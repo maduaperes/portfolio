@@ -23,25 +23,25 @@
 
         <nav class="main-nav">
           <ul>
-            <li><a href="#inicio" class="active">INÍCIO</a></li>
-            <li><a href="#sobre">SOBRE</a></li>
-            <li><a href="#servicos">SERVIÇOS</a></li>
-            <li><a href="#curriculo">CURRÍCULO</a></li>
-            <li><a href="#contato">CONTATO</a></li>
+            <li><a href="#inicio" class="active" id="nav-home">INÍCIO</a></li>
+            <li><a href="#sobre" id="nav-about">SOBRE</a></li>
+            <li><a href="#servicos" id="nav-services">SERVIÇOS</a></li>
+            <li><a href="#curriculo" id="nav-resume">CURRÍCULO</a></li>
+            <li><a href="#contato" id="nav-contact">CONTATO</a></li>
           </ul>
         </nav>
 
         <div class="lang-selector">
-          <a href="#">ENG</a>
-          <a href="#" class="active-lang">PT</a>
+          <a href="#" id="lang-en">ENG</a>
+          <a href="#" id="lang-pt" class="active-lang">PT</a>
         </div>
       </header>
 
       <section id="inicio" class="hero-section">
         <div class="hero-text">
-          <span class="subtitle">— Olá! Eu sou,</span>
+          <span class="subtitle" id="hero-subtitle">— Olá! Eu sou,</span>
           <h1><span class="highlight">Madu</span> Peres</h1>
-          <p>
+          <p id="hero-description">
             Desenvolvedora de software em evolução, focada em construir
             interfaces modernas, códigos limpos e soluções digitais inteligentes
             enquanto expando meus conhecimentos no mundo da tecnologia.
@@ -58,13 +58,19 @@
         </div>
 
         <div class="social-icons">
-          <a href="#" target="_blank"><i class="fab fa-instagram"></i></a>
-          <a href="#" target="_blank" class="active-social"
+          <a href="https://www.instagram.com/devmaduperes/" target="_blank"
+            ><i class="fab fa-instagram"></i
+          ></a>
+          <a
+            href="https://github.com/maduaperes"
+            target="_blank"
+            class="active-social"
             ><i class="fab fa-github"></i
           ></a>
-          <a href="#" target="_blank"><i class="fab fa-linkedin-in"></i></a>
-          <a href="#" target="_blank"><i class="fab fa-twitter"></i></a>
-          <a href="mailto:maduperes@seu-email.com"
+          <a href="https://www.linkedin.com/in/mariaeduperes/" target="_blank"
+            ><i class="fab fa-linkedin-in"></i
+          ></a>
+          <a href="mailto:mariaeduardaaperes@hotmail.com"
             ><i class="fas fa-envelope"></i
           ></a>
         </div>
@@ -79,7 +85,7 @@
         <div class="section-container">
           <div class="about-grid">
             <div class="about-main-text">
-              <span class="section-tag">Quem sou</span>
+              <span class="section-tag" id="about-tag">Quem sou</span>
               <h2>Sobre Mim</h2>
               <p>
                 Sou fascinada pela capacidade de transformar linhas de código em
@@ -131,18 +137,7 @@
                 </div>
                 <div class="skill-item">
                   <div class="skill-info">
-                    <span
-                      ><i class="fab fa-js-square"></i> JavaScript (ES6+)</span
-                    >
-                    <span>80%</span>
-                  </div>
-                  <div class="progress-bar">
-                    <div class="progress" style="width: 80%"></div>
-                  </div>
-                </div>
-                <div class="skill-item">
-                  <div class="skill-info">
-                    <span><i class="fab fa-react"></i> React.js</span>
+                    <span><i class="fab fa-react"></i> Node.js & APIs</span>
                     <span>75%</span>
                   </div>
                   <div class="progress-bar">
@@ -151,11 +146,40 @@
                 </div>
                 <div class="skill-item">
                   <div class="skill-info">
-                    <span><i class="fab fa-node-js"></i> Node.js & APIs</span>
-                    <span>65%</span>
+                    <span
+                      ><i class="fab fa-js-square"></i> JavaScript (ES6+)</span
+                    >
+                    <span>50%</span>
                   </div>
                   <div class="progress-bar">
-                    <div class="progress" style="width: 65%"></div>
+                    <div class="progress" style="width: 50%"></div>
+                  </div>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-info">
+                    <span><i class="fab fa-python"></i> Python</span>
+                    <span>25%</span>
+                  </div>
+                  <div class="progress-bar">
+                    <div class="progress" style="width: 25%"></div>
+                  </div>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-info">
+                    <span><i class="fab fa-java"></i> Java</span>
+                    <span>15%</span>
+                  </div>
+                  <div class="progress-bar">
+                    <div class="progress" style="width: 15%"></div>
+                  </div>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-info">
+                    <span><i class="fa-solid fa-code"></i> C#</span>
+                    <span>10%</span>
+                  </div>
+                  <div class="progress-bar">
+                    <div class="progress" style="width: 10%"></div>
                   </div>
                 </div>
               </div>
@@ -176,8 +200,8 @@
 
       <section id="servicos" class="services-section">
         <div class="section-container">
-          <span class="section-tag">O que faço</span>
-          <h2>Serviços Profissionais</h2>
+          <span class="section-tag" id="services-tag">O que faço</span>
+          <h2 id="services-title">Serviços Profissionais</h2>
           <p class="section-subtitle">
             Soluções planejadas para tirar ideias do papel com qualidade
             técnica.
@@ -249,8 +273,8 @@
 
       <section id="curriculo" class="resume-section">
         <div class="section-container">
-          <span class="section-tag">Trajetória</span>
-          <h2>Currículo & Experiência</h2>
+          <span class="section-tag" id="resume-tag">Trajetória</span>
+          <h2 id="resume-title">Currículo & Experiência</h2>
 
           <div class="resume-grid">
             <div class="resume-box">
@@ -375,9 +399,9 @@
 
       <section id="contato" class="contact-section">
         <div class="section-container">
-          <span class="section-tag">Conexão</span>
-          <h2>Vamos Conversar?</h2>
-          <p class="section-subtitle">
+          <span class="section-tag" id="contact-tag">Conexão</span>
+          <h2 id="contact-title">Vamos Conversar?</h2>
+          <p class="section-subtitle" id="contact-subtitle">
             Fique à vontade para mandar uma mensagem sobre oportunidades,
             projetos ou feedbacks!
           </p>
