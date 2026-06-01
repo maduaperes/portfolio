@@ -7,6 +7,7 @@
   scroll-behavior: smooth; /* Rolagem suave entre as seções */
 }
 
+html,
 body {
   background-color: #f3f5f8 !important; /* Fundo off-white azulado suave */
   color: #333;
@@ -162,8 +163,8 @@ header.scrolled {
   width: 50%;
   height: 100%;
   background-color: #f3f5f8;
-  isolation: isolate;
   display: flex;
+  overflow: hidden;
   align-items: flex-end;
   justify-content: center;
 }
@@ -172,17 +173,20 @@ header.scrolled {
   content: "";
   position: absolute;
   inset: 0;
-  background-color: #f3f5f8;
-  z-index: 1;
+  background: #f3f5f8;
+  z-index: 0;
 }
 
 .profile-img {
-  max-height: 80vh;
-  object-fit: contain;
   position: relative;
   z-index: 2;
+  max-height: 80vh;
+
   filter: grayscale(100%) contrast(120%);
   mix-blend-mode: multiply;
+
+  -webkit-transform: translateZ(0);
+  transform: translateZ(0);
 }
 
 .bg-circle {
@@ -855,6 +859,13 @@ h2 {
   color: #ff003c;
 }
 
+@supports (-webkit-touch-callout: none) {
+  .profile-img {
+    mix-blend-mode: normal;
+    opacity: 0.95; /* simula o blend sem quebrar */
+  }
+}
+
 /* ── Breakpoint: Tablet (< 992px / lg) ─────────────── */
 @media (max-width: 991.98px) {
   .main-wrapper {
@@ -955,7 +966,7 @@ h2 {
     width: 90%;
   }
 
-  .skill-badgenters {
+  .other-skills-badges {
     flex-direction: column;
     gap: 20px;
     align-items: flex-start;
