@@ -408,3 +408,28 @@ window.addEventListener("scroll", () => {
     header.classList.remove("scrolled");
   }
 });
+
+// Script mínimo para o toggle
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+  localStorage.setItem("theme", theme);
+}
+
+function setupToggle(btn) {
+  if (!btn) return;
+  btn.addEventListener("click", () => {
+    const isDark =
+      document.documentElement.getAttribute("data-theme") === "dark";
+    applyTheme(isDark ? "light" : "dark");
+  });
+}
+
+setupToggle(document.getElementById("themeToggle"));
+setupToggle(document.getElementById("themeToggleMobile"));
+
+const saved =
+  localStorage.getItem("theme") ||
+  (window.matchMedia("(prefers-color-scheme: dark)").matches
+    ? "dark"
+    : "light");
+applyTheme(saved);

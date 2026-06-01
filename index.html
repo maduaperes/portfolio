@@ -53,9 +53,21 @@
           </ul>
         </nav>
 
-        <div class="lang-selector d-none d-lg-flex">
-          <a href="#" id="lang-en">ENG</a>
-          <a href="#" id="lang-pt" class="active-lang">PT</a>
+        <div class="header-right d-none d-lg-flex">
+          <div class="lang-selector">
+            <a href="#" id="lang-en">ENG</a>
+            <a href="#" id="lang-pt" class="active-lang">PT</a>
+          </div>
+          <button
+            class="theme-toggle"
+            id="themeToggle"
+            aria-label="Alternar tema"
+          >
+            <span class="icon-sun"><i class="fa-solid fa-moon"></i></span>
+            <span class="icon-moon"
+              ><i class="fa-solid fa-sun" style="color: #999"></i
+            ></span>
+          </button>
         </div>
       </header>
 
@@ -107,6 +119,29 @@
           <div class="lang-selector mt-3">
             <a href="#" id="lang-en-m">ENG</a>
             <a href="#" id="lang-pt-m" class="active-lang">PT</a>
+          </div>
+
+          <!-- Toggle no mobile -->
+          <div class="mt-3 d-flex align-items-center gap-2">
+            <span
+              style="
+                font-size: 11px;
+                font-weight: 600;
+                color: var(--text-hint);
+                letter-spacing: 1px;
+              "
+              >TEMA</span
+            >
+            <button
+              class="theme-toggle"
+              id="themeToggleMobile"
+              aria-label="Alternar tema"
+            >
+              <span class="icon-sun"><i class="fa-solid fa-moon"></i></span>
+              <span class="icon-moon"
+                ><i class="fa-solid fa-sun" style="color: #999"></i
+              ></span>
+            </button>
           </div>
         </nav>
       </div>
