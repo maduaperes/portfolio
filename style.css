@@ -165,6 +165,7 @@ header.scrolled {
   display: flex;
   align-items: flex-end;
   justify-content: center;
+  background: transparent !important;
 }
 
 .profile-img {
@@ -173,6 +174,7 @@ header.scrolled {
   z-index: 3;
   filter: grayscale(100%) contrast(120%);
   mix-blend-mode: multiply;
+  background: transparent !important;
 }
 
 .bg-circle {
