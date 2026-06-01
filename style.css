@@ -161,15 +161,26 @@ header.scrolled {
   position: relative;
   width: 50%;
   height: 100%;
+  background-color: #f3f5f8;
+  isolation: isolate;
   display: flex;
   align-items: flex-end;
   justify-content: center;
 }
 
+.hero-image::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background-color: #f3f5f8;
+  z-index: 1;
+}
+
 .profile-img {
   max-height: 80vh;
   object-fit: contain;
-  z-index: 3;
+  position: relative;
+  z-index: 2;
   filter: grayscale(100%) contrast(120%);
   mix-blend-mode: multiply;
 }
