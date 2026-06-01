@@ -31,9 +31,7 @@
         <button
           class="hamburger-btn d-lg-none"
           type="button"
-          data-bs-toggle="collapse"
-          data-bs-target="#mobileMenu"
-          aria-controls="mobileMenu"
+          id="hamburgerBtn"
           aria-expanded="false"
           aria-label="Abrir menu"
         >
@@ -72,48 +70,23 @@
       </header>
 
       <!-- Menu mobile colapsável -->
-      <div class="collapse mobile-menu" id="mobileMenu">
+      <div class="mobile-menu" id="mobileMenu">
         <nav>
           <ul>
             <li>
-              <a
-                href="#inicio"
-                data-bs-toggle="collapse"
-                data-bs-target="#mobileMenu"
-                >INÍCIO</a
-              >
+              <a href="#inicio" class="close-menu">INÍCIO</a>
             </li>
             <li>
-              <a
-                href="#sobre"
-                data-bs-toggle="collapse"
-                data-bs-target="#mobileMenu"
-                >SOBRE</a
-              >
+              <a href="#sobre" class="close-menu">SOBRE</a>
             </li>
             <li>
-              <a
-                href="#servicos"
-                data-bs-toggle="collapse"
-                data-bs-target="#mobileMenu"
-                >SERVIÇOS</a
-              >
+              <a href="#servicos" class="close-menu">SERVIÇOS</a>
             </li>
             <li>
-              <a
-                href="#curriculo"
-                data-bs-toggle="collapse"
-                data-bs-target="#mobileMenu"
-                >CURRÍCULO</a
-              >
+              <a href="#curriculo" class="close-menu">CURRÍCULO</a>
             </li>
             <li>
-              <a
-                href="#contato"
-                data-bs-toggle="collapse"
-                data-bs-target="#mobileMenu"
-                >CONTATO</a
-              >
+              <a href="#contato" class="close-menu">CONTATO</a>
             </li>
           </ul>
           <div class="lang-selector mt-3">

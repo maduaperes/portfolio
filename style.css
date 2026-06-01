@@ -1010,8 +1010,22 @@ h2 {
   background-color: var(--bg-page);
   z-index: 998;
   border-bottom: 2px solid var(--border-color);
-  padding: 24px 30px 30px;
+  padding: 0 30px;
   box-shadow: var(--shadow-md);
+
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition:
+    max-height 0.4s ease,
+    opacity 0.3s ease,
+    padding 0.3s ease;
+}
+
+.mobile-menu.open {
+  max-height: 400px;
+  opacity: 1;
+  padding: 24px 30px 30px;
 }
 
 .mobile-menu ul {
