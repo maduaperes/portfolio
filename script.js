@@ -1,39 +1,49 @@
 /* =========================
-   TEMA (DARK / LIGHT)
+   TEMA
    ========================= */
-function applyTheme(theme) {
-  document.documentElement.setAttribute("data-theme", theme);
-  localStorage.setItem("theme", theme);
+
+const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+
+function getSystemTheme() {
+  return mediaQuery.matches ? "dark" : "light";
 }
 
+function applyTheme(theme) {
+  document.documentElement.setAttribute("data-theme", theme);
+}
+
+// Verifica se o usuário já escolheu um tema manualmente
+const userTheme = localStorage.getItem("theme");
+
+// Primeira carga
+applyTheme(userTheme || getSystemTheme());
+
+// Se o sistema mudar de tema
+mediaQuery.addEventListener("change", (e) => {
+  // Só acompanha o sistema se o usuário nunca escolheu um tema
+  if (!localStorage.getItem("theme")) {
+    applyTheme(e.matches ? "dark" : "light");
+  }
+});
+
+// Botões
 function setupToggle(btn) {
   if (!btn) return;
+
   btn.addEventListener("click", () => {
-    const isDark =
-      document.documentElement.getAttribute("data-theme") === "dark";
-    applyTheme(isDark ? "light" : "dark");
+    const current = document.documentElement.getAttribute("data-theme");
+
+    const newTheme = current === "dark" ? "light" : "dark";
+
+    // A partir daqui a preferência do usuário tem prioridade
+    localStorage.setItem("theme", newTheme);
+
+    applyTheme(newTheme);
   });
 }
 
 setupToggle(document.getElementById("themeToggle"));
 setupToggle(document.getElementById("themeToggleMobile"));
-
-const savedTheme = localStorage.getItem("theme");
-
-if (savedTheme) {
-  applyTheme(savedTheme);
-} else {
-  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
-  applyTheme(prefersDark ? "dark" : "light");
-
-  window
-    .matchMedia("(prefers-color-scheme: dark)")
-    .addEventListener("change", (e) => {
-      if (!localStorage.getItem("theme")) {
-        applyTheme(e.matches ? "dark" : "light");
-      }
-    });
-}
 
 /* =========================
    MENU MOBILE FLUIDO
