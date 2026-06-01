@@ -7,9 +7,10 @@
   scroll-behavior: smooth; /* Rolagem suave entre as seções */
 }
 
-body {
+html, body {
   background-color: #f3f5f8 !important; /* Fundo off-white azulado suave */
   color: #333;
+  overflow-x: hidden;
 }
 
 /* Ajustado para permitir que o conteúdo role para baixo nas outras seções */
