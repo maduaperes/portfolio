@@ -427,9 +427,21 @@ function setupToggle(btn) {
 setupToggle(document.getElementById("themeToggle"));
 setupToggle(document.getElementById("themeToggleMobile"));
 
-const saved =
-  localStorage.getItem("theme") ||
-  (window.matchMedia("(prefers-color-scheme: dark)").matches
-    ? "dark"
-    : "light");
-applyTheme(saved);
+// Usa preferência salva ou detecta o sistema
+const saved = localStorage.getItem("theme");
+
+if (saved) {
+  applyTheme(saved);
+} else {
+  const prefersDark = window.matchMedia("(prefers-color-scheme: dark)").matches;
+  applyTheme(prefersDark ? "dark" : "light");
+
+  // Atualiza em tempo real se o sistema mudar e o usuário não tiver escolhido
+  window
+    .matchMedia("(prefers-color-scheme: dark)")
+    .addEventListener("change", (e) => {
+      if (!localStorage.getItem("theme")) {
+        applyTheme(e.matches ? "dark" : "light");
+      }
+    });
+}
