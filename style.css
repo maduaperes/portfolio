@@ -877,7 +877,7 @@ h2 {
     height: auto;
     min-height: calc(100vh - 64px);
     padding-top: 80px;
-    padding-bottom: 60px;
+    padding-bottom: 10px;
     gap: 40px;
     text-align: center;
   }
@@ -890,22 +890,31 @@ h2 {
   }
 
   .hero-text h1 {
-    font-size: 42px;
+    font-size: 40px;
+  }
+
+  .hero-text p {
+    font-size: 16px;
   }
 
   .hero-image {
     width: 70%;
     height: auto;
+    margin-top: -15px;
   }
 
   .profile-img {
     max-height: 50vh;
   }
 
+  .element-img {
+    max-height: 50vh;
+  }
+
   .social-icons {
     position: static;
     justify-content: center;
-    margin-top: 10px;
+    margin-top: -25px;
   }
 
   .scroll-down {
