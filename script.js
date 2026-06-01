@@ -2,43 +2,41 @@
    TEMA
    ========================= */
 
+/* =========================
+   TEMA
+   ========================= */
+
 const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
 
-function getSystemTheme() {
-  return mediaQuery.matches ? "dark" : "light";
-}
-
 function applyTheme(theme) {
-  document.documentElement.setAttribute("data-theme", theme);
+  if (theme) {
+    document.documentElement.setAttribute("data-theme", theme);
+  } else {
+    document.documentElement.removeAttribute("data-theme");
+  }
 }
 
-// Verifica se o usuário já escolheu um tema manualmente
-const userTheme = localStorage.getItem("theme");
+// Primeira carga: respeita escolha do usuário, senão segue o sistema
+const saved = localStorage.getItem("theme");
+applyTheme(saved || null);
 
-// Primeira carga
-applyTheme(userTheme || getSystemTheme());
-
-// Se o sistema mudar de tema
+// Atualiza em tempo real se o sistema mudar (e o usuário não tiver escolhido)
 mediaQuery.addEventListener("change", (e) => {
-  // Só acompanha o sistema se o usuário nunca escolheu um tema
   if (!localStorage.getItem("theme")) {
-    applyTheme(e.matches ? "dark" : "light");
+    applyTheme(null); // mantém sem data-theme → CSS @media age livre
   }
 });
 
-// Botões
 function setupToggle(btn) {
   if (!btn) return;
-
   btn.addEventListener("click", () => {
-    const current = document.documentElement.getAttribute("data-theme");
+    const current =
+      document.documentElement.getAttribute("data-theme") ||
+      (mediaQuery.matches ? "dark" : "light");
 
-    const newTheme = current === "dark" ? "light" : "dark";
-
-    // A partir daqui a preferência do usuário tem prioridade
-    localStorage.setItem("theme", newTheme);
-
-    applyTheme(newTheme);
+    const next = current === "dark" ? "light" : "dark";
+    localStorage.setItem("theme", next);
+    applyTheme(next);
   });
 }
 

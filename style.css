@@ -73,6 +73,11 @@
     --toggle-icon-sun: 0;
     --toggle-icon-moon: 1;
   }
+
+  body {
+    color: var(--text-primary) !important;
+    background-color: var(--bg-page) !important;
+  }
 }
 
 /* ============================================================
