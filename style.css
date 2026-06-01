@@ -876,7 +876,7 @@ h2 {
     align-items: center;
     height: auto;
     min-height: calc(100vh - 64px);
-    padding-top: 80px;
+    padding-top: 40px;
     padding-bottom: 10px;
     gap: 40px;
     text-align: center;
