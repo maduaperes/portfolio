@@ -572,7 +572,7 @@ h2 {
   justify-content: space-between;
   font-size: 12px;
   font-weight: 600;
-  color: #444;
+  color: var(--text-secondary);
   margin-bottom: 8px;
 }
 
