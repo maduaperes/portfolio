@@ -8,12 +8,12 @@
 }
 
 body {
-  background-color: #f3f5f8; /* Fundo off-white azulado suave */
+  background-color: #f3f5f8 !important; /* Fundo off-white azulado suave */
   color: #333;
 }
 
 /* Ajustado para permitir que o conteúdo role para baixo nas outras seções */
-.container {
+.main-wrapper {
   width: 100%;
   max-width: 1440px;
   margin: 0 auto;
@@ -23,11 +23,23 @@ body {
 
 /* --- HEADER --- */
 header {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  background-color: #f3f5f8 !important; /* mesma cor do fundo */
+  z-index: 999;
+  padding: 20px 60px;
   display: flex;
   justify-content: space-between;
   align-items: center;
-  z-index: 10;
-  position: relative;
+  transition:
+    box-shadow 0.3s ease,
+    background-color 0.3s ease;
+}
+
+header.scrolled {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.08);
 }
 
 .logo {
@@ -243,7 +255,7 @@ header {
   color: #ff003c;
   letter-spacing: 2px;
   text-transform: uppercase;
-  display: block;
+  display: inline-block;
   margin-bottom: 10px;
 }
 
@@ -258,7 +270,7 @@ h2 {
 .section-subtitle {
   font-size: 14px;
   color: #666;
-  margin-top: -30px;
+  margin-top: 0px;
   margin-bottom: 40px;
 }
 
@@ -279,10 +291,18 @@ h2 {
 
 .about-counters {
   display: flex;
-  gap: 40px;
+  flex-direction: row;
+  justify-content: space-between;
+  gap: 20px;
   margin-top: 40px;
+  flex-wrap: nowrap; /* impede quebrar linha */
 }
 
+.counter-item {
+  flex: 1;
+  min-width: 0; /* evita overflow estranho */
+  text-align: center;
+}
 .counter-item h3 {
   font-size: 32px;
   color: #ff003c;
@@ -328,18 +348,17 @@ h2 {
   margin-right: 5px;
 }
 
-.progress-bar {
+.skills-list .progress-bar {
   width: 100%;
   height: 6px;
-  background-color: #e0e5eb;
+  background-color: #d6dbe3 !important;
   border-radius: 3px;
   overflow: hidden;
 }
 
-.progress {
+.skills-list .progress {
   height: 100%;
-  background-color: #ff003c;
-  border-radius: 3px;
+  background-color: #ff003c !important;
 }
 
 .other-skills-title {
@@ -353,23 +372,25 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
+  justify-content: center; /* centraliza o conjunto */
+  align-items: center;
 }
 
-.badge {
-  background-color: #e8ecf2;
-  color: #495057;
-  padding: 6px 14px;
+.skill-badge {
+  background-color: #eef2f7;
+  color: #1e2229;
+  padding: 7px 14px;
   font-size: 11px;
   font-weight: 500;
-  border-radius: 4px;
-  transition:
-    background-color 0.3s,
-    color 0.3s;
+  border-radius: 6px;
+  transition: all 0.2s ease;
+  display: inline-block;
 }
 
-.badge:hover {
+.skill-badge:hover {
   background-color: #ff003c;
   color: #fff;
+  border-color: #ff003c;
 }
 
 /* --- SEÇÃO SERVIÇOS --- */
@@ -383,7 +404,7 @@ h2 {
   background-color: #ffffff;
   padding: 40px 30px;
   border-radius: 8px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.089);
   transition:
     transform 0.3s,
     box-shadow 0.3s;
@@ -529,7 +550,7 @@ h2 {
   background-color: #fff;
   border-radius: 8px;
   overflow: hidden;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.089);
   display: flex;
   flex-direction: column;
 }
@@ -618,7 +639,7 @@ h2 {
   display: flex;
   align-items: center;
   gap: 20px;
-  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.02);
+  box-shadow: 0 5px 20px rgba(0, 0, 0, 0.089);
 }
 
 .detail-icon {
@@ -753,4 +774,206 @@ h2 {
 .social-icons a.active-social,
 .social-icons a:hover {
   color: #ff003c;
+}
+
+/* ── Menu Hambúrguer ─────────────────────────────────── */
+.hamburger-btn {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  gap: 5px;
+  background: none;
+  border: none;
+  cursor: pointer;
+  padding: 6px;
+  z-index: 1001;
+}
+
+.hamburger-btn span {
+  display: block;
+  width: 24px;
+  height: 2px;
+  background-color: #1e2229;
+  border-radius: 2px;
+  transition: all 0.3s ease;
+}
+
+/* Animação X ao abrir */
+.hamburger-btn[aria-expanded="true"] span:nth-child(1) {
+  transform: translateY(7px) rotate(45deg);
+}
+.hamburger-btn[aria-expanded="true"] span:nth-child(2) {
+  opacity: 0;
+}
+.hamburger-btn[aria-expanded="true"] span:nth-child(3) {
+  transform: translateY(-7px) rotate(-45deg);
+}
+
+/* Painel do menu mobile */
+.mobile-menu {
+  position: fixed;
+  top: 64px; /* altura do header */
+  left: 0;
+  width: 100%;
+  background-color: #f3f5f8;
+  z-index: 998;
+  border-bottom: 2px solid #e0e5eb;
+  padding: 24px 30px 30px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.mobile-menu ul {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.mobile-menu ul li a {
+  text-decoration: none;
+  color: #444;
+  font-size: 13px;
+  font-weight: 600;
+  letter-spacing: 1.5px;
+  transition: color 0.2s;
+}
+
+.mobile-menu ul li a:hover {
+  color: #ff003c;
+}
+
+/* ── Breakpoint: Tablet (< 992px / lg) ─────────────── */
+@media (max-width: 991.98px) {
+  .main-wrapper {
+    padding: 40px 30px;
+  }
+
+  header {
+    padding: 16px 30px;
+  }
+
+  /* Hero: empilha texto + imagem */
+  .hero-section {
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    height: auto;
+    min-height: calc(100vh - 64px);
+    padding-top: 80px;
+    padding-bottom: 60px;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .hero-text {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  .hero-text h1 {
+    font-size: 42px;
+  }
+
+  .hero-image {
+    width: 70%;
+    height: auto;
+  }
+
+  .profile-img {
+    max-height: 50vh;
+  }
+
+  .social-icons {
+    position: static;
+    justify-content: center;
+    margin-top: 10px;
+  }
+
+  .scroll-down {
+    display: none;
+  }
+
+  /* Sobre: empilha as duas colunas */
+  .about-grid {
+    grid-template-columns: 1fr;
+    gap: 50px;
+  }
+
+  /* Currículo: empilha as duas colunas */
+  .resume-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+  }
+
+  /* Projetos: empilha */
+  .projects-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Contato: empilha detalhes + form */
+  .contact-layout-grid {
+    grid-template-columns: 1fr;
+    gap: 30px;
+  }
+}
+
+/* ── Breakpoint: Mobile (< 576px / sm) ─────────────── */
+@media (max-width: 575.98px) {
+  .main-wrapper {
+    padding: 30px 20px;
+  }
+
+  header {
+    padding: 14px 20px;
+  }
+
+  .mobile-menu {
+    top: 58px;
+    padding: 20px;
+  }
+
+  .hero-text h1 {
+    font-size: 34px;
+  }
+
+  .hero-image {
+    width: 90%;
+  }
+
+  .skill-badgenters {
+    flex-direction: column;
+    gap: 20px;
+    align-items: flex-start;
+  }
+
+  /* Serviços: 1 coluna */
+  .services-grid {
+    grid-template-columns: 1fr;
+  }
+
+  /* Form de contato: empilha os dois campos da linha */
+  .form-row {
+    grid-template-columns: 1fr;
+  }
+
+  .contact-form-wrapper {
+    padding: 25px 20px;
+  }
+
+  .btn-submit-form {
+    width: 100%;
+    justify-content: center;
+  }
+
+  h2 {
+    font-size: 28px;
+  }
+
+  .counter-item h3 {
+    font-size: 26px;
+  }
 }

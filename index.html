@@ -13,15 +13,37 @@
       rel="stylesheet"
       href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css"
     />
+    <link rel="icon" type="image/png" href="imagens/favicon.png" />
+    <link
+      href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
+      rel="stylesheet"
+    />
   </head>
   <body>
-    <div class="container" id="inicio">
+    <div class="main-wrapper">
+      <!-- ===== HEADER ===== -->
       <header>
         <div class="logo">
           <a href="#inicio"><span class="highlight">dev.</span>maduperes</a>
         </div>
 
-        <nav class="main-nav">
+        <!-- Hambúrguer: visível só em mobile -->
+        <button
+          class="hamburger-btn d-lg-none"
+          type="button"
+          data-bs-toggle="collapse"
+          data-bs-target="#mobileMenu"
+          aria-controls="mobileMenu"
+          aria-expanded="false"
+          aria-label="Abrir menu"
+        >
+          <span></span>
+          <span></span>
+          <span></span>
+        </button>
+
+        <!-- Nav desktop: oculta em mobile -->
+        <nav class="main-nav d-none d-lg-flex">
           <ul>
             <li><a href="#inicio" class="active" id="nav-home">INÍCIO</a></li>
             <li><a href="#sobre" id="nav-about">SOBRE</a></li>
@@ -31,12 +53,65 @@
           </ul>
         </nav>
 
-        <div class="lang-selector">
+        <div class="lang-selector d-none d-lg-flex">
           <a href="#" id="lang-en">ENG</a>
           <a href="#" id="lang-pt" class="active-lang">PT</a>
         </div>
       </header>
 
+      <!-- Menu mobile colapsável -->
+      <div class="collapse mobile-menu" id="mobileMenu">
+        <nav>
+          <ul>
+            <li>
+              <a
+                href="#inicio"
+                data-bs-toggle="collapse"
+                data-bs-target="#mobileMenu"
+                >INÍCIO</a
+              >
+            </li>
+            <li>
+              <a
+                href="#sobre"
+                data-bs-toggle="collapse"
+                data-bs-target="#mobileMenu"
+                >SOBRE</a
+              >
+            </li>
+            <li>
+              <a
+                href="#servicos"
+                data-bs-toggle="collapse"
+                data-bs-target="#mobileMenu"
+                >SERVIÇOS</a
+              >
+            </li>
+            <li>
+              <a
+                href="#curriculo"
+                data-bs-toggle="collapse"
+                data-bs-target="#mobileMenu"
+                >CURRÍCULO</a
+              >
+            </li>
+            <li>
+              <a
+                href="#contato"
+                data-bs-toggle="collapse"
+                data-bs-target="#mobileMenu"
+                >CONTATO</a
+              >
+            </li>
+          </ul>
+          <div class="lang-selector mt-3">
+            <a href="#" id="lang-en-m">ENG</a>
+            <a href="#" id="lang-pt-m" class="active-lang">PT</a>
+          </div>
+        </nav>
+      </div>
+
+      <!-- ===== HERO ===== -->
       <section id="inicio" class="hero-section">
         <div class="hero-text">
           <span class="subtitle" id="hero-subtitle">— Olá! Eu sou,</span>
@@ -47,8 +122,8 @@
             enquanto expando meus conhecimentos no mundo da tecnologia.
           </p>
           <a href="#contato" class="btn-cv" id="contactBtn"
-            >ENTRAR EM CONTATO
-          </a>
+            >ENTRAR EM CONTATO</a
+          >
         </div>
 
         <div class="hero-image">
@@ -67,7 +142,7 @@
             class="active-social"
             ><i class="fab fa-github"></i
           ></a>
-          <a href="https://www.linkedin.com/in/mariaeduperes/" target="_blank"
+          <a href="https://www.linkedin.com/in/maduaperes/" target="_blank"
             ><i class="fab fa-linkedin-in"></i
           ></a>
           <a href="mailto:mariaeduardaaperes@hotmail.com"
@@ -81,13 +156,14 @@
         </div>
       </section>
 
+      <!-- ===== SOBRE ===== -->
       <section id="sobre" class="about-section">
         <div class="section-container">
           <div class="about-grid">
             <div class="about-main-text">
               <span class="section-tag" id="about-tag">Quem sou</span>
-              <h2>Sobre Mim</h2>
-              <p>
+              <h2 id="about-title">Sobre Mim</h2>
+              <p id="about-text-1">
                 Sou fascinada pela capacidade de transformar linhas de código em
                 soluções reais que impactam o dia a dia das pessoas. Minha
                 jornada na tecnologia começou pela curiosidade de entender como
@@ -95,7 +171,7 @@
                 aplicações que unem design intuitivo, acessibilidade e
                 desempenho.
               </p>
-              <p>
+              <p id="about-text-2">
                 Atualmente, busco aprimorar minhas competências em arquitetura
                 de software, padrões de projeto e desenvolvimento ágil. Divido
                 meu tempo entre a faculdade, a criação de projetos pessoais
@@ -104,23 +180,23 @@
 
               <div class="about-counters">
                 <div class="counter-item">
-                  <h3>+2 Anos</h3>
-                  <p>Estudos Práticos</p>
+                  <h3 id="counter-years">+2 Anos</h3>
+                  <p id="counter-studies">Estudos Práticos</p>
                 </div>
                 <div class="counter-item">
-                  <h3>+15</h3>
-                  <p>Projetos no GitHub</p>
+                  <h3 id="counter-projects-number">+15</h3>
+                  <p id="counter-projects">Projetos no GitHub</p>
                 </div>
                 <div class="counter-item">
-                  <h3>100%</h3>
-                  <p>Dedicação</p>
+                  <h3 id="counter-dedication-number">100%</h3>
+                  <p id="counter-dedication">Dedicação</p>
                 </div>
               </div>
             </div>
 
             <div class="about-skills-wrapper">
-              <h3>Minhas Tech Skills</h3>
-              <p>
+              <h3 id="skills-title">Minhas Tech Skills</h3>
+              <p id="skills-description">
                 Tecnologias e ferramentas que utilizo no meu ecossistema de
                 desenvolvimento:
               </p>
@@ -129,26 +205,15 @@
                 <div class="skill-item">
                   <div class="skill-info">
                     <span><i class="fab fa-html5"></i> HTML5 / CSS3</span>
-                    <span>90%</span>
+                    <span>85%</span>
                   </div>
                   <div class="progress-bar">
-                    <div class="progress" style="width: 90%"></div>
+                    <div class="progress" style="width: 85%"></div>
                   </div>
                 </div>
                 <div class="skill-item">
                   <div class="skill-info">
-                    <span><i class="fab fa-react"></i> Node.js & APIs</span>
-                    <span>75%</span>
-                  </div>
-                  <div class="progress-bar">
-                    <div class="progress" style="width: 75%"></div>
-                  </div>
-                </div>
-                <div class="skill-item">
-                  <div class="skill-info">
-                    <span
-                      ><i class="fab fa-js-square"></i> JavaScript (ES6+)</span
-                    >
+                    <span><i class="fab fa-js-square"></i> JavaScript</span>
                     <span>50%</span>
                   </div>
                   <div class="progress-bar">
@@ -158,51 +223,80 @@
                 <div class="skill-item">
                   <div class="skill-info">
                     <span><i class="fab fa-python"></i> Python</span>
-                    <span>25%</span>
+                    <span>45%</span>
                   </div>
                   <div class="progress-bar">
-                    <div class="progress" style="width: 25%"></div>
+                    <div class="progress" style="width: 45%"></div>
                   </div>
                 </div>
                 <div class="skill-item">
                   <div class="skill-info">
                     <span><i class="fab fa-java"></i> Java</span>
-                    <span>15%</span>
+                    <span>40%</span>
                   </div>
                   <div class="progress-bar">
-                    <div class="progress" style="width: 15%"></div>
+                    <div class="progress" style="width: 40%"></div>
                   </div>
                 </div>
                 <div class="skill-item">
                   <div class="skill-info">
-                    <span><i class="fa-solid fa-code"></i> C#</span>
-                    <span>10%</span>
+                    <span
+                      ><i class="fa-solid fa-chart-column"></i> Power BI</span
+                    >
+                    <span>60%</span>
                   </div>
                   <div class="progress-bar">
-                    <div class="progress" style="width: 10%"></div>
+                    <div class="progress" style="width: 60%"></div>
+                  </div>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-info">
+                    <span
+                      ><i class="fa-solid fa-file-excel"></i> Excel
+                      Avançado</span
+                    >
+                    <span>75%</span>
+                  </div>
+                  <div class="progress-bar">
+                    <div class="progress" style="width: 75%"></div>
                   </div>
                 </div>
               </div>
 
-              <h4 class="other-skills-title">Outras Ferramentas:</h4>
+              <h4 id="other-skills-title">Outras Ferramentas:</h4>
               <div class="other-skills-badges">
-                <span class="badge">TypeScript</span>
-                <span class="badge">Git & GitHub</span>
-                <span class="badge">SQL / PostgreSQL</span>
-                <span class="badge">Figma (UI/UX)</span>
-                <span class="badge">Tailwind CSS</span>
-                <span class="badge">Scrum / Metodologias Ágeis</span>
+                <span class="skill-badge" id="badge-git">Git & GitHub</span>
+                <span class="skill-badge" id="badge-ai"
+                  >Inteligência Artificial</span
+                >
+                <span class="skill-badge" id="badge-genai">IA Generativa</span>
+                <span class="skill-badge" id="badge-logic"
+                  >Lógica de Programação</span
+                >
+                <span class="skill-badge" id="badge-oop"
+                  >Programação Orientada a Objetos</span
+                >
+                <span class="skill-badge" id="badge-data"
+                  >Análise de Dados</span
+                >
+                <span class="skill-badge" id="badge-kpi"
+                  >Indicadores (KPIs)</span
+                >
+                <span class="skill-badge" id="badge-office"
+                  >Microsoft Office</span
+                >
               </div>
             </div>
           </div>
         </div>
       </section>
 
+      <!-- ===== SERVIÇOS ===== -->
       <section id="servicos" class="services-section">
         <div class="section-container">
           <span class="section-tag" id="services-tag">O que faço</span>
           <h2 id="services-title">Serviços Profissionais</h2>
-          <p class="section-subtitle">
+          <p class="section-subtitle" id="services-subtitle">
             Soluções planejadas para tirar ideias do papel com qualidade
             técnica.
           </p>
@@ -210,15 +304,17 @@
           <div class="services-grid">
             <div class="service-card">
               <div class="card-icon"><i class="fas fa-code"></i></div>
-              <h3>Desenvolvimento Front-end</h3>
-              <p>
+              <h3 id="service-front-title">Desenvolvimento Front-end</h3>
+              <p id="service-front-description">
                 Construção de aplicações web dinâmicas, limpas e rápidas,
                 utilizando ecossistemas modernos baseados em componentes
                 reaproveitáveis.
               </p>
               <ul class="service-bullets">
-                <li><i class="fas fa-check"></i> Sites institucionais</li>
-                <li>
+                <li id="service-front-item1">
+                  <i class="fas fa-check"></i> Sites institucionais
+                </li>
+                <li id="service-front-item2">
                   <i class="fas fa-check"></i> Single Page Applications (SPA)
                 </li>
               </ul>
@@ -226,43 +322,53 @@
 
             <div class="service-card">
               <div class="card-icon"><i class="fas fa-server"></i></div>
-              <h3>Desenvolvimento Back-end</h3>
-              <p>
+              <h3 id="service-back-title">Desenvolvimento Back-end</h3>
+              <p id="service-back-description">
                 Criação de APIs estruturadas, regras de negócio eficientes e
                 conexões seguras com bancos de dados para sustentar aplicações
                 de qualquer porte.
               </p>
               <ul class="service-bullets">
-                <li><i class="fas fa-check"></i> Integrações de APIs REST</li>
-                <li><i class="fas fa-check"></i> Modelagem de dados</li>
+                <li id="service-back-item1">
+                  <i class="fas fa-check"></i> Integrações de APIs REST
+                </li>
+                <li id="service-back-item2">
+                  <i class="fas fa-check"></i> Modelagem de dados
+                </li>
               </ul>
             </div>
 
             <div class="service-card">
               <div class="card-icon"><i class="fas fa-mobile-alt"></i></div>
-              <h3>Interfaces Responsivas</h3>
-              <p>
+              <h3 id="service-responsive-title">Interfaces Responsivas</h3>
+              <p id="service-responsive-description">
                 Desenvolvimento focado na adaptação perfeita das páginas para
                 telas de smartphones, tablets e desktops, garantindo
                 acessibilidade em qualquer lugar.
               </p>
               <ul class="service-bullets">
-                <li><i class="fas fa-check"></i> Filosofia Mobile-First</li>
-                <li><i class="fas fa-check"></i> Otimização de layouts</li>
+                <li id="service-responsive-item1">
+                  <i class="fas fa-check"></i> Filosofia Mobile-First
+                </li>
+                <li id="service-responsive-item2">
+                  <i class="fas fa-check"></i> Otimização de layouts
+                </li>
               </ul>
             </div>
 
             <div class="service-card">
               <div class="card-icon"><i class="fas fa-crop-alt"></i></div>
-              <h3>Prototipagem & UI/UX</h3>
-              <p>
+              <h3 id="service-uiux-title">Prototipagem & UI/UX</h3>
+              <p id="service-uiux-description">
                 Conversão de requisitos de negócio em wireframes e protótipos
                 visuais interativos antes da etapa de código, diminuindo
                 refatorações.
               </p>
               <ul class="service-bullets">
-                <li><i class="fas fa-check"></i> Arquitetura de informação</li>
-                <li>
+                <li id="service-uiux-item1">
+                  <i class="fas fa-check"></i> Arquitetura de informação
+                </li>
+                <li id="service-uiux-item2">
                   <i class="fas fa-check"></i> Criação de layouts no Figma
                 </li>
               </ul>
@@ -271,6 +377,7 @@
         </div>
       </section>
 
+      <!-- ===== CURRÍCULO ===== -->
       <section id="curriculo" class="resume-section">
         <div class="section-container">
           <span class="section-tag" id="resume-tag">Trajetória</span>
@@ -278,24 +385,28 @@
 
           <div class="resume-grid">
             <div class="resume-box">
-              <h3 class="box-title">
+              <h3 class="box-title" id="education-title">
                 <i class="fas fa-graduation-cap"></i> Formação Acadêmica
               </h3>
               <div class="timeline">
                 <div class="timeline-item">
                   <span class="timeline-year">2024-2026</span>
-                  <h4>Análise e Desenvolvimento de Sistemas</h4>
-                  <span class="timeline-place">SENAC - Sorocaba SP</span>
-                  <p>
+                  <h4 id="ads-title">Análise e Desenvolvimento de Sistemas</h4>
+                  <span class="timeline-place" id="ads-place"
+                    >SENAC - Sorocaba SP</span
+                  >
+                  <p id="ads-description">
                     Técnica voltada para engenharia de requisitos, lógica
                     estruturada, bancos de dados relacionais e governança de TI.
                   </p>
                 </div>
                 <div class="timeline-item">
                   <span class="timeline-year">2026 - Presente</span>
-                  <h4>Ciência da Computação</h4>
-                  <span class="timeline-place">UNIP - Sorocaba SP</span>
-                  <p>
+                  <h4 id="cc-title">Ciência da Computação</h4>
+                  <span class="timeline-place" id="cc-place"
+                    >UNIP - Sorocaba SP</span
+                  >
+                  <p id="cc-description">
                     Graduação voltada para desenvolvimento de algoritmos,
                     complexidade de cálculo, arquitetura de sistemas e
                     inteligência artificial aplicativa.
@@ -305,26 +416,32 @@
             </div>
 
             <div class="resume-box">
-              <h3 class="box-title">
+              <h3 class="box-title" id="experience-title">
                 <i class="fas fa-briefcase"></i> Vivência Profissional
               </h3>
               <div class="timeline">
                 <div class="timeline-item">
-                  <span class="timeline-year">2026 - Presente</span>
-                  <h4>Técnica de Suporte Lógico (Autônoma)</h4>
-                  <span class="timeline-place">Atendimento Independente</span>
-                  <p>
-                    Atuação em troubleshooting de sistemas: instalação e
-                    configuração de SO, diagnóstico de falhas de software,
-                    remoção de malwares, otimização de desempenho e recuperação
-                    de acessos.
+                  <span class="timeline-year">2022</span>
+                  <h4 id="fr-title">Assistente Administrativo</h4>
+                  <span class="timeline-place" id="fr-place"
+                    >Imobiliária FR Imóveis</span
+                  >
+                  <p id="fr-description">
+                    Suporte às rotinas administrativas da empresa, com foco na
+                    organização de documentos, atendimento ao cliente e apoio
+                    aos processos internos, desenvolvendo competências em
+                    comunicação, organização e resolução de problemas.
                   </p>
                 </div>
                 <div class="timeline-item">
                   <span class="timeline-year">2026 - Presente</span>
-                  <h4>Auxiliar Administrativo (Controladoria)</h4>
-                  <span class="timeline-place">CNH Industrial Brasil</span>
-                  <p>
+                  <h4 id="cnh-title">
+                    Auxiliar Administrativo (Controladoria)
+                  </h4>
+                  <span class="timeline-place" id="cnh-place"
+                    >CNH Industrial Brasil</span
+                  >
+                  <p id="cnh-description">
                     Atuação no suporte operacional do setor de controladoria,
                     auxiliando na organização de fluxos de dados financeiros,
                     controle de relatórios internos e otimização de processos
@@ -336,20 +453,20 @@
           </div>
 
           <div class="projects-featured-wrapper">
-            <h3>Projetos em Destaque</h3>
-            <p>
+            <h3 id="projects-title">Projetos em Destaque</h3>
+            <p id="projects-description">
               Algumas soluções criadas recentemente que demonstram minhas
               habilidades na prática:
             </p>
 
             <div class="projects-grid">
               <div class="project-card">
-                <div class="project-img-placeholder">
+                <div class="project-img-placeholder" id="project1-image-text">
                   [ Imagem do Projeto 1 ]
                 </div>
                 <div class="project-info">
-                  <h4>E-Commerce Dashboard</h4>
-                  <p>
+                  <h4 id="project1-title">E-Commerce Dashboard</h4>
+                  <p id="project1-description">
                     Painel administrativo para controle de estoque e vendas em
                     tempo real integrado a um banco de dados relacional.
                   </p>
@@ -358,10 +475,10 @@
                     <span>PostgreSQL</span>
                   </div>
                   <div class="project-links">
-                    <a href="#" target="_blank"
+                    <a href="#" target="_blank" id="project1-code"
                       ><i class="fab fa-github"></i> Código</a
                     >
-                    <a href="#" target="_blank"
+                    <a href="#" target="_blank" id="project1-demo"
                       ><i class="fas fa-external-link-alt"></i> Live Demo</a
                     >
                   </div>
@@ -369,12 +486,12 @@
               </div>
 
               <div class="project-card">
-                <div class="project-img-placeholder">
+                <div class="project-img-placeholder" id="project2-image-text">
                   [ Imagem do Projeto 2 ]
                 </div>
                 <div class="project-info">
-                  <h4>App de Finanças Pessoais</h4>
-                  <p>
+                  <h4 id="project2-title">App de Finanças Pessoais</h4>
+                  <p id="project2-description">
                     Interface responsiva para gestão de fluxo de caixa mensal,
                     com exibição de gráficos interativos de despesas.
                   </p>
@@ -383,10 +500,10 @@
                     <span>LocalCSS</span>
                   </div>
                   <div class="project-links">
-                    <a href="#" target="_blank"
+                    <a href="#" target="_blank" id="project2-code"
                       ><i class="fab fa-github"></i> Código</a
                     >
-                    <a href="#" target="_blank"
+                    <a href="#" target="_blank" id="project2-demo"
                       ><i class="fas fa-external-link-alt"></i> Live Demo</a
                     >
                   </div>
@@ -397,6 +514,7 @@
         </div>
       </section>
 
+      <!-- ===== CONTATO ===== -->
       <section id="contato" class="contact-section">
         <div class="section-container">
           <span class="section-tag" id="contact-tag">Conexão</span>
@@ -411,28 +529,26 @@
               <div class="detail-card">
                 <div class="detail-icon"><i class="fas fa-envelope"></i></div>
                 <div class="detail-text">
-                  <h4>E-mail Direto</h4>
+                  <h4 id="email-title">E-mail Direto</h4>
                   <p>mariaeduardaaperes@hotmail.com</p>
                 </div>
               </div>
-
               <div class="detail-card">
                 <div class="detail-icon">
                   <i class="fas fa-map-marker-alt"></i>
                 </div>
                 <div class="detail-text">
-                  <h4>Localização</h4>
-                  <p>Sorocaba - SP, Brasil</p>
+                  <h4 id="location-title">Localização</h4>
+                  <p id="location-text">Sorocaba - SP, Brasil</p>
                 </div>
               </div>
-
               <div class="detail-card">
                 <div class="detail-icon">
                   <i class="fab fa-linkedin-in"></i>
                 </div>
                 <div class="detail-text">
-                  <h4>Rede Profissional</h4>
-                  <p>linkedin.com/in/mariaeduperes</p>
+                  <h4 id="linkedin-title">Rede Profissional</h4>
+                  <p>linkedin.com/in/maduaperes</p>
                 </div>
               </div>
             </div>
@@ -441,46 +557,51 @@
               <form class="portfolio-form">
                 <div class="form-row">
                   <div class="form-input-group">
-                    <label for="name">Seu Nome</label>
+                    <label for="name" id="label-name">Seu Nome</label>
                     <input
                       type="text"
                       id="name"
+                      class="translate-name-placeholder"
                       placeholder="Ex: Maria Silva"
                       required
                     />
                   </div>
                   <div class="form-input-group">
-                    <label for="email">Seu E-mail</label>
+                    <label for="email" id="label-email">Seu E-mail</label>
                     <input
                       type="email"
                       id="email"
+                      class="translate-email-placeholder"
                       placeholder="Ex: maria@email.com"
                       required
                     />
                   </div>
                 </div>
-
                 <div class="form-input-group">
-                  <label for="subject">Assunto</label>
+                  <label for="subject" id="label-subject">Assunto</label>
                   <input
                     type="text"
                     id="subject"
+                    class="translate-subject-placeholder"
                     placeholder="Ex: Oportunidade de Projeto / Emprego"
                     required
                   />
                 </div>
-
                 <div class="form-input-group">
-                  <label for="message">Mensagem</label>
+                  <label for="message" id="label-message">Mensagem</label>
                   <textarea
                     id="message"
+                    class="translate-message-placeholder"
                     rows="6"
                     placeholder="Escreva aqui detalhes sobre sua proposta ou dúvida..."
                     required
                   ></textarea>
                 </div>
-
-                <button type="submit" class="btn-submit-form">
+                <button
+                  type="submit"
+                  class="btn-submit-form"
+                  id="submit-button"
+                >
                   Enviar Mensagem <i class="fas fa-paper-plane"></i>
                 </button>
               </form>
@@ -490,12 +611,14 @@
       </section>
 
       <footer class="site-footer">
-        <p>
+        <p id="footer-text">
           © 2026 Madu Peres. Todos os direitos reservados. Desenvolvido com foco
           e dedicação.
         </p>
       </footer>
     </div>
+
     <script src="script.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
   </body>
 </html>
