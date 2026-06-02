@@ -1,44 +1,4 @@
 /* =========================
-   AVISO WEBVIEW
-   ========================= */
-(function () {
-  const ua = navigator.userAgent || "";
-  const isWebView = /Instagram|FBAN|FBAV|Twitter|Line\/|musical_ly/i.test(ua);
-
-  if (isWebView) {
-    const isIOS = /iPhone|iPad|iPod/i.test(ua);
-    const openLink = isIOS
-      ? `googlechrome://navigate?url=${encodeURIComponent(location.href)}`
-      : location.href;
-
-    const banner = document.createElement("div");
-    banner.innerHTML = `
-      <span>Para melhor experiência, abra no seu navegador</span>
-      <a href="${openLink}"
-         style="color:#fff;font-weight:700;text-decoration:underline;margin-left:10px;">
-        Abrir ↗
-      </a>
-    `;
-    Object.assign(banner.style, {
-      position: "fixed",
-      bottom: "0",
-      left: "0",
-      width: "100%",
-      background: "var(--accent)",
-      color: "#fff",
-      fontSize: "12px",
-      padding: "12px 20px",
-      zIndex: "9999",
-      display: "flex",
-      alignItems: "center",
-      justifyContent: "center",
-      textAlign: "center",
-    });
-    document.body.appendChild(banner);
-  }
-})();
-
-/* =========================
    TEMA
    ========================= */
 
