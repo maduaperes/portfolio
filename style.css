@@ -326,7 +326,7 @@ header.scrolled {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: calc(100vh - 80px);
+  height: 100svh;
   position: relative;
   overflow: hidden;
 }
