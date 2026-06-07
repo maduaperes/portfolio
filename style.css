@@ -326,7 +326,7 @@ header.scrolled {
   display: flex;
   align-items: center;
   justify-content: space-between;
-  height: 100svh;
+  height: calc(100vh - 80px);
   position: relative;
   overflow: hidden;
 }
@@ -1198,7 +1198,7 @@ h2 {
     align-items: center;
     text-align: center;
 
-    min-height: 100svh;
+    min-height: 90svh;
     height: auto;
 
     padding-top: 70px;
