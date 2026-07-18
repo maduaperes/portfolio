@@ -373,12 +373,29 @@ header.scrolled {
 
 /* ============================================================
    HERO SECTION
+   ------------------------------------------------------------
+   Estrutura em CSS Grid com 3 filhos diretos:
+     .hero-text-top    → subtítulo + nome
+     .hero-image       → foto
+     .hero-text-bottom → parágrafo + botões
+
+   Em telas largas eles formam duas "colunas" (texto | imagem),
+   com o texto-topo e texto-base empilhados na mesma coluna da
+   esquerda (grid-template-areas cuidando disso). Em mobile
+   (≤680px) a grade vira 1 coluna e a ordem física passa a ser
+   exatamente: topo → imagem → base, que é a ordem em que os
+   elementos já aparecem no HTML.
    ============================================================ */
 
 .hero-section {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  grid-template-areas:
+    "top image"
+    "bottom image";
+  column-gap: 40px;
+  align-items: stretch;
   /* Antes: height fixo em "100vh - 80px". Isso fazia o hero mudar de
      tamanho conforme a ALTURA da janela do navegador (não só a largura),
      então em janelas mais baixas (mesmo em telas largas) tudo ficava
@@ -393,6 +410,16 @@ header.scrolled {
 .hero-text {
   max-width: 500px;
   z-index: 5;
+}
+
+.hero-text-top {
+  grid-area: top;
+  align-self: end;
+}
+
+.hero-text-bottom {
+  grid-area: bottom;
+  align-self: start;
 }
 
 .subtitle {
@@ -423,6 +450,14 @@ header.scrolled {
   margin-bottom: 35px;
 }
 
+/* Wrapper dos dois botões do hero (Entrar em contato / Download CV) */
+.hero-buttons {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
 .btn-cv {
   background-color: var(--accent);
   color: #fff;
@@ -445,11 +480,36 @@ header.scrolled {
   transform: translateY(-2px);
 }
 
+/* Botão secundário (outline) — Download CV */
+.btn-cv-outline {
+  background-color: transparent;
+  color: var(--text-primary);
+  border: 1px solid var(--border-color);
+  padding: 14px 35px;
+  font-size: 11px;
+  font-weight: 600;
+  letter-spacing: 1px;
+  cursor: pointer;
+  transition:
+    transform 0.3s,
+    background-color 0.3s,
+    border-color 0.3s,
+    color 0.3s;
+  text-decoration: none;
+  display: inline-block;
+}
+
+.btn-cv-outline:hover {
+  border-color: var(--accent);
+  color: var(--accent);
+  transform: translateY(-2px);
+}
+
 /* Imagem Hero */
 .hero-image {
+  grid-area: image;
   position: relative;
-  width: 50%;
-  align-self: stretch;
+  width: 100%;
   background-color: var(--bg-page);
   display: flex;
   overflow: hidden;
@@ -1259,9 +1319,19 @@ h2 {
    ------------------------------------------------------------
    Escada de breakpoints (desktop-first, em cascata):
      ≥1200px  → Desktop (estilos base, sem media query)
-     991.98px → Laptop pequeno / desktop estreito
-     991.98px → Tablet (menu vira hambúrguer, hero empilha)
-     767.98px → Tablet retrato / celular grande
+     1199.98px→ Laptop pequeno / desktop estreito (hero lado a lado)
+     991.98px → Tablet (menu vira hambúrguer; hero AINDA lado a
+                 lado, só mais compacto — evita a tela de tablet
+                 ficar com o hero empilhado e um vazio enorme nas
+                 laterais)
+     767.98px → Tablet retrato estreito / phablet (hero lado a
+                 lado, ainda mais compacto)
+     680px    → A PARTIR DAQUI o hero empilha (imagem em cima,
+                 texto embaixo) — reservado para telas realmente
+                 estreitas (celulares e tablets bem pequenos).
+                 A ordem física dos 3 blocos do hero (topo, imagem,
+                 base) já é a ordem correta no HTML, então aqui só
+                 trocamos a grade de 2 colunas para 1 coluna.
      575.98px → Celular
      380px    → Celular pequeno (iPhone SE, Android antigo)
      + consultas dedicadas para telas baixas/paisagem
@@ -1317,122 +1387,128 @@ h2 {
 
 /* ============================================================
    ≤ 991.98px — TABLET
-   Ponto em que o menu vira hambúrguer (mesmo breakpoint "lg"
-   do Bootstrap, por isso 991.98 em vez de 992 — evita o menu
-   duplicado por 1px de sobreposição entre as duas regras) e o
-   hero deixa de ser lado a lado para empilhar.
+   Ponto em que o menu vira hambúrguer (mesmo breakpoint "lg" do
+   Bootstrap, por isso 991.98 em vez de 992 — evita o menu
+   duplicado por 1px de sobreposição entre as duas regras).
+   O HERO CONTINUA LADO A LADO aqui — só mais compacto. Antes ele
+   empilhava já nesse tamanho e sobrava muito espaço em branco
+   nas laterais em tablets (768–991px), que têm largura de sobra
+   pra manter texto e foto lado a lado.
    ============================================================ */
 
 @media (max-width: 991.98px) {
   :root {
-    --header-h: 64px;
+    --header-h: 72px;
   }
 
   .main-wrapper {
-    padding: 20px 18px;
+    padding: 24px 24px;
   }
 
   header {
-    padding: 14px 18px;
+    padding: 14px 24px;
   }
 
-  /* ── Hero ─────────────────────────────────────────── */
+  /* ── Hero: empilha igual ao mobile (topo → foto → base), mas
+     texto e botões usam a largura toda disponível em vez de
+     ficar numa coluna estreita e centralizada sobrando espaço
+     vazio nas laterais, como acontecia antes em tablets. ───── */
   .hero-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "top"
+      "image"
+      "bottom";
+    row-gap: 24px;
+    justify-items: stretch;
+    text-align: center;
+    /* A partir daqui o hero deixa de tentar preencher a altura da
+       tela (min-height baseado em vh, herdado do desktop). Com o
+       texto e a foto já menores nesse intervalo, uma altura presa
+       ao viewport sobrava demais e deixava um vão vazio enorme no
+       topo. Agora a altura é só a que o conteúdo pede. */
+    min-height: 0;
+    padding: 56px 0;
+  }
+
+  .hero-text-top,
+  .hero-text-bottom {
+    /* Desfaz o alinhamento "esticado" pelas linhas 1fr/1fr — aqui a
+       altura das linhas passa a ser definida pelo próprio conteúdo. */
+    align-self: auto;
+    width: 100%;
+  }
+
+  .hero-text {
+    max-width: 100%;
+    width: 100%;
+    display: flex;
     flex-direction: column;
     align-items: center;
-    text-align: center;
+  }
 
-    min-height: 90svh;
+  .hero-text .subtitle {
+    font-size: 13px;
+  }
 
-    padding-top: 70px;
-    padding-bottom: 30px;
+  .hero-text h1 {
+    font-size: clamp(34px, 6vw, 46px);
+    margin-bottom: 16px;
+  }
 
-    justify-content: space-between;
+  .hero-text p {
+    font-size: 14px;
+    line-height: 1.7;
+    margin-bottom: 24px;
+    max-width: 600px;
   }
 
   .hero-image {
     width: 100%;
-    height: auto;
-    max-height: 45vh;
-
+    max-height: 48vh;
     justify-content: center;
     align-items: flex-end;
-
     overflow: hidden;
-    order: -1;
-    position: relative;
-    margin-bottom: 0;
   }
 
   .profile-img,
   .element-img {
-    width: 100%;
-    height: auto;
-    max-height: 45vh;
+    max-height: 48vh;
     object-fit: contain;
     object-position: top center;
   }
 
-  .profile-img {
-    filter: grayscale(100%) contrast(130%) brightness(0.95);
-  }
-
   .bg-brush {
-    width: clamp(260px, 75vw, 400px);
-    height: clamp(260px, 75vw, 400px);
     right: 50%;
-    bottom: -10%;
     transform: translateX(50%) rotate(-10deg);
-    opacity: 1;
   }
 
   .scroll-down {
     display: none;
   }
 
-  .hero-text {
-    max-width: 100%;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    padding: 0 4px;
-    gap: 4px;
-  }
-
-  .hero-text .subtitle {
-    font-size: 11px;
-    letter-spacing: 2.5px;
-    margin-bottom: 6px;
-    margin-top: 10px;
-  }
-
-  .hero-text h1 {
-    font-size: clamp(30px, 8vw, 48px);
-    line-height: 1.1;
-    margin-bottom: 12px;
-  }
-
-  .hero-text p {
-    font-size: clamp(12px, 3.5vw, 14px);
-    line-height: 1.75;
-    max-width: min(340px, 88vw);
-    margin-bottom: 20px;
-  }
-
-  .btn-cv {
-    font-size: 11px;
-    padding: 13px 30px;
-  }
-
   .social-icons {
     position: static;
     justify-content: center;
-    margin-top: 22px;
-    gap: 30px;
+    margin-top: 6px;
+    gap: 26px;
   }
 
-  .social-icons a {
-    font-size: 18px;
+  /* Botões esticados de ponta a ponta (metade cada um) */
+  .hero-buttons {
+    width: 100%;
+    justify-content: center;
+    gap: 15px;
+  }
+
+  .btn-cv,
+  .btn-cv-outline {
+    flex: 1 1 0;
+    text-align: center;
+    font-size: 11px;
+    padding: 14px 20px;
   }
 
   /* ── Divisores de seção ───────────────────────────── */
@@ -1516,51 +1592,25 @@ h2 {
 
   /* ── Serviços ─────────────────────────────────────── */
   .services-grid {
-    grid-template-columns: 1fr;
-    gap: 12px;
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
   }
 
   .service-card {
-    padding: clamp(14px, 4vw, 20px);
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    gap: 10px;
-    border-bottom: none;
-    border-left: 3px solid transparent;
-    border-radius: 10px;
-  }
-
-  .service-card:hover {
-    border-bottom: none;
-    border-left: 3px solid var(--accent);
+    padding: clamp(16px, 3vw, 24px);
   }
 
   .card-icon {
-    font-size: 20px;
-    margin-bottom: 0;
-    width: 42px;
-    height: 42px;
-    background-color: var(--accent-bg);
-    border-radius: 10px;
-    display: flex;
-    justify-content: center;
-    align-items: center;
+    font-size: 26px;
+    margin-bottom: 14px;
   }
 
   .service-card h3 {
-    font-size: clamp(13px, 4vw, 15px);
-    margin-bottom: 2px;
+    font-size: clamp(14px, 2.5vw, 16px);
   }
 
   .service-card p {
-    font-size: clamp(11px, 3vw, 13px);
-    line-height: 1.65;
-    margin-bottom: 4px;
-  }
-
-  .service-bullets li {
-    font-size: clamp(10px, 2.8vw, 12px);
+    font-size: clamp(12px, 2vw, 13px);
   }
 
   /* ── Currículo ────────────────────────────────────── */
@@ -1580,25 +1630,25 @@ h2 {
 
   /* ── Projetos ─────────────────────────────────────── */
   .projects-grid {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 18px;
   }
 
   .project-img-placeholder {
-    height: clamp(120px, 35vw, 160px);
+    height: clamp(120px, 22vw, 160px);
     font-size: 12px;
   }
 
   .project-info {
-    padding: clamp(14px, 4vw, 20px);
+    padding: clamp(14px, 3vw, 20px);
   }
 
   .project-info h4 {
-    font-size: clamp(13px, 4vw, 16px);
+    font-size: clamp(13px, 2.5vw, 16px);
   }
 
   .project-info p {
-    font-size: clamp(11px, 3vw, 13px);
+    font-size: clamp(11px, 2vw, 13px);
   }
 
   /* ── Contato ──────────────────────────────────────── */
@@ -1612,7 +1662,7 @@ h2 {
   }
 
   .form-row {
-    grid-template-columns: 1fr;
+    grid-template-columns: 1fr 1fr;
     gap: 14px;
   }
 
@@ -1664,53 +1714,77 @@ h2 {
 }
 
 /* ============================================================
-   ≤ 767.98px — TABLET RETRATO / CELULAR GRANDE
-   Ajuste fino intermediário: sem isso, tudo entre ~576 e 767px
-   herdava direto do breakpoint de tablet (991px) e ficava com
-   respiro maior do que cabia na tela.
+   ≤ 767.98px — TABLET RETRATO ESTREITO / PHABLET
+   O hero já está empilhado (herdado do breakpoint de 991.98px),
+   então aqui só afinamos um pouco mais o tamanho do texto/botão
+   e reorganizamos as outras seções (serviços, projetos, form).
    ============================================================ */
 
 @media (max-width: 767.98px) {
+  :root {
+    --header-h: 68px;
+  }
+
   header {
-    padding: 12px 16px;
+    padding: 12px 18px;
   }
 
   .main-wrapper {
-    padding: 18px 16px;
+    padding: 20px 18px;
   }
 
   .hero-section {
-    padding-top: 64px;
-    padding-bottom: 26px;
-  }
-
-  .hero-image {
-    max-height: 38vh;
-  }
-
-  .profile-img,
-  .element-img {
-    max-height: 38vh;
+    padding: 44px 0;
   }
 
   .hero-text h1 {
-    font-size: clamp(28px, 7.5vw, 40px);
+    font-size: clamp(28px, 7vw, 36px);
   }
 
-  .about-counters {
-    margin-top: 22px;
+  .hero-text p {
+    font-size: 13px;
+    line-height: 1.6;
+    margin-bottom: 20px;
+  }
+
+  .btn-cv,
+  .btn-cv-outline {
+    padding: 12px 18px;
+  }
+
+  .services-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 
   .service-card {
-    padding: 16px;
+    padding: clamp(14px, 4vw, 20px);
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
   }
 
-  .timeline {
-    padding-left: 18px;
+  .card-icon {
+    font-size: 20px;
+    margin-bottom: 0;
+    width: 42px;
+    height: 42px;
+    background-color: var(--accent-bg);
+    border-radius: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
   }
 
   .projects-grid {
+    grid-template-columns: 1fr;
     gap: 16px;
+  }
+
+  .form-row {
+    grid-template-columns: 1fr;
+    gap: 14px;
   }
 
   .contact-form-wrapper {
@@ -1723,12 +1797,151 @@ h2 {
 }
 
 /* ============================================================
+   ≤ 680px — A PARTIR DAQUI O HERO EMPILHA
+   Ponto de virada: abaixo disso não há mais largura confortável
+   pra manter foto e texto lado a lado, então o hero passa para
+   o layout vertical (subtítulo+nome → foto → parágrafo+botões)
+   — a mesma ordem em que os blocos aparecem no HTML.
+   ============================================================ */
+
+@media (max-width: 680px) {
+  .main-wrapper {
+    padding: 20px 18px;
+  }
+
+  header {
+    padding: 14px 18px;
+  }
+
+  /* ── Hero ─────────────────────────────────────────── */
+  .hero-section {
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: auto auto auto;
+    grid-template-areas:
+      "top"
+      "image"
+      "bottom";
+    row-gap: 0;
+    justify-items: center;
+    text-align: center;
+
+    min-height: 90svh;
+
+    /* padding-top amarrado à altura real do header (--header-h) em
+       vez de um número fixo — garante que a foto nunca fique atrás
+       do header, mesmo que a altura do header mude no futuro */
+    padding-top: calc(var(--header-h) + 24px);
+    padding-bottom: 30px;
+
+    align-content: space-between;
+  }
+
+  .hero-text-top,
+  .hero-text-bottom {
+    align-self: auto;
+    width: 100%;
+  }
+
+  .hero-image {
+    width: 100%;
+    height: auto;
+    max-height: 45vh;
+
+    justify-content: center;
+    align-items: flex-end;
+
+    overflow: hidden;
+    position: relative;
+    margin-bottom: 0;
+  }
+
+  .profile-img,
+  .element-img {
+    width: 100%;
+    height: auto;
+    max-height: 45vh;
+    object-fit: contain;
+    object-position: top center;
+  }
+
+  .profile-img {
+    filter: grayscale(100%) contrast(130%) brightness(0.95);
+  }
+
+  .bg-brush {
+    width: clamp(260px, 75vw, 400px);
+    height: clamp(260px, 75vw, 400px);
+    right: 50%;
+    bottom: -10%;
+    transform: translateX(50%) rotate(-10deg);
+    opacity: 1;
+  }
+
+  .scroll-down {
+    display: none;
+  }
+
+  .hero-text {
+    max-width: 100%;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    padding: 0 4px;
+    gap: 4px;
+  }
+
+  .hero-text .subtitle {
+    font-size: 11px;
+    letter-spacing: 2.5px;
+    margin-bottom: 6px;
+    margin-top: 10px;
+  }
+
+  .hero-text h1 {
+    font-size: clamp(30px, 8vw, 48px);
+    line-height: 1.1;
+    margin-bottom: 12px;
+  }
+
+  .hero-text p {
+    font-size: clamp(12px, 3.5vw, 14px);
+    line-height: 1.75;
+    max-width: min(340px, 88vw);
+    margin-bottom: 20px;
+  }
+
+  .hero-buttons {
+    justify-content: center;
+    width: 100%;
+  }
+
+  .btn-cv,
+  .btn-cv-outline {
+    flex: 0 1 auto;
+    font-size: 11px;
+    padding: 13px 30px;
+  }
+
+  .social-icons {
+    position: static;
+    justify-content: center;
+    margin-top: 22px;
+    gap: 30px;
+  }
+
+  .social-icons a {
+    font-size: 18px;
+  }
+}
+
+/* ============================================================
    ≤ 575.98px — CELULAR
    ============================================================ */
 
 @media (max-width: 575.98px) {
   :root {
-    --header-h: 60px;
+    --header-h: 68px;
   }
 
   .main-wrapper {
@@ -1744,7 +1957,7 @@ h2 {
   }
 
   .hero-section {
-    padding-top: 58px;
+    padding-top: calc(var(--header-h) + 16px);
     min-height: auto;
     padding-bottom: 22px;
   }
@@ -1766,9 +1979,17 @@ h2 {
     max-width: 100%;
   }
 
-  .btn-cv {
+  .hero-buttons {
+    flex-direction: column;
+    width: 100%;
+    max-width: 280px;
+  }
+
+  .btn-cv,
+  .btn-cv-outline {
     text-align: center;
     padding: 14px 20px;
+    width: 100%;
   }
 
   .social-icons {
@@ -1865,7 +2086,8 @@ h2 {
     font-size: 12px;
   }
 
-  .btn-cv {
+  .btn-cv,
+  .btn-cv-outline {
     padding: 12px 16px;
     font-size: 10px;
   }
@@ -1913,15 +2135,17 @@ h2 {
 
 /* ============================================================
    TELAS BAIXAS (celular deitado / laptops com pouca altura)
-   Sem isso, um celular em paisagem (ex.: 812×375) herdava o
-   min-height:90svh do tablet e sobrava/faltava espaço de forma
-   estranha porque a lógica ali é pensada para telas altas.
+   Só entra em ação dentro da faixa em que o hero já está
+   empilhado (≤680px) — em telas mais largas o hero continua
+   lado a lado e o piso de min-height do próprio hero (definido
+   lá na regra base) já dá conta de telas baixas sem precisar
+   de ajuste extra aqui.
    ============================================================ */
 
-@media (max-width: 991.98px) and (max-height: 700px) {
+@media (max-width: 680px) and (max-height: 700px) {
   .hero-section {
     min-height: auto;
-    padding-top: 30px;
+    padding-top: calc(var(--header-h) + 10px);
     padding-bottom: 20px;
   }
 
@@ -1952,7 +2176,8 @@ h2 {
     margin-top: 10px;
   }
 
-  .btn-cv {
+  .btn-cv,
+  .btn-cv-outline {
     padding: 10px 24px;
   }
 }
@@ -1960,7 +2185,7 @@ h2 {
 /* Celular em paisagem bem baixo (ex.: 667×375, 568×320):
    reduz mais um passo e tira o elemento puramente decorativo
    de trás da foto, que nessa proporção só atrapalhava. */
-@media (max-width: 767.98px) and (max-height: 450px) {
+@media (max-width: 680px) and (max-height: 450px) {
   .hero-image {
     max-height: 28vh;
   }
