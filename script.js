@@ -109,10 +109,13 @@ window.addEventListener("scroll", () => {
   });
 
   navLinks.forEach((link) => {
-    link.classList.toggle(
-      "active",
-      link.getAttribute("href") === `#${current}`,
-    );
+    const isActive = link.getAttribute("href") === `#${current}`;
+    link.classList.toggle("active", isActive);
+    if (isActive) {
+      link.setAttribute("aria-current", "page");
+    } else {
+      link.removeAttribute("aria-current");
+    }
   });
 });
 
@@ -139,6 +142,7 @@ function setActiveLang(lang) {
 }
 
 function translateToEnglish() {
+  document.documentElement.lang = "en";
   document.title = "Portfolio - Madu Peres";
 
   // MENU

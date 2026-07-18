@@ -4,7 +4,43 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>Portfólio - Madu Peres</title>
+    <meta
+      name="description"
+      content="Portfólio de Madu Peres, desenvolvedora de software focada em front-end, back-end e interfaces responsivas."
+    />
+
+    <!-- Open Graph / compartilhamento em redes sociais -->
+    <meta property="og:type" content="website" />
+    <meta property="og:url" content="https://maduaperes.github.io/portfolio/" />
+    <meta property="og:title" content="Portfólio - Madu Peres" />
+    <meta
+      property="og:description"
+      content="Portfólio de Madu Peres, desenvolvedora de software focada em front-end, back-end e interfaces responsivas."
+    />
+    <meta
+      property="og:image"
+      content="https://maduaperes.github.io/portfolio/imagens/me.png"
+    />
+    <meta property="og:locale" content="pt_BR" />
+
+    <!-- Twitter Card -->
+    <meta name="twitter:card" content="summary" />
+    <meta name="twitter:title" content="Portfólio - Madu Peres" />
+    <meta
+      name="twitter:description"
+      content="Portfólio de Madu Peres, desenvolvedora de software focada em front-end, back-end e interfaces responsivas."
+    />
+    <meta
+      name="twitter:image"
+      content="https://maduaperes.github.io/portfolio/imagens/me.png"
+    />
+
+    <meta name="theme-color" content="#f3f5f8" />
+    <link rel="manifest" href="manifest.json" />
+
     <link rel="stylesheet" href="style.css" />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap"
       rel="stylesheet"
@@ -18,8 +54,32 @@
       href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css"
       rel="stylesheet"
     />
+
+    <!-- Dados estruturados: ajudam o Google a entender que a página é sobre uma pessoa/profissional -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Madu Peres",
+        "jobTitle": "Desenvolvedora de Software",
+        "url": "https://maduaperes.github.io/portfolio/",
+        "email": "mailto:mariaeduardaaperes@hotmail.com",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Sorocaba",
+          "addressRegion": "SP",
+          "addressCountry": "BR"
+        },
+        "sameAs": [
+          "https://www.instagram.com/devmaduperes/",
+          "https://github.com/maduaperes",
+          "https://www.linkedin.com/in/maduaperes/"
+        ]
+      }
+    </script>
   </head>
   <body>
+    <a href="#inicio" class="skip-link">Pular para o conteúdo</a>
     <div class="main-wrapper">
       <!-- ===== HEADER ===== -->
       <header>
@@ -43,7 +103,11 @@
         <!-- Nav desktop: oculta em mobile -->
         <nav class="main-nav d-none d-lg-flex">
           <ul>
-            <li><a href="#inicio" class="active" id="nav-home">INÍCIO</a></li>
+            <li>
+              <a href="#inicio" class="active" id="nav-home" aria-current="page"
+                >INÍCIO</a
+              >
+            </li>
             <li><a href="#sobre" id="nav-about">SOBRE</a></li>
             <li><a href="#servicos" id="nav-services">SERVIÇOS</a></li>
             <li><a href="#curriculo" id="nav-resume">CURRÍCULO</a></li>
@@ -137,20 +201,27 @@
         <div class="hero-image">
           <div class="bg-brush"></div>
           <img src="imagens/me.png" alt="Madu Peres" class="profile-img" />
-          <img src="imagens/element.png" alt="Element" class="element-img" />
+          <img src="imagens/element.png" alt="" class="element-img" />
         </div>
 
         <div class="social-icons">
-          <a href="https://www.instagram.com/devmaduperes/" target="_blank"
+          <a
+            href="https://www.instagram.com/devmaduperes/"
+            target="_blank"
+            rel="noopener noreferrer"
             ><i class="fab fa-instagram"></i
           ></a>
           <a
             href="https://github.com/maduaperes"
             target="_blank"
+            rel="noopener noreferrer"
             class="active-social"
             ><i class="fab fa-github"></i
           ></a>
-          <a href="https://www.linkedin.com/in/maduaperes/" target="_blank"
+          <a
+            href="https://www.linkedin.com/in/maduaperes/"
+            target="_blank"
+            rel="noopener noreferrer"
             ><i class="fab fa-linkedin-in"></i
           ></a>
           <a href="mailto:mariaeduardaaperes@hotmail.com"
@@ -483,10 +554,18 @@
                     <span>PostgreSQL</span>
                   </div>
                   <div class="project-links">
-                    <a href="#" target="_blank" id="project1-code"
+                    <a
+                      href="#"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      id="project1-code"
                       ><i class="fab fa-github"></i> Código</a
                     >
-                    <a href="#" target="_blank" id="project1-demo"
+                    <a
+                      href="#"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      id="project1-demo"
                       ><i class="fas fa-external-link-alt"></i> Live Demo</a
                     >
                   </div>
@@ -508,10 +587,18 @@
                     <span>LocalCSS</span>
                   </div>
                   <div class="project-links">
-                    <a href="#" target="_blank" id="project2-code"
+                    <a
+                      href="#"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      id="project2-code"
                       ><i class="fab fa-github"></i> Código</a
                     >
-                    <a href="#" target="_blank" id="project2-demo"
+                    <a
+                      href="#"
+                      target="_blank"
+                      rel="noopener noreferrer"
+                      id="project2-demo"
                       ><i class="fas fa-external-link-alt"></i> Live Demo</a
                     >
                   </div>
@@ -626,7 +713,10 @@
       </footer>
     </div>
 
-    <script src="script.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="script.js" defer></script>
+    <script
+      src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+      defer
+    ></script>
   </body>
 </html>
