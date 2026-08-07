@@ -969,6 +969,15 @@ h2 {
   justify-content: center;
   font-size: 13px;
   font-weight: 600;
+  overflow: hidden; /* impede a imagem de vazar do card */
+}
+
+.project-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: top center;
+  display: block;
 }
 
 [data-theme="dark"] .project-img-placeholder {
@@ -1169,6 +1178,22 @@ h2 {
   background-color: var(--accent);
   color: #fff;
   transform: translateY(-2px);
+}
+
+.form-buttons-row {
+  display: flex;
+  gap: 15px;
+  flex-wrap: wrap;
+}
+
+.btn-whatsapp {
+  background-color: #25d366;
+  color: #fff;
+}
+
+.btn-whatsapp:hover {
+  background-color: #1ebe57;
+  color: #fff;
 }
 
 /* ============================================================
@@ -1785,6 +1810,15 @@ h2 {
   .form-row {
     grid-template-columns: 1fr;
     gap: 14px;
+  }
+
+  .form-buttons-row {
+    flex-direction: column;
+  }
+
+  .form-buttons-row .btn-submit-form {
+    width: 100%;
+    justify-content: center;
   }
 
   .contact-form-wrapper {

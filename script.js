@@ -274,17 +274,15 @@ function translateToEnglish() {
     "projects-description",
     "Some recently developed solutions that demonstrate my skills in practice:",
   );
-  setText("project1-image-text", "[ Project Image 1 ]");
-  setText("project1-title", "E-Commerce Dashboard");
+  setText("project1-title", "ProcessDebt");
   setText(
     "project1-description",
-    "Administrative dashboard for inventory and real-time sales management integrated with a relational database.",
+    "Diagnosis and measurement platform for process inefficiency, applying the Technical Debt concept to business process management. Project in progress...",
   );
-  setText("project2-image-text", "[ Project Image 2 ]");
-  setText("project2-title", "Personal Finance App");
+  setText("project2-title", "SkillBridge");
   setText(
     "project2-description",
-    "Responsive interface for monthly cash flow management with interactive expense charts.",
+    "Organizational Knowledge Retention, Transfer and Mapping System. Project in progress...",
   );
   document.getElementById("project1-code").innerHTML =
     '<i class="fab fa-github"></i> Code';
@@ -319,7 +317,12 @@ function translateToEnglish() {
   document.querySelector(".translate-message-placeholder").placeholder =
     "Write your message here...";
   document.getElementById("submit-button").innerHTML =
-    'Send Message <i class="fas fa-paper-plane"></i>';
+    'Send by Email <i class="fas fa-paper-plane"></i>';
+  const whatsappBtnEl = document.getElementById("whatsapp-button");
+  if (whatsappBtnEl) {
+    whatsappBtnEl.innerHTML =
+      'Send via WhatsApp <i class="fab fa-whatsapp"></i>';
+  }
 
   // FOOTER
   setText(
@@ -352,15 +355,25 @@ langPTMobile?.addEventListener("click", (e) => {
 });
 
 /* =========================
-   WHATSAPP REDIRECT (FORM)
+   FORMULÁRIO DE CONTATO
+   ------------------------------------------------------------
+   Dois botões separados, cada um com seu próprio comportamento:
+
+   1) #submit-button  → type="submit" de verdade. NÃO tem
+      preventDefault, então o form segue o fluxo normal e é
+      enviado via POST para o Formspree (definido no atributo
+      action do <form> no HTML). Não precisa de JS aqui.
+
+   2) #whatsapp-button → type="button" (não dispara submit).
+      Ao clicar, monta a mensagem com os dados preenchidos e
+      abre o WhatsApp numa nova aba, sem interferir no envio
+      por e-mail.
    ========================= */
 
-const form = document.querySelector(".portfolio-form");
+const whatsappButton = document.getElementById("whatsapp-button");
 
-if (form) {
-  form.addEventListener("submit", function (e) {
-    e.preventDefault();
-
+if (whatsappButton) {
+  whatsappButton.addEventListener("click", function () {
     const name = document.getElementById("name").value;
     const email = document.getElementById("email").value;
     const subject = document.getElementById("subject").value;

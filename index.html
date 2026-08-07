@@ -111,6 +111,7 @@
             <li><a href="#sobre" id="nav-about">SOBRE</a></li>
             <li><a href="#servicos" id="nav-services">SERVIÇOS</a></li>
             <li><a href="#curriculo" id="nav-resume">CURRÍCULO</a></li>
+            <li><a href="#projetos" id="nav-projects">PROJETOS</a></li>
             <li><a href="#contato" id="nav-contact">CONTATO</a></li>
           </ul>
         </nav>
@@ -148,6 +149,9 @@
             </li>
             <li>
               <a href="#curriculo" class="close-menu">CURRÍCULO</a>
+            </li>
+            <li>
+              <a href="#projetos" class="close-menu">PROJETOS</a>
             </li>
             <li>
               <a href="#contato" class="close-menu">CONTATO</a>
@@ -307,10 +311,10 @@
                 <div class="skill-item">
                   <div class="skill-info">
                     <span><i class="fab fa-js-square"></i> JavaScript</span>
-                    <span>50%</span>
+                    <span>15%</span>
                   </div>
                   <div class="progress-bar">
-                    <div class="progress" style="width: 50%"></div>
+                    <div class="progress" style="width: 15%"></div>
                   </div>
                 </div>
                 <div class="skill-item">
@@ -325,10 +329,10 @@
                 <div class="skill-item">
                   <div class="skill-info">
                     <span><i class="fab fa-java"></i> Java</span>
-                    <span>40%</span>
+                    <span>10%</span>
                   </div>
                   <div class="progress-bar">
-                    <div class="progress" style="width: 40%"></div>
+                    <div class="progress" style="width: 10%"></div>
                   </div>
                 </div>
                 <div class="skill-item">
@@ -336,10 +340,10 @@
                     <span
                       ><i class="fa-solid fa-chart-column"></i> Power BI</span
                     >
-                    <span>60%</span>
+                    <span>70%</span>
                   </div>
                   <div class="progress-bar">
-                    <div class="progress" style="width: 60%"></div>
+                    <div class="progress" style="width: 70%"></div>
                   </div>
                 </div>
                 <div class="skill-item">
@@ -348,10 +352,10 @@
                       ><i class="fa-solid fa-file-excel"></i> Excel
                       Avançado</span
                     >
-                    <span>75%</span>
+                    <span>90%</span>
                   </div>
                   <div class="progress-bar">
-                    <div class="progress" style="width: 75%"></div>
+                    <div class="progress" style="width: 90%"></div>
                   </div>
                 </div>
               </div>
@@ -545,7 +549,7 @@
             </div>
           </div>
 
-          <div class="projects-featured-wrapper">
+          <div class="projects-featured-wrapper" id="projetos">
             <h3 id="projects-title">Projetos em Destaque</h3>
             <p id="projects-description">
               Algumas soluções criadas recentemente que demonstram minhas
@@ -554,14 +558,21 @@
 
             <div class="projects-grid">
               <div class="project-card">
-                <div class="project-img-placeholder" id="project1-image-text">
-                  [ Imagem do Projeto 1 ]
+                <div class="project-img-placeholder">
+                  <img
+                    src="imagens/projeto1-dashboard.png"
+                    alt="Captura de tela do E-Commerce Dashboard"
+                    class="project-img"
+                  />
                 </div>
                 <div class="project-info">
-                  <h4 id="project1-title">E-Commerce Dashboard</h4>
+                  <h4 id="project1-title">ProcessDebt</h4>
                   <p id="project1-description">
-                    Painel administrativo para controle de estoque e vendas em
-                    tempo real integrado a um banco de dados relacional.
+                    Plataforma de diagnóstico e mensuração de ineficiência
+                    processual, aplicando o conceito de Technical Debt à gestão
+                    de processos de negócio.
+                    <br />
+                    <span style="color: #ff003c">Projeto em andamento...</span>
                   </p>
                   <div class="project-tags">
                     <span>React</span> <span>Node.js</span>
@@ -587,14 +598,20 @@
               </div>
 
               <div class="project-card">
-                <div class="project-img-placeholder" id="project2-image-text">
-                  [ Imagem do Projeto 2 ]
+                <div class="project-img-placeholder">
+                  <img
+                    src="imagens/projeto2-financas.png"
+                    alt="Captura de tela do App de Finanças Pessoais"
+                    class="project-img"
+                  />
                 </div>
                 <div class="project-info">
-                  <h4 id="project2-title">App de Finanças Pessoais</h4>
+                  <h4 id="project2-title">SkillBridge</h4>
                   <p id="project2-description">
-                    Interface responsiva para gestão de fluxo de caixa mensal,
-                    com exibição de gráficos interativos de despesas.
+                    Sistema de Retenção, Transferência e Mapeamento de
+                    Conhecimento Organizacional.
+                    <br />
+                    <span style="color: #ff003c">Projeto em andamento...</span>
                   </p>
                   <div class="project-tags">
                     <span>JavaScript</span> <span>Chart.js</span>
@@ -663,13 +680,18 @@
             </div>
 
             <div class="contact-form-wrapper">
-              <form class="portfolio-form">
+              <form
+                class="portfolio-form"
+                action="https://formspree.io/f/xbgrlznp"
+                method="POST"
+              >
                 <div class="form-row">
                   <div class="form-input-group">
                     <label for="name" id="label-name">Seu Nome</label>
                     <input
                       type="text"
                       id="name"
+                      name="name"
                       class="translate-name-placeholder"
                       placeholder="Ex: Maria Silva"
                       required
@@ -680,6 +702,7 @@
                     <input
                       type="email"
                       id="email"
+                      name="email"
                       class="translate-email-placeholder"
                       placeholder="Ex: maria@email.com"
                       required
@@ -691,6 +714,7 @@
                   <input
                     type="text"
                     id="subject"
+                    name="subject"
                     class="translate-subject-placeholder"
                     placeholder="Ex: Oportunidade de Projeto / Emprego"
                     required
@@ -700,19 +724,34 @@
                   <label for="message" id="label-message">Mensagem</label>
                   <textarea
                     id="message"
+                    name="message"
                     class="translate-message-placeholder"
                     rows="6"
                     placeholder="Escreva aqui detalhes sobre sua proposta ou dúvida..."
                     required
                   ></textarea>
                 </div>
-                <button
-                  type="submit"
-                  class="btn-submit-form"
-                  id="submit-button"
-                >
-                  Enviar Mensagem <i class="fas fa-paper-plane"></i>
-                </button>
+                <input
+                  type="hidden"
+                  name="_subject"
+                  value="Nova mensagem do portfólio"
+                />
+                <div class="form-buttons-row">
+                  <button
+                    type="submit"
+                    class="btn-submit-form"
+                    id="submit-button"
+                  >
+                    Enviar por E-mail <i class="fas fa-paper-plane"></i>
+                  </button>
+                  <button
+                    type="button"
+                    class="btn-submit-form btn-whatsapp"
+                    id="whatsapp-button"
+                  >
+                    Enviar por WhatsApp <i class="fab fa-whatsapp"></i>
+                  </button>
+                </div>
               </form>
             </div>
           </div>
