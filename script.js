@@ -293,6 +293,15 @@ function translateToEnglish() {
   document.getElementById("project2-demo").innerHTML =
     '<i class="fas fa-external-link-alt"></i> Live Demo';
 
+  // MODAL DO PROCESSDEBT
+  setText("pd-modal-title", "Project in progress...");
+  setText(
+    "pd-modal-text",
+    "Would you like to go to the prototype currently in development on Figma?",
+  );
+  setText("processdebt-modal-confirm", "Yes");
+  setText("processdebt-modal-cancel", "Cancel");
+
   // CONTACT
   setText("contact-tag", "Connection");
   setText("contact-title", "Let's Talk?");
@@ -354,22 +363,6 @@ langPTMobile?.addEventListener("click", (e) => {
   translateToPortuguese();
 });
 
-/* =========================
-   FORMULÁRIO DE CONTATO
-   ------------------------------------------------------------
-   Dois botões separados, cada um com seu próprio comportamento:
-
-   1) #submit-button  → type="submit" de verdade. NÃO tem
-      preventDefault, então o form segue o fluxo normal e é
-      enviado via POST para o Formspree (definido no atributo
-      action do <form> no HTML). Não precisa de JS aqui.
-
-   2) #whatsapp-button → type="button" (não dispara submit).
-      Ao clicar, monta a mensagem com os dados preenchidos e
-      abre o WhatsApp numa nova aba, sem interferir no envio
-      por e-mail.
-   ========================= */
-
 const whatsappButton = document.getElementById("whatsapp-button");
 
 if (whatsappButton) {
@@ -379,7 +372,7 @@ if (whatsappButton) {
     const subject = document.getElementById("subject").value;
     const message = document.getElementById("message").value;
 
-    const phoneNumber = "5515996514120"; // <-- TROQUE AQUI pro seu número com DDI + DDD
+    const phoneNumber = "5515996514120"; //
 
     const text = `
 *Olá Madu, vim pelo seu portfólio!*
@@ -397,3 +390,45 @@ ${message}
     window.open(url, "_blank");
   });
 }
+
+/* =========================
+   MODAL: ProcessDebt - Protótipo em desenvolvimento
+   ========================= */
+(function () {
+  const FIGMA_URL =
+    "https://www.figma.com/design/RSdPrrbAmS5hDzvLVaWYVh/ProcessDebt---Prot%C3%B3tipo-UI?node-id=0-1&t=fPJyU0fxDm9zVkUl-0";
+
+  const overlay = document.getElementById("processdebt-modal-overlay");
+  const confirmBtn = document.getElementById("processdebt-modal-confirm");
+  const cancelBtn = document.getElementById("processdebt-modal-cancel");
+
+  window.openProcessDebtModal = function () {
+    overlay?.classList.add("pd-modal-open");
+  };
+
+  function closeProcessDebtModal() {
+    overlay?.classList.remove("pd-modal-open");
+  }
+
+  confirmBtn?.addEventListener("click", function () {
+    window.open(FIGMA_URL, "_blank", "noopener,noreferrer");
+    closeProcessDebtModal();
+  });
+
+  cancelBtn?.addEventListener("click", closeProcessDebtModal);
+
+  overlay?.addEventListener("click", function (event) {
+    if (event.target === overlay) {
+      closeProcessDebtModal();
+    }
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (
+      event.key === "Escape" &&
+      overlay?.classList.contains("pd-modal-open")
+    ) {
+      closeProcessDebtModal();
+    }
+  });
+})();

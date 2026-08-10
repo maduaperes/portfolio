@@ -77,6 +77,121 @@
         ]
       }
     </script>
+
+    <style>
+      /* Modal "Projeto em andamento" do ProcessDebt */
+      .pd-modal-overlay {
+        display: none;
+        position: fixed;
+        inset: 0;
+        z-index: 9999;
+        background: rgba(15, 15, 20, 0.6);
+        backdrop-filter: blur(3px);
+        align-items: center;
+        justify-content: center;
+        padding: 20px;
+      }
+      .pd-modal-overlay.pd-modal-open {
+        display: flex;
+      }
+
+      .pd-modal-card {
+        background: #ffffff;
+        color: #1a1a1a;
+        max-width: 380px;
+        width: 100%;
+        border-radius: 16px;
+        padding: 32px 28px;
+        text-align: center;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
+        animation: pd-modal-pop 0.18s ease-out;
+      }
+
+      @keyframes pd-modal-pop {
+        from {
+          transform: scale(0.94);
+          opacity: 0;
+        }
+        to {
+          transform: scale(1);
+          opacity: 1;
+        }
+      }
+
+      .pd-modal-icon {
+        font-size: 28px;
+        color: #ff003c;
+        margin-bottom: 14px;
+      }
+
+      .pd-modal-card h4 {
+        margin: 0 0 10px;
+        font-size: 18px;
+        font-weight: 700;
+      }
+
+      .pd-modal-card p {
+        margin: 0 0 24px;
+        font-size: 14px;
+        color: #555;
+        line-height: 1.5;
+      }
+
+      .pd-modal-buttons {
+        display: flex;
+        gap: 12px;
+        justify-content: center;
+      }
+
+      .pd-modal-btn {
+        flex: 1;
+        padding: 10px 16px;
+        border-radius: 10px;
+        font-weight: 600;
+        font-size: 14px;
+        cursor: pointer;
+        border: 1px solid transparent;
+        transition: opacity 0.15s ease;
+      }
+      .pd-modal-btn:hover {
+        opacity: 0.85;
+      }
+
+      .pd-modal-btn-confirm {
+        background: #ff003c;
+        color: #fff;
+      }
+
+      .pd-modal-btn-cancel {
+        background: transparent;
+        color: #1a1a1a;
+        border-color: #ccc;
+      }
+
+      /* Modo escuro: segue o mesmo atributo usado pelo restante do site */
+      html[data-theme="dark"] .pd-modal-overlay {
+        background: rgba(0, 0, 0, 0.75);
+      }
+
+      html[data-theme="dark"] .pd-modal-card {
+        background: #1c1c22;
+        color: #f2f2f2;
+        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
+      }
+
+      html[data-theme="dark"] .pd-modal-card p {
+        color: #b8b8bf;
+      }
+
+      html[data-theme="dark"] .pd-modal-btn-cancel {
+        color: #f2f2f2;
+        border-color: #444;
+      }
+
+      html[data-theme="dark"] .pd-modal-btn-cancel:hover {
+        background: rgba(255, 255, 255, 0.06);
+      }
+    </style>
   </head>
   <body>
     <a href="#inicio" class="skip-link">Pular para o conteúdo</a>
@@ -310,59 +425,59 @@
                 </div>
                 <div class="skill-item">
                   <div class="skill-info">
-                    <span><i class="fab fa-js-square"></i> JavaScript</span>
-                    <span>15%</span>
+                    <span><i class="fab fa-git-alt"></i> Git & GitHub</span>
+                    <span>65%</span>
                   </div>
                   <div class="progress-bar">
-                    <div class="progress" style="width: 15%"></div>
+                    <div class="progress" style="width: 65%"></div>
                   </div>
                 </div>
                 <div class="skill-item">
                   <div class="skill-info">
                     <span><i class="fab fa-python"></i> Python</span>
-                    <span>45%</span>
+                    <span>60%</span>
                   </div>
                   <div class="progress-bar">
-                    <div class="progress" style="width: 45%"></div>
-                  </div>
-                </div>
-                <div class="skill-item">
-                  <div class="skill-info">
-                    <span><i class="fab fa-java"></i> Java</span>
-                    <span>10%</span>
-                  </div>
-                  <div class="progress-bar">
-                    <div class="progress" style="width: 10%"></div>
+                    <div class="progress" style="width: 60%"></div>
                   </div>
                 </div>
                 <div class="skill-item">
                   <div class="skill-info">
                     <span
-                      ><i class="fa-solid fa-chart-column"></i> Power BI</span
+                      ><i class="fa-solid fa-database"></i> SQL / Bancos
+                      Relacionais</span
                     >
-                    <span>70%</span>
+                    <span>55%</span>
                   </div>
                   <div class="progress-bar">
-                    <div class="progress" style="width: 70%"></div>
+                    <div class="progress" style="width: 55%"></div>
                   </div>
                 </div>
                 <div class="skill-item">
                   <div class="skill-info">
                     <span
-                      ><i class="fa-solid fa-file-excel"></i> Excel
-                      Avançado</span
+                      ><i class="fa-solid fa-plug"></i> Consumo de APIs
+                      REST</span
                     >
-                    <span>90%</span>
+                    <span>55%</span>
                   </div>
                   <div class="progress-bar">
-                    <div class="progress" style="width: 90%"></div>
+                    <div class="progress" style="width: 55%"></div>
+                  </div>
+                </div>
+                <div class="skill-item">
+                  <div class="skill-info">
+                    <span><i class="fa-solid fa-bolt"></i> FastAPI</span>
+                    <span>50%</span>
+                  </div>
+                  <div class="progress-bar">
+                    <div class="progress" style="width: 50%"></div>
                   </div>
                 </div>
               </div>
 
               <h4 id="other-skills-title">Outras Ferramentas:</h4>
               <div class="other-skills-badges">
-                <span class="skill-badge" id="badge-git">Git & GitHub</span>
                 <span class="skill-badge" id="badge-ai"
                   >Inteligência Artificial</span
                 >
@@ -381,6 +496,16 @@
                 >
                 <span class="skill-badge" id="badge-office"
                   >Microsoft Office</span
+                >
+                <span class="skill-badge" id="badge-sqlalchemy"
+                  >SQLAlchemy (ORM)</span
+                >
+                <span class="skill-badge" id="badge-alembic"
+                  >Alembic (Migrations)</span
+                >
+                <span class="skill-badge" id="badge-jwt">Autenticação JWT</span>
+                <span class="skill-badge" id="badge-architecture"
+                  >Arquitetura em Camadas</span
                 >
               </div>
             </div>
@@ -580,7 +705,7 @@
                   </div>
                   <div class="project-links">
                     <a
-                      href="#"
+                      href="https://github.com/maduaperes/process-debt"
                       target="_blank"
                       rel="noopener noreferrer"
                       id="project1-code"
@@ -588,9 +713,11 @@
                     >
                     <a
                       href="#"
-                      target="_blank"
-                      rel="noopener noreferrer"
                       id="project1-demo"
+                      onclick="
+                        openProcessDebtModal();
+                        return false;
+                      "
                       ><i class="fas fa-external-link-alt"></i> Live Demo</a
                     >
                   </div>
@@ -764,6 +891,37 @@
           e dedicação.
         </p>
       </footer>
+    </div>
+
+    <div class="pd-modal-overlay" id="processdebt-modal-overlay">
+      <div
+        class="pd-modal-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="pd-modal-title"
+      >
+        <i class="fas fa-hourglass-half pd-modal-icon"></i>
+        <h4 id="pd-modal-title">Projeto em andamento...</h4>
+        <p id="pd-modal-text">
+          Deseja seguir para o protótipo em desenvolvimento no Figma?
+        </p>
+        <div class="pd-modal-buttons">
+          <button
+            type="button"
+            class="pd-modal-btn pd-modal-btn-confirm"
+            id="processdebt-modal-confirm"
+          >
+            Sim
+          </button>
+          <button
+            type="button"
+            class="pd-modal-btn pd-modal-btn-cancel"
+            id="processdebt-modal-cancel"
+          >
+            Cancelar
+          </button>
+        </div>
+      </div>
     </div>
 
     <script src="script.js" defer></script>
