@@ -77,121 +77,6 @@
         ]
       }
     </script>
-
-    <style>
-      /* Modal "Projeto em andamento" do ProcessDebt */
-      .pd-modal-overlay {
-        display: none;
-        position: fixed;
-        inset: 0;
-        z-index: 9999;
-        background: rgba(15, 15, 20, 0.6);
-        backdrop-filter: blur(3px);
-        align-items: center;
-        justify-content: center;
-        padding: 20px;
-      }
-      .pd-modal-overlay.pd-modal-open {
-        display: flex;
-      }
-
-      .pd-modal-card {
-        background: #ffffff;
-        color: #1a1a1a;
-        max-width: 380px;
-        width: 100%;
-        border-radius: 16px;
-        padding: 32px 28px;
-        text-align: center;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.35);
-        animation: pd-modal-pop 0.18s ease-out;
-      }
-
-      @keyframes pd-modal-pop {
-        from {
-          transform: scale(0.94);
-          opacity: 0;
-        }
-        to {
-          transform: scale(1);
-          opacity: 1;
-        }
-      }
-
-      .pd-modal-icon {
-        font-size: 28px;
-        color: #ff003c;
-        margin-bottom: 14px;
-      }
-
-      .pd-modal-card h4 {
-        margin: 0 0 10px;
-        font-size: 18px;
-        font-weight: 700;
-      }
-
-      .pd-modal-card p {
-        margin: 0 0 24px;
-        font-size: 14px;
-        color: #555;
-        line-height: 1.5;
-      }
-
-      .pd-modal-buttons {
-        display: flex;
-        gap: 12px;
-        justify-content: center;
-      }
-
-      .pd-modal-btn {
-        flex: 1;
-        padding: 10px 16px;
-        border-radius: 10px;
-        font-weight: 600;
-        font-size: 14px;
-        cursor: pointer;
-        border: 1px solid transparent;
-        transition: opacity 0.15s ease;
-      }
-      .pd-modal-btn:hover {
-        opacity: 0.85;
-      }
-
-      .pd-modal-btn-confirm {
-        background: #ff003c;
-        color: #fff;
-      }
-
-      .pd-modal-btn-cancel {
-        background: transparent;
-        color: #1a1a1a;
-        border-color: #ccc;
-      }
-
-      /* Modo escuro: segue o mesmo atributo usado pelo restante do site */
-      html[data-theme="dark"] .pd-modal-overlay {
-        background: rgba(0, 0, 0, 0.75);
-      }
-
-      html[data-theme="dark"] .pd-modal-card {
-        background: #1c1c22;
-        color: #f2f2f2;
-        box-shadow: 0 20px 50px rgba(0, 0, 0, 0.6);
-      }
-
-      html[data-theme="dark"] .pd-modal-card p {
-        color: #b8b8bf;
-      }
-
-      html[data-theme="dark"] .pd-modal-btn-cancel {
-        color: #f2f2f2;
-        border-color: #444;
-      }
-
-      html[data-theme="dark"] .pd-modal-btn-cancel:hover {
-        background: rgba(255, 255, 255, 0.06);
-      }
-    </style>
   </head>
   <body>
     <a href="#inicio" class="skip-link">Pular para o conteúdo</a>
@@ -474,6 +359,15 @@
                     <div class="progress" style="width: 50%"></div>
                   </div>
                 </div>
+                <div class="skill-item">
+                  <div class="skill-info">
+                    <span><i class="fab fa-js-square"></i> JavaScript</span>
+                    <span>45%</span>
+                  </div>
+                  <div class="progress-bar">
+                    <div class="progress" style="width: 45%"></div>
+                  </div>
+                </div>
               </div>
 
               <h4 id="other-skills-title">Outras Ferramentas:</h4>
@@ -656,29 +550,79 @@
                   </p>
                 </div>
                 <div class="timeline-item">
-                  <span class="timeline-year">2026 - Presente</span>
+                  <span class="timeline-year">Mar 2025 - Atual</span>
                   <h4 id="cnh-title">
-                    Auxiliar Administrativo (Controladoria)
+                    Assistente Administrativo Rural (Aprendiz)
                   </h4>
                   <span class="timeline-place" id="cnh-place"
-                    >CNH Industrial Brasil</span
+                    >Case New Holland (CNH Industrial Brasil)</span
                   >
                   <p id="cnh-description">
-                    Atuação no suporte operacional do setor de controladoria,
-                    auxiliando na organização de fluxos de dados financeiros,
-                    controle de relatórios internos e otimização de processos
-                    administrativos cotidianos.
+                    Atuação em ambiente multinacional na área de Controladoria,
+                    com estruturação e validação de dados corporativos, apoio na
+                    construção de relatórios gerenciais e indicadores de
+                    desempenho (KPIs), além de automação de rotinas com Excel
+                    Avançado e Power BI.
+                  </p>
+                </div>
+              </div>
+            </div>
+
+            <div class="resume-box">
+              <h3 class="box-title" id="certifications-title">
+                <i class="fas fa-certificate"></i> Certificações
+              </h3>
+              <div class="timeline">
+                <div class="timeline-item">
+                  <span class="timeline-year">Mar 2026</span>
+                  <h4 id="cert1-title">
+                    IA Generativa Aplicada ao Desenvolvimento de Soluções
+                  </h4>
+                  <span class="timeline-place" id="cert1-place"
+                    >Senai São Paulo</span
+                  >
+                  <p id="cert1-description">
+                    Certificação com foco em arquiteturas de IA generativa,
+                    engenharia de prompts, processamento de linguagem natural
+                    (NLP) e integração de APIs de IA aplicadas ao
+                    desenvolvimento de software.
+                  </p>
+                </div>
+                <div class="timeline-item">
+                  <span class="timeline-year">Mar 2026</span>
+                  <h4 id="cert2-title">
+                    MTA: Introduction to Programming Using Python
+                  </h4>
+                  <span class="timeline-place" id="cert2-place"
+                    >Fundação Bradesco</span
+                  >
+                  <p id="cert2-description">
+                    Certificação internacional Microsoft Technology Associate
+                    com foco em fundamentos de programação em Python.
+                  </p>
+                </div>
+                <div class="timeline-item">
+                  <span class="timeline-year">Mar 2026</span>
+                  <h4 id="cert3-title">Lógica de Programação</h4>
+                  <span class="timeline-place" id="cert3-place"
+                    >Senai São Paulo</span
+                  >
+                  <p id="cert3-description">
+                    Formação em lógica de programação, estruturas de decisão,
+                    repetição e algoritmos.
                   </p>
                 </div>
               </div>
             </div>
           </div>
 
+          <!-- ===== PROJETOS ===== -->
           <div class="projects-featured-wrapper" id="projetos">
-            <h3 id="projects-title">Projetos em Destaque</h3>
+            <span class="section-tag" id="projects-tag">Portfólio</span>
+            <h2 id="projects-title">Projetos em Destaque</h2>
             <p id="projects-description">
               Algumas soluções criadas recentemente que demonstram minhas
-              habilidades na prática:
+              habilidades na prática.
             </p>
 
             <div class="projects-grid">
@@ -700,15 +644,17 @@
                     <span style="color: #ff003c">Projeto em andamento...</span>
                   </p>
                   <div class="project-tags">
-                    <span>React</span> <span>Node.js</span>
+                    <span>FastAPI</span> <span>React</span>
                     <span>PostgreSQL</span>
                   </div>
                   <div class="project-links">
                     <a
-                      href="https://github.com/maduaperes/process-debt"
-                      target="_blank"
-                      rel="noopener noreferrer"
+                      href="#"
                       id="project1-code"
+                      onclick="
+                        openProcessDebtCodeModal();
+                        return false;
+                      "
                       ><i class="fab fa-github"></i> Código</a
                     >
                     <a
@@ -747,16 +693,20 @@
                   <div class="project-links">
                     <a
                       href="#"
-                      target="_blank"
-                      rel="noopener noreferrer"
                       id="project2-code"
+                      onclick="
+                        openSkillBridgeModal();
+                        return false;
+                      "
                       ><i class="fab fa-github"></i> Código</a
                     >
                     <a
                       href="#"
-                      target="_blank"
-                      rel="noopener noreferrer"
                       id="project2-demo"
+                      onclick="
+                        openSkillBridgeModal();
+                        return false;
+                      "
                       ><i class="fas fa-external-link-alt"></i> Live Demo</a
                     >
                   </div>
@@ -873,7 +823,7 @@
                   </button>
                   <button
                     type="button"
-                    class="btn-submit-form btn-whatsapp"
+                    class="btn-submit-form"
                     id="whatsapp-button"
                   >
                     Enviar por WhatsApp <i class="fab fa-whatsapp"></i>
@@ -893,6 +843,7 @@
       </footer>
     </div>
 
+    <!-- Modal: Live Demo do ProcessDebt (leva ao protótipo no Figma) -->
     <div class="pd-modal-overlay" id="processdebt-modal-overlay">
       <div
         class="pd-modal-card"
@@ -919,6 +870,58 @@
             id="processdebt-modal-cancel"
           >
             Cancelar
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: Código do ProcessDebt (repositório privado) -->
+    <div class="pd-modal-overlay" id="processdebt-code-modal-overlay">
+      <div
+        class="pd-modal-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="pd-code-modal-title"
+      >
+        <i class="fas fa-lock pd-modal-icon"></i>
+        <h4 id="pd-code-modal-title">Código em desenvolvimento</h4>
+        <p id="pd-code-modal-text">
+          O repositório deste projeto ainda está em desenvolvimento e não está
+          disponível publicamente no momento.
+        </p>
+        <div class="pd-modal-buttons">
+          <button
+            type="button"
+            class="pd-modal-btn pd-modal-btn-confirm"
+            id="processdebt-code-modal-ok"
+          >
+            Entendi
+          </button>
+        </div>
+      </div>
+    </div>
+
+    <!-- Modal: SkillBridge (projeto ainda não iniciado) -->
+    <div class="pd-modal-overlay" id="skillbridge-modal-overlay">
+      <div
+        class="pd-modal-card"
+        role="dialog"
+        aria-modal="true"
+        aria-labelledby="skillbridge-modal-title"
+      >
+        <i class="fas fa-clock pd-modal-icon"></i>
+        <h4 id="skillbridge-modal-title">Em breve</h4>
+        <p id="skillbridge-modal-text">
+          Este projeto ainda não entrou em desenvolvimento. Em breve iniciarei a
+          construção do protótipo e do código-fonte.
+        </p>
+        <div class="pd-modal-buttons">
+          <button
+            type="button"
+            class="pd-modal-btn pd-modal-btn-confirm"
+            id="skillbridge-modal-ok"
+          >
+            Entendi
           </button>
         </div>
       </div>

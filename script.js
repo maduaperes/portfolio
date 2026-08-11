@@ -255,20 +255,46 @@ function translateToEnglish() {
     "cc-description",
     "Bachelor's degree focused on algorithms, systems architecture and applied artificial intelligence.",
   );
+  setText("certifications-title", "Certifications");
+  setText(
+    "cert1-title",
+    "Generative AI Applied to Software Development",
+  );
+  setText("cert1-place", "Senai São Paulo");
+  setText(
+    "cert1-description",
+    "Certification focused on generative AI architectures, prompt engineering, natural language processing (NLP), and AI API integration applied to software development.",
+  );
+  setText(
+    "cert2-title",
+    "MTA: Introduction to Programming Using Python",
+  );
+  setText("cert2-place", "Fundação Bradesco");
+  setText(
+    "cert2-description",
+    "International Microsoft Technology Associate certification focused on Python programming fundamentals.",
+  );
+  setText("cert3-title", "Programming Logic");
+  setText("cert3-place", "Senai São Paulo");
+  setText(
+    "cert3-description",
+    "Training in programming logic, decision structures, loops, and algorithms.",
+  );
   setText("fr-title", "Administrative Assistant");
   setText("fr-place", "FR Real Estate Agency");
   setText(
     "fr-description",
     "Support for administrative routines, document organization, customer service and internal processes.",
   );
-  setText("cnh-title", "Administrative Assistant (Controlling)");
-  setText("cnh-place", "CNH Industrial Brazil");
+  setText("cnh-title", "Rural Administrative Assistant (Apprentice)");
+  setText("cnh-place", "Case New Holland (CNH Industrial Brazil)");
   setText(
     "cnh-description",
-    "Operational support for the controlling department, assisting with financial data flows and internal reports.",
+    "Operating in a multinational environment in the Controlling department, structuring and validating corporate data, supporting the creation of management reports and key performance indicators (KPIs), and automating routines with Advanced Excel and Power BI.",
   );
 
   // PROJECTS
+  setText("projects-tag", "Portfolio");
   setText("projects-title", "Featured Projects");
   setText(
     "projects-description",
@@ -293,7 +319,7 @@ function translateToEnglish() {
   document.getElementById("project2-demo").innerHTML =
     '<i class="fas fa-external-link-alt"></i> Live Demo';
 
-  // MODAL DO PROCESSDEBT
+  // MODAL DO PROCESSDEBT (Live Demo)
   setText("pd-modal-title", "Project in progress...");
   setText(
     "pd-modal-text",
@@ -301,6 +327,22 @@ function translateToEnglish() {
   );
   setText("processdebt-modal-confirm", "Yes");
   setText("processdebt-modal-cancel", "Cancel");
+
+  // MODAL DO PROCESSDEBT (Código)
+  setText("pd-code-modal-title", "Code under development");
+  setText(
+    "pd-code-modal-text",
+    "This project's repository is still under development and is not publicly available at the moment.",
+  );
+  setText("processdebt-code-modal-ok", "Got it");
+
+  // MODAL DO SKILLBRIDGE
+  setText("skillbridge-modal-title", "Coming soon");
+  setText(
+    "skillbridge-modal-text",
+    "This project hasn't entered development yet. I'll soon start building the prototype and source code.",
+  );
+  setText("skillbridge-modal-ok", "Got it");
 
   // CONTACT
   setText("contact-tag", "Connection");
@@ -424,11 +466,68 @@ ${message}
   });
 
   document.addEventListener("keydown", function (event) {
-    if (
-      event.key === "Escape" &&
-      overlay?.classList.contains("pd-modal-open")
-    ) {
+    if (event.key === "Escape" && overlay?.classList.contains("pd-modal-open")) {
       closeProcessDebtModal();
+    }
+  });
+})();
+
+/* =========================
+   MODAL: ProcessDebt - Código (repositório privado)
+   ========================= */
+(function () {
+  const overlay = document.getElementById("processdebt-code-modal-overlay");
+  const okBtn = document.getElementById("processdebt-code-modal-ok");
+
+  window.openProcessDebtCodeModal = function () {
+    overlay?.classList.add("pd-modal-open");
+  };
+
+  function closeProcessDebtCodeModal() {
+    overlay?.classList.remove("pd-modal-open");
+  }
+
+  okBtn?.addEventListener("click", closeProcessDebtCodeModal);
+
+  overlay?.addEventListener("click", function (event) {
+    if (event.target === overlay) {
+      closeProcessDebtCodeModal();
+    }
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && overlay?.classList.contains("pd-modal-open")) {
+      closeProcessDebtCodeModal();
+    }
+  });
+})();
+
+/* =========================
+   MODAL: SkillBridge - Em breve
+   ========================= */
+(function () {
+  const overlay = document.getElementById("skillbridge-modal-overlay");
+  const okBtn = document.getElementById("skillbridge-modal-ok");
+
+  window.openSkillBridgeModal = function () {
+    overlay?.classList.add("pd-modal-open");
+  };
+
+  function closeSkillBridgeModal() {
+    overlay?.classList.remove("pd-modal-open");
+  }
+
+  okBtn?.addEventListener("click", closeSkillBridgeModal);
+
+  overlay?.addEventListener("click", function (event) {
+    if (event.target === overlay) {
+      closeSkillBridgeModal();
+    }
+  });
+
+  document.addEventListener("keydown", function (event) {
+    if (event.key === "Escape" && overlay?.classList.contains("pd-modal-open")) {
+      closeSkillBridgeModal();
     }
   });
 })();
