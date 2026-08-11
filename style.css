@@ -1183,7 +1183,6 @@ html[data-theme="dark"] .pd-modal-btn-cancel:hover {
 .detail-card {
   background-color: var(--bg-surface);
   padding: 25px;
-  border-radius: 8px;
   display: flex;
   align-items: center;
   gap: 20px;
@@ -1224,7 +1223,6 @@ html[data-theme="dark"] .pd-modal-btn-cancel:hover {
 .contact-form-wrapper {
   background-color: var(--bg-surface);
   padding: 40px;
-  border-radius: 8px;
   box-shadow: var(--shadow-sm);
 }
 
