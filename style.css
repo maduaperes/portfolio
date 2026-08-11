@@ -955,7 +955,6 @@ h2 {
 
 .project-card {
   background-color: var(--bg-surface);
-  border-radius: 8px;
   overflow: hidden;
   box-shadow: var(--shadow-sm);
   display: flex;
@@ -1449,34 +1448,6 @@ html[data-theme="dark"] .pd-modal-btn-cancel:hover {
 
 /* ============================================================
    RESPONSIVO
-   ------------------------------------------------------------
-   Escada de breakpoints (desktop-first, em cascata):
-     ≥1200px  → Desktop (estilos base, sem media query)
-     1199.98px→ Laptop pequeno / desktop estreito (hero lado a lado)
-     991.98px → Tablet (menu vira hambúrguer; hero AINDA lado a
-                 lado, só mais compacto — evita a tela de tablet
-                 ficar com o hero empilhado e um vazio enorme nas
-                 laterais)
-     767.98px → Tablet retrato estreito / phablet (hero lado a
-                 lado, ainda mais compacto)
-     680px    → A PARTIR DAQUI o hero empilha (imagem em cima,
-                 texto embaixo) — reservado para telas realmente
-                 estreitas (celulares e tablets bem pequenos).
-                 A ordem física dos 3 blocos do hero (topo, imagem,
-                 base) já é a ordem correta no HTML, então aqui só
-                 trocamos a grade de 2 colunas para 1 coluna.
-     575.98px → Celular
-     380px    → Celular pequeno (iPhone SE, Android antigo)
-     + consultas dedicadas para telas baixas/paisagem
-   Cada faixa só sobrescreve o que muda; o que não é redefinido
-   é herdado da faixa mais larga anterior.
-   ============================================================ */
-
-/* ============================================================
-   ≤ 1199.98px — LAPTOP PEQUENO / DESKTOP ESTREITO
-   Ainda com menu horizontal e hero lado a lado, só com menos
-   espaço de respiro (evita hero-text e hero-image brigando
-   por espaço em janelas de ~1024–1199px).
    ============================================================ */
 
 @media (max-width: 1199.98px) {
