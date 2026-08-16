@@ -688,11 +688,22 @@ h2 {
    SOBRE MIM
    ============================================================ */
 
+/* Coluna da bio mais estreita que a de skills, esticada (align-items:
+   stretch) pra começar e terminar exatamente na mesma altura da coluna de
+   skills ao lado. Os contadores são empurrados pra base pra usar bem o
+   espaço extra em vez de deixá-lo em branco. */
 .about-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 80px;
-  align-items: start;
+  grid-template-columns: 0.72fr 1fr;
+  gap: 60px;
+  align-items: stretch;
+}
+
+.about-main-text {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  min-width: 0;
 }
 
 .about-main-text p {
@@ -712,13 +723,39 @@ h2 {
 }
 
 .counter-item {
+  position: relative;
   flex: 1;
   min-width: 0;
   text-align: center;
+  background-color: var(--bg-surface);
+  box-shadow: var(--shadow-sm);
+  border-radius: 8px;
+  padding: 24px 10px;
+}
+
+/* Linha vertical fina entre um card e outro, centralizada no gap
+   (não depois do último) */
+.counter-item:not(:last-child)::after {
+  content: "";
+  position: absolute;
+  top: 8%;
+  right: -10px;
+  width: 2px;
+  height: 84%;
+
+  background: linear-gradient(
+    to bottom,
+    transparent 0%,
+    var(--border-color) 20%,
+    var(--border-color) 80%,
+    transparent 100%
+  );
+
+  opacity: 0.6;
 }
 
 .counter-item h3 {
-  font-size: 32px;
+  font-size: 24px;
   color: var(--accent);
   font-weight: 700;
 }
@@ -790,7 +827,7 @@ h2 {
   display: flex;
   flex-wrap: wrap;
   gap: 10px;
-  justify-content: center;
+  justify-content: flex-start;
   align-items: center;
 }
 
@@ -807,6 +844,28 @@ h2 {
 .skill-badge:hover {
   background-color: var(--accent);
   color: #fff;
+}
+
+.languages-block {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-color);
+}
+
+.languages-block h4 {
+  font-size: 14px;
+  color: var(--text-primary);
+  margin-bottom: 15px;
+  font-weight: 600;
+}
+
+.languages-block h4 i {
+  color: var(--accent);
+  margin-right: 4px;
+}
+
+.languages-list {
+  margin-bottom: 0 !important;
 }
 
 /* ============================================================
@@ -1584,6 +1643,14 @@ html[data-theme="dark"] .pd-modal-btn-cancel:hover {
     gap: 50px;
   }
 
+  .counter-item {
+    padding: 20px 8px;
+  }
+
+  .counter-item h3 {
+    font-size: 19px;
+  }
+
   .resume-grid {
     gap: 24px;
   }
@@ -1752,26 +1819,12 @@ html[data-theme="dark"] .pd-modal-btn-cancel:hover {
 
   /* ── Contadores ───────────────────────────────────── */
   .about-counters {
-    gap: 0;
+    gap: 10px;
     margin-top: 28px;
   }
 
   .counter-item {
-    border-radius: 0;
     padding: clamp(12px, 3vw, 16px) 6px;
-    position: relative;
-  }
-
-  .counter-item:not(:last-child)::after {
-    content: "";
-    position: absolute;
-    top: 50%;
-    right: 0;
-    transform: translateY(-50%);
-    width: 1px;
-    height: 50%;
-    background: var(--border-progress);
-    opacity: 0.6;
   }
 
   .counter-item h3 {
