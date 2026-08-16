@@ -455,7 +455,7 @@ header.scrolled {
 
 .hero-text h1 .hero-name-last {
   font-size: 0.42em;
-  font-weight: 550;
+  font-weight: 500;
   letter-spacing: 5px;
   text-transform: uppercase;
   color: var(--text-primary);
@@ -502,7 +502,7 @@ header.scrolled {
 .btn-cv-outline {
   background-color: transparent;
   color: var(--text-primary);
-  border: 1px solid var(--text-hint);
+  border: 1px solid var(--text-muted);
   padding: 14px 35px;
   font-size: 11px;
   font-weight: 600;
@@ -879,9 +879,9 @@ h2 {
 
 .resume-grid {
   display: grid;
-  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-columns: 1fr 1fr;
   gap: 40px;
-  margin-bottom: 80px;
+  margin-bottom: 60px;
 }
 
 .box-title {
@@ -944,6 +944,82 @@ h2 {
 
 .timeline-item p {
   font-size: 13px;
+  color: var(--text-lighter);
+  line-height: 1.6;
+}
+
+/* ============================================================
+   CERTIFICAÇÕES — grid de cards
+   ------------------------------------------------------------
+   Com 6 certificações, a lista em timeline vertical (usada em
+   Formação/Vivência, que têm só 2 itens cada) ficava desproporcional:
+   a coluna de Certificações esticava muito mais que as outras duas
+   dentro do mesmo grid de 3 colunas. Solução: tirar Certificações do
+   resume-grid, deixá-la como um bloco de largura total logo abaixo,
+   e usar um grid de cards (como .service-card) em vez de timeline —
+   mais compacto, escaneável e consistente com o resto do site.
+   ============================================================ */
+
+.certifications-block {
+  margin-bottom: 20px;
+}
+
+.certifications-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.cert-card {
+  background-color: var(--bg-surface);
+  padding: 28px 24px;
+  box-shadow: var(--shadow-sm);
+  border-bottom: 3px solid transparent;
+  display: flex;
+  flex-direction: column;
+  transition:
+    transform 0.3s,
+    box-shadow 0.3s;
+}
+
+.cert-card:hover {
+  transform: translateY(-5px);
+  box-shadow: var(--shadow-lg);
+  border-bottom: 3px solid var(--accent);
+}
+
+.cert-card-icon {
+  font-size: 20px;
+  color: var(--accent);
+  margin-bottom: 14px;
+}
+
+.cert-date {
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--accent);
+  letter-spacing: 1px;
+  display: block;
+  margin-bottom: 8px;
+}
+
+.cert-card h4 {
+  font-size: 15px;
+  font-weight: 600;
+  color: var(--text-primary);
+  line-height: 1.35;
+  margin-bottom: 4px;
+}
+
+.cert-card .cert-place {
+  font-size: 11px;
+  color: var(--text-hint);
+  display: block;
+  margin-bottom: 12px;
+}
+
+.cert-card p {
+  font-size: 12.5px;
   color: var(--text-lighter);
   line-height: 1.6;
 }
@@ -1234,6 +1310,16 @@ html[data-theme="dark"] .pd-modal-btn-cancel:hover {
   color: var(--text-lighter);
   overflow-wrap: anywhere;
   word-break: break-word;
+}
+
+.detail-text p a {
+  color: inherit;
+  text-decoration: none;
+  transition: color 0.3s;
+}
+
+.detail-text p a:hover {
+  color: var(--accent);
 }
 
 /* Formulário */
@@ -1751,6 +1837,15 @@ html[data-theme="dark"] .pd-modal-btn-cancel:hover {
     font-size: clamp(11px, 3vw, 13px);
   }
 
+  .certifications-grid {
+    grid-template-columns: 1fr 1fr;
+    gap: 16px;
+  }
+
+  .cert-card {
+    padding: clamp(16px, 3vw, 22px);
+  }
+
   /* ── Projetos ─────────────────────────────────────── */
   .projects-grid {
     grid-template-columns: 1fr 1fr;
@@ -1886,6 +1981,11 @@ html[data-theme="dark"] .pd-modal-btn-cancel:hover {
     flex-direction: column;
     align-items: flex-start;
     gap: 10px;
+  }
+
+  .certifications-grid {
+    grid-template-columns: 1fr;
+    gap: 12px;
   }
 
   .card-icon {
