@@ -316,6 +316,41 @@ header.scrolled {
   box-shadow: var(--shadow-md);
 }
 
+/* Fallback das classes utilitárias do Bootstrap (d-none/d-flex/d-lg-*)
+   usadas no HTML pra alternar hambúrguer x menu desktop. O Bootstrap via
+   CDN já cobre isso, mas caso ele não carregue (CDN fora do ar, bloqueio
+   de rede etc.) o menu não pode depender só dele — aqui replicamos o
+   breakpoint "lg" (992px) do próprio Bootstrap. */
+.d-none {
+  display: none !important;
+}
+
+.d-flex {
+  display: flex !important;
+}
+
+.align-items-center {
+  align-items: center !important;
+}
+
+.gap-2 {
+  gap: 0.5rem !important;
+}
+
+.mt-3 {
+  margin-top: 1rem !important;
+}
+
+@media (min-width: 992px) {
+  .d-lg-none {
+    display: none !important;
+  }
+
+  .d-lg-flex {
+    display: flex !important;
+  }
+}
+
 .header-right {
   align-items: center;
   gap: 16px;
@@ -433,6 +468,22 @@ header.scrolled {
 
 /* ============================================================
    NOME NO HERO — hierarquia em duas linhas
+   ------------------------------------------------------------
+   Linha 1 (.hero-name-first): o prenome ("Maria Eduarda"), grande,
+   em negrito e na cor de destaque — é como ela é chamada no dia a
+   dia, e o que deve chamar mais atenção visualmente.
+   Linha 2 (.hero-name-last): o sobrenome ("Arruda Peres"), bem
+   menor, em caixa alta e com letter-spacing largo — funciona quase
+   como uma legenda/assinatura abaixo do nome, dando peso editorial
+   sem competir com a linha 1.
+
+   Uso display:flex + flex-direction:column no <h1> em vez de deixar
+   o texto quebrar sozinho: assim a quebra de linha fica sempre entre
+   prenome e sobrenome, em qualquer largura de tela. Os tamanhos das
+   duas linhas são em "em", relativos ao font-size do próprio h1 —
+   isso significa que todos os breakpoints abaixo que já ajustam
+   ".hero-text h1 { font-size: ... }" continuam funcionando exatamente
+   como antes, sem precisar duplicar regras para as duas linhas.
    ============================================================ */
 
 .hero-text h1 {
@@ -502,7 +553,7 @@ header.scrolled {
 .btn-cv-outline {
   background-color: transparent;
   color: var(--text-primary);
-  border: 1px solid var(--text-muted);
+  border: 1px solid var(--text-hint);
   padding: 14px 35px;
   font-size: 11px;
   font-weight: 600;
@@ -766,8 +817,9 @@ h2 {
 }
 
 /* Skills */
-.about-skills-wrapper h3 {
-  font-size: 20px;
+.skills-title h3 {
+  font-size: 14px;
+  font-weight: 600;
   color: var(--text-primary);
   margin-bottom: 15px;
 }
@@ -2416,6 +2468,12 @@ html[data-theme="dark"] .pd-modal-btn-cancel:hover {
     height: 36px;
     min-width: 36px;
     font-size: 15px;
+  }
+
+  /* Nessa largura o e-mail (texto mais longo da seção) quebra a
+     palavra por 1-2 caracteres; uma fonte levemente menor resolve. */
+  .detail-text p {
+    font-size: 11px;
   }
 }
 
