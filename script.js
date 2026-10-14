@@ -1,533 +1,396 @@
-/* =========================
-   TEMA
-   ========================= */
+/* ================================================================
+   INTERATIVIDADE DINÂMICA
+   ================================================================ */
 
-const mediaQuery = window.matchMedia("(prefers-color-scheme: dark)");
+document.addEventListener("DOMContentLoaded", () => {
+  const hamburger = document.getElementById("hamburger");
+  const mobileMenu = document.getElementById("mobileMenu");
+  const mobileLinks = document.querySelectorAll(".mobile-link");
 
-function applyTheme(theme) {
-  if (theme) {
-    document.documentElement.setAttribute("data-theme", theme);
-  } else {
-    document.documentElement.removeAttribute("data-theme");
-  }
-}
-
-// Primeira carga: respeita escolha do usuário, senão segue o sistema
-const saved = localStorage.getItem("theme");
-applyTheme(saved || null);
-
-// Atualiza em tempo real se o sistema mudar (e o usuário não tiver escolhido)
-mediaQuery.addEventListener("change", (e) => {
-  if (!localStorage.getItem("theme")) {
-    applyTheme(null); // mantém sem data-theme → CSS @media age livre
-  }
-});
-
-function setupToggle(btn) {
-  if (!btn) return;
-  btn.addEventListener("click", () => {
-    const current =
-      document.documentElement.getAttribute("data-theme") ||
-      (mediaQuery.matches ? "dark" : "light");
-
-    const next = current === "dark" ? "light" : "dark";
-    localStorage.setItem("theme", next);
-    applyTheme(next);
-  });
-}
-
-setupToggle(document.getElementById("themeToggle"));
-setupToggle(document.getElementById("themeToggleMobile"));
-
-/* =========================
-   MENU MOBILE FLUIDO
-   ========================= */
-const hamburger = document.getElementById("hamburgerBtn");
-const mobileMenu = document.getElementById("mobileMenu");
-
-if (hamburger && mobileMenu) {
-  hamburger.addEventListener("click", () => {
-    const isOpen = mobileMenu.classList.contains("open");
-    mobileMenu.classList.toggle("open");
-    hamburger.setAttribute("aria-expanded", !isOpen);
+  hamburger?.addEventListener("click", () => {
+    mobileMenu.classList.toggle("active");
+    document.body.style.overflow = mobileMenu.classList.contains("active")
+      ? "hidden"
+      : "";
   });
 
-  document.querySelectorAll(".close-menu").forEach((link) => {
+  mobileLinks.forEach((link) => {
     link.addEventListener("click", () => {
-      mobileMenu.classList.remove("open");
-      hamburger.setAttribute("aria-expanded", "false");
+      mobileMenu.classList.remove("active");
+      document.body.style.overflow = "";
     });
   });
-}
 
-/* =========================
-   HEADER SHADOW NO SCROLL
-   ========================= */
-const header = document.querySelector("header");
+  const themeToggle = document.getElementById("themeToggle");
+  const themeIcon = document.getElementById("themeIcon");
+  const htmlElement = document.documentElement;
 
-window.addEventListener("scroll", () => {
-  if (!header) return;
-  header.classList.toggle("scrolled", window.scrollY > 10);
-});
-
-/* =========================
-   SCROLL SUAVE + OFFSET HEADER
-   ========================= */
-document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-  anchor.addEventListener("click", function (e) {
-    const targetId = this.getAttribute("href");
-    if (targetId.length <= 1) return;
-
-    const target = document.querySelector(targetId);
-    if (target) {
-      e.preventDefault();
-      window.scrollTo({
-        top: target.offsetTop - 80,
-        behavior: "smooth",
-      });
-    }
-  });
-});
-
-/* =========================
-   ACTIVE MENU NO SCROLL
-   ========================= */
-const sections = document.querySelectorAll("section");
-const navLinks = document.querySelectorAll(".main-nav a");
-
-window.addEventListener("scroll", () => {
-  let current = "";
-
-  sections.forEach((section) => {
-    const sectionTop = section.offsetTop - 100;
-    if (
-      pageYOffset >= sectionTop &&
-      pageYOffset < sectionTop + section.clientHeight
-    ) {
-      current = section.getAttribute("id");
-    }
-  });
-
-  navLinks.forEach((link) => {
-    const isActive = link.getAttribute("href") === `#${current}`;
-    link.classList.toggle("active", isActive);
-    if (isActive) {
-      link.setAttribute("aria-current", "page");
+  function updateThemeIcon(isLight) {
+    if (isLight) {
+      themeIcon.innerHTML = `
+        <circle cx="12" cy="12" r="5"></circle>
+        <line x1="12" y1="1" x2="12" y2="3"></line>
+        <line x1="12" y1="21" x2="12" y2="23"></line>
+        <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"></line>
+        <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"></line>
+        <line x1="1" y1="12" x2="3" y2="12"></line>
+        <line x1="21" y1="12" x2="23" y2="12"></line>
+        <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"></line>
+        <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"></line>
+      `;
     } else {
-      link.removeAttribute("aria-current");
+      themeIcon.innerHTML = `
+        <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+      `;
     }
-  });
-});
-
-/* =========================
-   IDIOMA
-   ========================= */
-const langPT = document.getElementById("lang-pt");
-const langEN = document.getElementById("lang-en");
-const langPTMobile = document.getElementById("lang-pt-m");
-const langENMobile = document.getElementById("lang-en-m");
-
-function setText(id, text) {
-  const el = document.getElementById(id);
-  if (el) el.textContent = text;
-}
-
-function setActiveLang(lang) {
-  [langPT, langPTMobile].forEach((el) =>
-    el?.classList.toggle("active-lang", lang === "pt"),
-  );
-  [langEN, langENMobile].forEach((el) =>
-    el?.classList.toggle("active-lang", lang === "en"),
-  );
-}
-
-function translateToEnglish() {
-  document.documentElement.lang = "en";
-  document.title = "Portfolio - Madu Peres";
-
-  // MENU
-  setText("nav-home", "HOME");
-  setText("nav-about", "ABOUT");
-  setText("nav-services", "SERVICES");
-  setText("nav-resume", "RESUME");
-  setText("nav-contact", "CONTACT");
-
-  // HERO
-  setText("hero-subtitle", "— Hello! I'm,");
-  setText(
-    "hero-description",
-    "Software developer in progress, focused on building modern interfaces, clean code and intelligent digital solutions while expanding my knowledge in technology.",
-  );
-  setText("contactBtn", "GET IN TOUCH");
-
-  // ABOUT
-  setText("about-tag", "Who I Am");
-  setText("about-title", "About Me");
-  setText(
-    "about-text-1",
-    "I am fascinated by the ability to transform lines of code into real solutions that impact people's daily lives. My journey in technology began with curiosity about how the web works behind the scenes, and today I focus on creating applications that combine intuitive design, accessibility and performance.",
-  );
-  setText(
-    "about-text-2",
-    "Currently, I am improving my skills in software architecture, design patterns and agile development. I divide my time between college, personal projects and technology communities.",
-  );
-  setText("counter-years", "+2 Years");
-  setText("counter-studies", "Practical Studies");
-  setText("counter-projects", "GitHub Projects");
-  setText("counter-dedication", "Dedication");
-
-  // SKILLS
-  setText("skills-title", "My Tech Skills");
-  setText(
-    "skills-description",
-    "Technologies and tools that I use in my development ecosystem:",
-  );
-  setText("other-skills-title", "Other Tools:");
-  setText("badge-git", "Git & GitHub");
-  setText("badge-ai", "Artificial Intelligence");
-  setText("badge-genai", "Generative AI");
-  setText("badge-logic", "Programming Logic");
-  setText("badge-oop", "Object-Oriented Programming");
-  setText("badge-data", "Data Analysis");
-  setText("badge-kpi", "Key Performance Indicators (KPIs)");
-  setText("badge-office", "Microsoft Office");
-
-  // SERVICES
-  setText("services-tag", "What I Do");
-  setText("services-title", "Professional Services");
-  setText(
-    "services-subtitle",
-    "Solutions designed to transform ideas into high-quality products.",
-  );
-  setText("service-front-title", "Front-end Development");
-  setText(
-    "service-front-description",
-    "Development of dynamic, clean and fast web applications using modern component-based ecosystems.",
-  );
-  document.getElementById("service-front-item1").innerHTML =
-    '<i class="fas fa-check"></i> Institutional Websites';
-  document.getElementById("service-front-item2").innerHTML =
-    '<i class="fas fa-check"></i> Single Page Applications (SPA)';
-  setText("service-back-title", "Back-end Development");
-  setText(
-    "service-back-description",
-    "Creation of structured APIs, efficient business rules and secure database integrations.",
-  );
-  document.getElementById("service-back-item1").innerHTML =
-    '<i class="fas fa-check"></i> REST API Integrations';
-  document.getElementById("service-back-item2").innerHTML =
-    '<i class="fas fa-check"></i> Data Modeling';
-  setText("service-responsive-title", "Responsive Interfaces");
-  setText(
-    "service-responsive-description",
-    "Development focused on adapting applications to smartphones, tablets and desktops.",
-  );
-  document.getElementById("service-responsive-item1").innerHTML =
-    '<i class="fas fa-check"></i> Mobile-First Philosophy';
-  document.getElementById("service-responsive-item2").innerHTML =
-    '<i class="fas fa-check"></i> Layout Optimization';
-  setText("service-uiux-title", "Prototyping & UI/UX");
-  setText(
-    "service-uiux-description",
-    "Transformation of business requirements into interactive wireframes and visual prototypes before development.",
-  );
-  document.getElementById("service-uiux-item1").innerHTML =
-    '<i class="fas fa-check"></i> Information Architecture';
-  document.getElementById("service-uiux-item2").innerHTML =
-    '<i class="fas fa-check"></i> Figma Layout Design';
-
-  // RESUME
-  setText("resume-tag", "Journey");
-  setText("resume-title", "Resume & Experience");
-  document.getElementById("education-title").innerHTML =
-    '<i class="fas fa-graduation-cap"></i> Academic Background';
-  document.getElementById("experience-title").innerHTML =
-    '<i class="fas fa-briefcase"></i> Professional Experience';
-  setText("ads-title", "Systems Analysis and Development");
-  setText("ads-place", "SENAC - Sorocaba, Brazil");
-  setText(
-    "ads-description",
-    "Program focused on requirements engineering, structured logic, relational databases and IT governance.",
-  );
-  setText("cc-title", "Computer Science");
-  setText("cc-place", "UNIP - Sorocaba, Brazil");
-  setText(
-    "cc-description",
-    "Bachelor's degree focused on algorithms, systems architecture and applied artificial intelligence.",
-  );
-  setText("certifications-title", "Certifications");
-  setText(
-    "cert1-title",
-    "Generative AI Applied to Software Development",
-  );
-  setText("cert1-place", "Senai São Paulo");
-  setText(
-    "cert1-description",
-    "Certification focused on generative AI architectures, prompt engineering, natural language processing (NLP), and AI API integration applied to software development.",
-  );
-  setText(
-    "cert2-title",
-    "MTA: Introduction to Programming Using Python",
-  );
-  setText("cert2-place", "Fundação Bradesco");
-  setText(
-    "cert2-description",
-    "International Microsoft Technology Associate certification focused on Python programming fundamentals.",
-  );
-  setText("cert3-title", "Programming Logic");
-  setText("cert3-place", "Senai São Paulo");
-  setText(
-    "cert3-description",
-    "Training in programming logic, decision structures, loops, and algorithms.",
-  );
-  setText("fr-title", "Administrative Assistant");
-  setText("fr-place", "FR Real Estate Agency");
-  setText(
-    "fr-description",
-    "Support for administrative routines, document organization, customer service and internal processes.",
-  );
-  setText("cnh-title", "Rural Administrative Assistant (Apprentice)");
-  setText("cnh-place", "Case New Holland (CNH Industrial Brazil)");
-  setText(
-    "cnh-description",
-    "Operating in a multinational environment in the Controlling department, structuring and validating corporate data, supporting the creation of management reports and key performance indicators (KPIs), and automating routines with Advanced Excel and Power BI.",
-  );
-
-  // PROJECTS
-  setText("projects-tag", "Portfolio");
-  setText("projects-title", "Featured Projects");
-  setText(
-    "projects-description",
-    "Some recently developed solutions that demonstrate my skills in practice:",
-  );
-  setText("project1-title", "ProcessDebt");
-  setText(
-    "project1-description",
-    "Diagnosis and measurement platform for process inefficiency, applying the Technical Debt concept to business process management. Project in progress...",
-  );
-  setText("project2-title", "SkillBridge");
-  setText(
-    "project2-description",
-    "Organizational Knowledge Retention, Transfer and Mapping System. Project in progress...",
-  );
-  document.getElementById("project1-code").innerHTML =
-    '<i class="fab fa-github"></i> Code';
-  document.getElementById("project1-demo").innerHTML =
-    '<i class="fas fa-external-link-alt"></i> Live Demo';
-  document.getElementById("project2-code").innerHTML =
-    '<i class="fab fa-github"></i> Code';
-  document.getElementById("project2-demo").innerHTML =
-    '<i class="fas fa-external-link-alt"></i> Live Demo';
-
-  // MODAL DO PROCESSDEBT (Live Demo)
-  setText("pd-modal-title", "Project in progress...");
-  setText(
-    "pd-modal-text",
-    "Would you like to go to the prototype currently in development on Figma?",
-  );
-  setText("processdebt-modal-confirm", "Yes");
-  setText("processdebt-modal-cancel", "Cancel");
-
-  // MODAL DO PROCESSDEBT (Código)
-  setText("pd-code-modal-title", "Code under development");
-  setText(
-    "pd-code-modal-text",
-    "This project's repository is still under development and is not publicly available at the moment.",
-  );
-  setText("processdebt-code-modal-ok", "Got it");
-
-  // MODAL DO SKILLBRIDGE
-  setText("skillbridge-modal-title", "Coming soon");
-  setText(
-    "skillbridge-modal-text",
-    "This project hasn't entered development yet. I'll soon start building the prototype and source code.",
-  );
-  setText("skillbridge-modal-ok", "Got it");
-
-  // CONTACT
-  setText("contact-tag", "Connection");
-  setText("contact-title", "Let's Talk?");
-  setText(
-    "contact-subtitle",
-    "Feel free to send a message about opportunities, projects or feedback.",
-  );
-  setText("email-title", "Direct Email");
-  setText("location-title", "Location");
-  setText("location-text", "Sorocaba - SP, Brazil");
-  setText("linkedin-title", "Professional Network");
-  setText("label-name", "Your Name");
-  setText("label-email", "Your Email");
-  setText("label-subject", "Subject");
-  setText("label-message", "Message");
-  document.querySelector(".translate-name-placeholder").placeholder =
-    "Example: John Smith";
-  document.querySelector(".translate-email-placeholder").placeholder =
-    "Example: john@email.com";
-  document.querySelector(".translate-subject-placeholder").placeholder =
-    "Example: Job Opportunity";
-  document.querySelector(".translate-message-placeholder").placeholder =
-    "Write your message here...";
-  document.getElementById("submit-button").innerHTML =
-    'Send by Email <i class="fas fa-paper-plane"></i>';
-  const whatsappBtnEl = document.getElementById("whatsapp-button");
-  if (whatsappBtnEl) {
-    whatsappBtnEl.innerHTML =
-      'Send via WhatsApp <i class="fab fa-whatsapp"></i>';
   }
 
-  // FOOTER
-  setText(
-    "footer-text",
-    "© 2026 Madu Peres. All rights reserved. Developed with focus and dedication.",
-  );
+  const savedTheme = localStorage.getItem("portfolio-theme");
+  if (savedTheme === "light") {
+    htmlElement.setAttribute("data-theme", "light");
+    updateThemeIcon(true);
+  } else {
+    updateThemeIcon(false);
+  }
 
-  setActiveLang("en");
-}
+  themeToggle?.addEventListener("click", () => {
+    const currentTheme = htmlElement.getAttribute("data-theme");
 
-function translateToPortuguese() {
-  location.reload();
-}
-
-langEN?.addEventListener("click", (e) => {
-  e.preventDefault();
-  translateToEnglish();
-});
-langPT?.addEventListener("click", (e) => {
-  e.preventDefault();
-  translateToPortuguese();
-});
-langENMobile?.addEventListener("click", (e) => {
-  e.preventDefault();
-  translateToEnglish();
-});
-langPTMobile?.addEventListener("click", (e) => {
-  e.preventDefault();
-  translateToPortuguese();
-});
-
-const whatsappButton = document.getElementById("whatsapp-button");
-
-if (whatsappButton) {
-  whatsappButton.addEventListener("click", function () {
-    const name = document.getElementById("name").value;
-    const email = document.getElementById("email").value;
-    const subject = document.getElementById("subject").value;
-    const message = document.getElementById("message").value;
-
-    const phoneNumber = "5515996514120"; //
-
-    const text = `
-*Olá Madu, vim pelo seu portfólio!*
-
-Nome: ${name}
-Email: ${email}
-Assunto: ${subject}
-
-Mensagem:
-${message}
-    `;
-
-    const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(text)}`;
-
-    window.open(url, "_blank");
+    if (currentTheme === "light") {
+      htmlElement.removeAttribute("data-theme");
+      localStorage.setItem("portfolio-theme", "dark");
+      updateThemeIcon(false);
+    } else {
+      htmlElement.setAttribute("data-theme", "light");
+      localStorage.setItem("portfolio-theme", "light");
+      updateThemeIcon(true);
+    }
   });
-}
 
-/* =========================
-   MODAL: ProcessDebt - Protótipo em desenvolvimento
-   ========================= */
-(function () {
-  const FIGMA_URL =
-    "https://www.figma.com/design/RSdPrrbAmS5hDzvLVaWYVh/ProcessDebt---Prot%C3%B3tipo-UI?node-id=0-1&t=fPJyU0fxDm9zVkUl-0";
+  const langToggle = document.getElementById("langToggle");
+  let isEnglish = false;
 
-  const overlay = document.getElementById("processdebt-modal-overlay");
-  const confirmBtn = document.getElementById("processdebt-modal-confirm");
-  const cancelBtn = document.getElementById("processdebt-modal-cancel");
+  langToggle?.addEventListener("click", () => {
+    isEnglish = !isEnglish;
 
-  window.openProcessDebtModal = function () {
-    overlay?.classList.add("pd-modal-open");
+    if (isEnglish) {
+      document.querySelector(".hero-main-title").innerHTML =
+        `Software<br /><span>Developer</span>`;
+      document.querySelector(".hero-bio").innerText =
+        "Computer Science student with practical foundations in Python, FastAPI, and relational databases. Building clean systems and looking for my first professional opportunity.";
+      document.querySelector("#sobre .section-title").innerText =
+        "Technical Profile";
+      document.querySelector("#trajetoria .section-title").innerText =
+        "Professional Path";
+      document.querySelector("#projetos .section-title").innerText =
+        "Featured Projects";
+      document.querySelector("#contato .section-title").innerText =
+        "Let's Talk?";
+      langToggle.querySelector(".btn-label").innerText = "PT";
+    } else {
+      document.querySelector(".hero-main-title").innerHTML =
+        `Desenvolvedora<br /><span>de Software</span>`;
+      document.querySelector(".hero-bio").innerText =
+        "Estudante de Ciência da Computação com base sólida em Python, FastAPI e modelagem de dados. Focada em criar soluções eficientes, estruturadas e com alta usabilidade.";
+      document.querySelector("#sobre .section-title").innerText =
+        "Perfil Técnico";
+      document.querySelector("#trajetoria .section-title").innerText =
+        "Trajetória Profissional";
+      document.querySelector("#projetos .section-title").innerText =
+        "Projetos em Destaque";
+      document.querySelector("#contato .section-title").innerText =
+        "Vamos Conversar?";
+      langToggle.querySelector(".btn-label").innerText = "EN";
+    }
+  });
+
+  const observerOptions = {
+    threshold: 0.15,
+    rootMargin: "0px 0px -50px 0px",
   };
 
-  function closeProcessDebtModal() {
-    overlay?.classList.remove("pd-modal-open");
-  }
+  const observer = new IntersectionObserver((entries, observerInstance) => {
+    entries.forEach((entry) => {
+      if (entry.isIntersecting) {
+        entry.target.classList.add("active");
+        observerInstance.unobserve(entry.target);
+      }
+    });
+  }, observerOptions);
 
-  confirmBtn?.addEventListener("click", function () {
-    window.open(FIGMA_URL, "_blank", "noopener,noreferrer");
-    closeProcessDebtModal();
+  document.querySelectorAll("section > *").forEach((el, index) => {
+    el.classList.add(index % 2 === 0 ? "reveal" : "reveal-left");
+    observer.observe(el);
   });
 
-  cancelBtn?.addEventListener("click", closeProcessDebtModal);
+  const sections = document.querySelectorAll("section");
+  const navLinks = document.querySelectorAll(".nav-links a");
 
-  overlay?.addEventListener("click", function (event) {
-    if (event.target === overlay) {
-      closeProcessDebtModal();
-    }
-  });
+  // Agrupado num único requestAnimationFrame por evento de scroll: sem
+  // isso, o navegador roda esse cálculo (com leitura de offsetTop, que
+  // força layout) uma vez por evento de scroll, que pode disparar dezenas
+  // de vezes por segundo e travar a rolagem.
+  let navUpdateQueued = false;
+  const updateActiveNav = () => {
+    navUpdateQueued = false;
+    let current = "";
+    sections.forEach((section) => {
+      const sectionTop = section.offsetTop;
+      if (window.pageYOffset >= sectionTop - 200) {
+        current = section.getAttribute("id");
+      }
+    });
 
-  document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape" && overlay?.classList.contains("pd-modal-open")) {
-      closeProcessDebtModal();
-    }
-  });
-})();
-
-/* =========================
-   MODAL: ProcessDebt - Código (repositório privado)
-   ========================= */
-(function () {
-  const overlay = document.getElementById("processdebt-code-modal-overlay");
-  const okBtn = document.getElementById("processdebt-code-modal-ok");
-
-  window.openProcessDebtCodeModal = function () {
-    overlay?.classList.add("pd-modal-open");
+    navLinks.forEach((link) => {
+      link.classList.remove("active");
+      if (link.getAttribute("href").includes(current)) {
+        link.classList.add("active");
+      }
+    });
   };
 
-  function closeProcessDebtCodeModal() {
-    overlay?.classList.remove("pd-modal-open");
+  window.addEventListener(
+    "scroll",
+    () => {
+      if (navUpdateQueued) return;
+      navUpdateQueued = true;
+      requestAnimationFrame(updateActiveNav);
+    },
+    { passive: true },
+  );
+
+  /* ================================================================
+     GRID MAGNÉTICO NO HERO
+     Recria o grid de fundo num <canvas> só na seção inicial. Cada linha é
+     uma sequência de pontos; os pontos perto do cursor são empurrados pra
+     longe dele, curvando a linha, e voltam suavemente à posição reta
+     quando o cursor se afasta ou sai do hero. Inspirado em
+     https://www.originkit.dev/components/line-ripple-background (aqui
+     simplificado: sem ruído/animação própria, só reage ao cursor).
+     Desativado em telas sem mouse (touch) e com prefers-reduced-motion —
+     nesses casos o hero fica só com o grid pontilhado normal (CSS global).
+
+     Usa <canvas> em vez de SVG de propósito: a primeira versão manipulava
+     um <polyline> por linha do grid via setAttribute a cada frame, e cada
+     escrita de atributo forçava o navegador a reprocessar a geometria
+     daquele elemento — com até 35 elementos sendo reescritos 60x/segundo,
+     isso pesava sensivelmente em hardware mais modesto. Canvas desenha
+     tudo (todas as linhas) numa única chamada de stroke() por frame, sem
+     nenhum elemento de DOM sendo criado/alterado depois da primeira vez —
+     bem mais barato pra esse tipo de efeito com muitos traços mudando
+     de forma continuamente.
+     ================================================================ */
+  try {
+    const hero = document.querySelector(".hero");
+    const supportsHover = window.matchMedia(
+      "(hover: hover) and (pointer: fine)",
+    ).matches;
+    const prefersReducedMotion = window.matchMedia(
+      "(prefers-reduced-motion: reduce)",
+    ).matches;
+
+    if (hero && supportsHover && !prefersReducedMotion) {
+      const TILE = 64; // mesmo tamanho de malha do grid global (body::before)
+      const SEGMENT = 48; // distância entre pontos ao longo de cada linha
+      const RADIUS = 200; // raio de influência do cursor, em px
+      const MAX_PUSH = 46; // deslocamento máximo bem no centro do raio, em px
+      const EASE = 0.18; // velocidade da suavização (menor = mais lento/suave)
+      const REST_OPACITY = 0.15; // opacidade em repouso (igual ao grid global)
+      const ACTIVE_OPACITY = 0.55; // opacidade quando o cursor está atuando
+      const MAX_DPR = 2; // limite de nitidez em telas retina, sem exagerar o custo
+
+      const canvas = document.createElement("canvas");
+      canvas.className = "hero-grid";
+      hero.insertBefore(canvas, hero.firstChild);
+      const ctx = canvas.getContext("2d");
+
+      let lines = [];
+      let cursorX = null;
+      let cursorY = null;
+      let intensity = 0;
+      let targetIntensity = 0;
+      let rafId = null;
+      let heroRect = null;
+      let heroRectDirty = true;
+      let gridWidth = 0;
+      let gridHeight = 0;
+      let lineColor = "#888888";
+
+      // --line é uma variável CSS que muda com o tema (claro/escuro) — lida
+      // uma vez a cada início de interação (não a cada frame, pra não pagar
+      // o custo de getComputedStyle 60x/segundo) via ensureLoop().
+      const refreshColor = () => {
+        lineColor =
+          getComputedStyle(hero).getPropertyValue("--line").trim() || lineColor;
+      };
+
+      const buildGrid = () => {
+        heroRect = hero.getBoundingClientRect();
+        heroRectDirty = false;
+        gridWidth = Math.max(1, Math.round(heroRect.width));
+        gridHeight = Math.max(1, Math.round(heroRect.height));
+
+        const dpr = Math.min(window.devicePixelRatio || 1, MAX_DPR);
+        canvas.width = gridWidth * dpr;
+        canvas.height = gridHeight * dpr;
+        canvas.style.width = `${gridWidth}px`;
+        canvas.style.height = `${gridHeight}px`;
+        ctx.setTransform(dpr, 0, 0, dpr, 0, 0);
+
+        lines = [];
+        const addLine = (basePoints) => {
+          const xs = basePoints.map((p) => p[0]);
+          const ys = basePoints.map((p) => p[1]);
+          lines.push({
+            basePoints,
+            // Caixa delimitadora da linha, usada em render() pra pular todo
+            // o cálculo ponto a ponto de linhas que o cursor nem chega
+            // perto de afetar — nesses casos ela é desenhada como um único
+            // segmento reto (do primeiro ao último ponto), não precisa
+            // passar pelos pontos intermediários.
+            minX: Math.min(...xs),
+            maxX: Math.max(...xs),
+            minY: Math.min(...ys),
+            maxY: Math.max(...ys),
+          });
+        };
+
+        // Linhas verticais, cada uma subdividida a cada SEGMENT px
+        for (let x = 0; x <= gridWidth; x += TILE) {
+          const pts = [];
+          for (let y = 0; y <= gridHeight; y += SEGMENT) pts.push([x, y]);
+          if (pts[pts.length - 1][1] !== gridHeight) pts.push([x, gridHeight]);
+          addLine(pts);
+        }
+
+        // Linhas horizontais, mesma lógica
+        for (let y = 0; y <= gridHeight; y += TILE) {
+          const pts = [];
+          for (let x = 0; x <= gridWidth; x += SEGMENT) pts.push([x, y]);
+          if (pts[pts.length - 1][0] !== gridWidth) pts.push([gridWidth, y]);
+          addLine(pts);
+        }
+
+        render();
+      };
+
+      // Distância do ponto mais próximo da caixa delimitadora de uma linha
+      // até o cursor. Se isso já for >= RADIUS, nenhum ponto real da linha
+      // pode estar dentro do raio de influência — a linha inteira pode ser
+      // desenhada reta, sem percorrer os pontos intermediários.
+      const distToBox = (line, x, y) => {
+        const cx = Math.max(line.minX, Math.min(x, line.maxX));
+        const cy = Math.max(line.minY, Math.min(y, line.maxY));
+        const dx = x - cx;
+        const dy = y - cy;
+        return Math.sqrt(dx * dx + dy * dy);
+      };
+
+      const render = () => {
+        const flat = intensity < 0.001 || cursorX === null;
+
+        ctx.clearRect(0, 0, gridWidth, gridHeight);
+
+        // Além de curvar as linhas, a malha inteira fica mais visível
+        // enquanto o cursor está atuando (e volta a ficar discreta, igual
+        // ao grid normal, assim que ele se afasta) — sem isso, em fundos
+        // claros a curvatura sozinha pode passar despercebida.
+        ctx.globalAlpha =
+          REST_OPACITY + (ACTIVE_OPACITY - REST_OPACITY) * intensity;
+        ctx.strokeStyle = lineColor;
+        ctx.lineWidth = 1;
+
+        // Uma única chamada de stroke() no fim desenha todas as linhas de
+        // uma vez — bem mais barato do que um draw call por linha.
+        ctx.beginPath();
+        lines.forEach((line) => {
+          const pts = line.basePoints;
+
+          if (flat || distToBox(line, cursorX, cursorY) >= RADIUS) {
+            const first = pts[0];
+            const last = pts[pts.length - 1];
+            ctx.moveTo(first[0], first[1]);
+            ctx.lineTo(last[0], last[1]);
+            return;
+          }
+
+          ctx.moveTo(pts[0][0], pts[0][1]);
+          for (let i = 1; i < pts.length; i++) {
+            const x = pts[i][0];
+            const y = pts[i][1];
+            const dx = x - cursorX;
+            const dy = y - cursorY;
+            const dist = Math.sqrt(dx * dx + dy * dy);
+            if (dist >= RADIUS || dist < 0.01) {
+              ctx.lineTo(x, y);
+              continue;
+            }
+            // Quanto mais perto do cursor, mais forte o empurrão
+            // (decaimento quadrático até a borda do raio).
+            const falloff = Math.pow(1 - dist / RADIUS, 2);
+            const push = falloff * MAX_PUSH * intensity;
+            ctx.lineTo(x + (dx / dist) * push, y + (dy / dist) * push);
+          }
+        });
+        ctx.stroke();
+      };
+
+      const tick = () => {
+        intensity += (targetIntensity - intensity) * EASE;
+        const settled = targetIntensity === 0 && Math.abs(intensity) < 0.001;
+        if (settled) intensity = 0;
+        render();
+        rafId = settled ? null : requestAnimationFrame(tick);
+      };
+
+      const ensureLoop = () => {
+        if (rafId === null) {
+          refreshColor();
+          rafId = requestAnimationFrame(tick);
+        }
+      };
+
+      hero.addEventListener("mousemove", (e) => {
+        // Só recalcula a posição do hero quando ela pode ter mudado
+        // (depois de rolar ou redimensionar) — getBoundingClientRect força
+        // um layout síncrono, e chamá-lo em todo mousemove (que pode
+        // disparar centenas de vezes por segundo) era um dos motivos do
+        // efeito travar a página inteira.
+        if (heroRectDirty) {
+          heroRect = hero.getBoundingClientRect();
+          heroRectDirty = false;
+        }
+        cursorX = e.clientX - heroRect.left;
+        cursorY = e.clientY - heroRect.top;
+        targetIntensity = 1;
+        ensureLoop();
+      });
+
+      hero.addEventListener("mouseleave", () => {
+        targetIntensity = 0;
+        ensureLoop();
+      });
+
+      buildGrid();
+
+      let resizeTimer = null;
+      window.addEventListener("resize", () => {
+        clearTimeout(resizeTimer);
+        resizeTimer = setTimeout(buildGrid, 200);
+      });
+
+      // Rolar a página move o hero em relação à viewport, então a posição
+      // guardada em heroRect fica desatualizada — sem isso, o efeito
+      // ficaria "desalinhado" do cursor depois de rolar e voltar ao hero.
+      window.addEventListener(
+        "scroll",
+        () => {
+          heroRectDirty = true;
+        },
+        { passive: true },
+      );
+    }
+  } catch (err) {
+    // Falha silenciosa: o hero continua funcionando normalmente sem o efeito.
   }
-
-  okBtn?.addEventListener("click", closeProcessDebtCodeModal);
-
-  overlay?.addEventListener("click", function (event) {
-    if (event.target === overlay) {
-      closeProcessDebtCodeModal();
-    }
-  });
-
-  document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape" && overlay?.classList.contains("pd-modal-open")) {
-      closeProcessDebtCodeModal();
-    }
-  });
-})();
-
-/* =========================
-   MODAL: SkillBridge - Em breve
-   ========================= */
-(function () {
-  const overlay = document.getElementById("skillbridge-modal-overlay");
-  const okBtn = document.getElementById("skillbridge-modal-ok");
-
-  window.openSkillBridgeModal = function () {
-    overlay?.classList.add("pd-modal-open");
-  };
-
-  function closeSkillBridgeModal() {
-    overlay?.classList.remove("pd-modal-open");
-  }
-
-  okBtn?.addEventListener("click", closeSkillBridgeModal);
-
-  overlay?.addEventListener("click", function (event) {
-    if (event.target === overlay) {
-      closeSkillBridgeModal();
-    }
-  });
-
-  document.addEventListener("keydown", function (event) {
-    if (event.key === "Escape" && overlay?.classList.contains("pd-modal-open")) {
-      closeSkillBridgeModal();
-    }
-  });
-})();
+});
