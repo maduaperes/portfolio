@@ -1,6 +1,6 @@
 /* Layout: grid editorial de 12 colunas, max 1200px; faixas horizontais separadas por linhas finas; hero acompanha o tema (escuro/claro). */
 :root {
-  --photo: url("imagens/maria.png");
+  --photo: url("imagens/maria-sobre.jpeg");
   --hero-photo: url("imagens/maria-hero.png");
   --bg: #0a0a0a;
   --bg-2: #0e0e0e;
@@ -856,7 +856,7 @@ html.light .i-sun {
 .portrait-img {
   position: absolute;
   inset: 0;
-  background: var(--photo) 49% 22% / auto 128% no-repeat;
+  background: var(--photo) 46% 20% / auto 118% no-repeat;
   filter: grayscale(1) contrast(1.12) brightness(0.92);
   overflow: hidden;
   transition:
@@ -864,7 +864,7 @@ html.light .i-sun {
     filter 0.8s;
 }
 .portrait:hover .portrait-img {
-  background-size: auto 133%;
+  background-size: auto 123%;
   filter: grayscale(1) contrast(1.15) brightness(1);
 }
 .portrait-img::after {
