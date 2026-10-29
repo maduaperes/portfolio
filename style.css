@@ -15,6 +15,7 @@
   --line-3: rgba(255, 255, 255, 0.32);
   --glow: rgba(255, 255, 255, 0.07);
   --header: rgba(10, 10, 10, 0.62);
+  --menu: rgba(10, 10, 10, 0.92);
   --shadow: 0 30px 60px -30px rgba(0, 0, 0, 0.9);
   --sans: "Geist", "Helvetica Neue", Helvetica, Arial, sans-serif;
   --mono:
@@ -38,6 +39,7 @@ html.light {
   --line-3: rgba(0, 0, 0, 0.34);
   --glow: rgba(0, 0, 0, 0.04);
   --header: rgba(243, 243, 243, 0.7);
+  --menu: rgba(243, 243, 243, 0.94);
   --shadow: 0 30px 60px -34px rgba(0, 0, 0, 0.35);
   color-scheme: light;
 }
@@ -261,14 +263,23 @@ img {
   left: 0;
   right: 0;
   z-index: 50;
-  transition:
-    background-color 0.5s var(--ease),
-    backdrop-filter 0.5s;
 }
-.hdr.scrolled {
+/* o desfoque do header fica num pseudo-elemento: se ficasse no próprio .hdr,
+   o desfoque do menu mobile (que está dentro dele) pararia de funcionar ao rolar */
+.hdr::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  z-index: -1;
+  pointer-events: none;
   background: var(--header);
   -webkit-backdrop-filter: blur(14px) saturate(120%);
   backdrop-filter: blur(14px) saturate(120%);
+  opacity: 0;
+  transition: opacity 0.5s var(--ease);
+}
+.hdr.scrolled::before {
+  opacity: 1;
 }
 .hdr-in {
   display: flex;
@@ -1683,9 +1694,9 @@ html.light .i-sun {
     top: 100%;
     left: 0;
     right: 0;
-    background: var(--header);
-    -webkit-backdrop-filter: blur(16px);
-    backdrop-filter: blur(16px);
+    background: var(--menu);
+    -webkit-backdrop-filter: blur(18px) saturate(120%);
+    backdrop-filter: blur(18px) saturate(120%);
     border-bottom: 1px solid var(--line);
     flex-direction: column;
     padding: 8px var(--gut-r) 16px var(--gut);
