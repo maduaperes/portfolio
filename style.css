@@ -1,6 +1,6 @@
 /* Layout: grid editorial de 12 colunas, max 1200px; faixas horizontais separadas por linhas finas; hero acompanha o tema (escuro/claro). */
 :root {
-  --photo: url("imagens/maria-sobre.jpg");
+  --photo: url("imagens/maria-sobre.jpeg");
   --hero-photo: url("imagens/maria-hero.png");
   --bg: #0a0a0a;
   --bg-2: #0e0e0e;
