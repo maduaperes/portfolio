@@ -1,18 +1,12 @@
 (function () {
   var root = document.documentElement;
-  // tema
+  // tema: o site sempre abre no escuro; o botão alterna só durante a visita
+  root.classList.remove("light");
   try {
-    if (localStorage.getItem("mep-theme") === "light")
-      root.classList.add("light");
+    localStorage.removeItem("mep-theme"); // apaga a escolha salva por versões anteriores
   } catch (e) {}
   document.getElementById("theme").addEventListener("click", function () {
     root.classList.toggle("light");
-    try {
-      localStorage.setItem(
-        "mep-theme",
-        root.classList.contains("light") ? "light" : "dark",
-      );
-    } catch (e) {}
   });
   // header
   var hdr = document.getElementById("hdr"),
