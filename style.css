@@ -1,38 +1,41 @@
 /* ================================================================
-   PORTFÓLIO — CORES 100% NEUTRAS (CINZA PURO / SEM AZUL)
+   PORTFÓLIO — MONOCROMÁTICO (PRETO · GRAFITE · CINZA · BRANCO)
+   Nenhuma cor com matiz: todos os tons são cinza puro (R = G = B).
    ================================================================ */
 
 @import url("https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,300;0,400;0,600;0,800;1,400&family=Inter:wght@400;500;600;700&display=swap");
 
 :root {
-  /* Paleta "Greige (Cinza com Bege) + Verde Sálvia" — pedido da Maria pra o
-     modo escuro manter os MESMOS tons do modo claro em vez de cinza puro.
-     Reaproveita os valores exatos já validados por ela em rodadas anteriores
-     deste projeto (paleta "Areia · Fendi · Verde Sálvia"), agora aplicados
-     no site inteiro (antes só o --hero-accent do hero usava esse verde; os
-     fundos/textos continuavam em cinza puro nos dois temas). */
-  --bg-base: #201e1a;
-  --bg-surface: #2a2824;
-  --bg-card: #27251f;
+  /* Fundos — preto / grafite */
+  --bg-base: #0a0a0a;
+  --bg-surface: #141414;
+  --bg-card: #1c1c1c;
 
-  /* Escala de texto/estrutura "Fendi" — quente (cinza com bege), não mais
-     cinza puro. --text-main e --text-faint são os valores exatos do
-     histórico do projeto; --text-muted é interpolado entre os dois na mesma
-     proporção usada na escala de cinza puro anterior, pra manter o mesmo
-     contraste relativo entre os 3 níveis. */
-  --text-main: #f2efe8;
-  --text-muted: #c3beb3;
-  --text-faint: #948d7f;
+  /* Texto — branco → cinza */
+  --text-main: #f5f5f5;
+  --text-muted: #a3a3a3;
+  --text-faint: #666666;
 
-  --line: #35312a;
-  --accent: #a3b29e;
-  --accent-glow: rgba(163, 178, 158, 0.08);
+  /* Estrutura */
+  --line: #262626;
+  --line-strong: #3d3d3d;
 
-  /* Verde sálvia — mesmo valor de --accent agora (antes era uma variável à
-     parte porque só o hero usava essa cor; ver nota abaixo). Mantida como
-     variável separada por clareza semântica no hero e pra não precisar
-     reescrever todo o CSS do hero que já referencia --hero-accent. */
-  --hero-accent: #a3b29e;
+  /* Botão principal: branco sobre preto (hover cinza-claro) */
+  --accent: #f5f5f5;
+  --accent-hover: #d4d4d4;
+  --on-accent: #0a0a0a;
+  --accent-glow: rgba(255, 255, 255, 0.06);
+
+  /* Destaques de texto no hero ("Madu", "_", "de Software", nós do HUD):
+     cinza médio, pra contrastar com o branco do título sem usar cor. */
+  --hero-accent: #8c8c8c;
+
+  /* Brilho circular atrás da foto (branco suave sobre o fundo escuro) */
+  --glow-core: rgba(255, 255, 255, 0.3);
+  --glow-mid: rgba(255, 255, 255, 0.1);
+
+  /* Círculo sólido atrás da foto (grafite, um tom acima do fundo) */
+  --circle-bg: #262626;
 
   --font-sans: "Plus Jakarta Sans", sans-serif;
   --font-mono: "Inter", sans-serif;
@@ -41,18 +44,31 @@
 }
 
 [data-theme="light"] {
-  --bg-base: #f7f5f0;
-  --bg-surface: #fbfaf6;
-  --bg-card: #f2efe7;
+  --bg-base: #fafafa;
+  --bg-surface: #ffffff;
+  --bg-card: #f0f0f0;
 
-  --text-main: #2a2620;
-  --text-muted: #8c857b;
-  --text-faint: #c9c2b4;
+  --text-main: #111111;
+  --text-muted: #5c5c5c;
+  --text-faint: #a3a3a3;
 
-  --line: #e3dccd;
-  --accent: #8a9a86;
-  --accent-glow: rgba(138, 154, 134, 0.08);
-  --hero-accent: #8a9a86;
+  --line: #e0e0e0;
+  --line-strong: #c4c4c4;
+
+  /* Botão principal: grafite com texto branco (hover um pouco mais claro) */
+  --accent: #1a1a1a;
+  --accent-hover: #3a3a3a;
+  --on-accent: #ffffff;
+  --accent-glow: rgba(0, 0, 0, 0.05);
+
+  --hero-accent: #6b6b6b;
+
+  /* No modo claro, o brilho fica em tom escuro (grafite) */
+  --glow-core: rgba(20, 20, 20, 0.4);
+  --glow-mid: rgba(20, 20, 20, 0.14);
+
+  /* Círculo sólido em grafite escuro */
+  --circle-bg: #1f1f1f;
 }
 
 * {
@@ -65,6 +81,11 @@
 
 html {
   scroll-snap-type: y proximity;
+}
+
+::selection {
+  background: var(--text-main);
+  color: var(--bg-base);
 }
 
 img,
@@ -251,7 +272,7 @@ header {
 }
 
 .control-btn:hover {
-  border-color: var(--text-main);
+  border-color: var(--line-strong);
   background: var(--bg-card);
   transform: translateY(-2px);
 }
@@ -326,12 +347,7 @@ header {
   display: grid;
   /* minmax(0, ...) trava a proporção mesmo quando um item (a imagem) tem
      um width maior que a própria coluna — sem isso, a coluna da imagem
-     "incha" pra caber o conteúdo e rouba espaço da coluna do texto.
-     Colunas iguais (1fr/1fr, antes 1.2fr/0.8fr): dá bem mais espaço pra
-     coluna da foto — ela cresce (ver .hero-portrait-container mais abaixo)
-     sem precisar "vazar" pra fora da coluna nem da borda do site, o que
-     mantém a simetria com o texto (mesma distância da borda da tela dos
-     dois lados). */
+     "incha" pra caber o conteúdo e rouba espaço da coluna do texto. */
   grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: 50px;
   align-items: center;
@@ -341,16 +357,8 @@ header {
   scroll-snap-align: start;
 }
 
-/* Grid do hero em SVG: substitui, só nessa seção, o grid pontilhado global
-   (que continua igual no resto do site) por uma versão desenhada em <line>,
-   com a mesma malha de 64px e a mesma cor/opacidade em repouso — visualmente
-   idêntica ao grid normal. A diferença é que cada linha vira vários pontos
-   (script.js), então dá pra empurrar os pontos perto do cursor pra longe
-   dele, curvando a linha, como um "puxão" magnético no quadriculado. Criado
-   via JS (fica vazio/sem efeito nenhum se JS não rodar, sem quebrar layout). */
-/* Agora é o próprio <canvas> (script.js desenha o grid nele a cada frame,
-   com opacidade/cor controladas via canvas 2D — não precisa de regras de
-   opacity/stroke aqui como na versão anterior em SVG). */
+/* <canvas> do grid magnético do hero (script.js desenha o grid nele a cada
+   frame, com opacidade/cor controladas via canvas 2D). */
 .hero-grid {
   position: absolute;
   inset: 0;
@@ -360,9 +368,8 @@ header {
   display: block;
 }
 
-/* Linha pequena acima do título ("Olá, eu sou a Madu _"), pedida junto com
-   a referência visual do hero. "Madu" e o cursor "_" usam o verde sálvia
-   (--hero-accent) pra combinar com "de Software" logo abaixo. */
+/* "Olá, eu sou a Madu _" — "Madu" em branco/preto (texto principal) e o
+   cursor "_" em cinza, sem cor. */
 .hero-eyebrow {
   display: flex;
   align-items: baseline;
@@ -377,12 +384,11 @@ header {
 }
 
 .hero-eyebrow-accent {
-  color: var(--hero-accent);
+  color: var(--text-main);
 }
 
 .hero-eyebrow-cursor {
   color: var(--hero-accent);
-  opacity: 0.85;
 }
 
 .hero-main-title {
@@ -392,12 +398,14 @@ header {
   letter-spacing: -0.04em;
   margin-bottom: 25px;
   /* Título tem quebra de linha manual (via <br> no HTML): "Desenvolvedora" / "de Software".
-     Sobrescreve o break-word global (linha ~68) pra impedir que o navegador quebre
+     Sobrescreve o break-word global pra impedir que o navegador quebre
      as palavras no meio, letra por letra, em telas estreitas. */
   word-break: normal;
   overflow-wrap: normal;
 }
 
+/* "de Software" em cinza médio: contraste de tom com "Desenvolvedora"
+   (branco no escuro / preto no claro), sem usar cor. */
 .hero-main-title span {
   color: var(--hero-accent);
   font-style: italic;
@@ -423,13 +431,8 @@ header {
   gap: 16px;
 }
 
-/* Linha de contato rápido, logo abaixo dos botões — preenche o espaço vazio
-   que sobrava ali e dá um segundo caminho de contato além do formulário.
-   Rótulo "Me encontre" + linha fina (mesma linguagem visual do resto do
-   site, ver .section-header::after) seguido de uma fileira de ícones
-   quadrados (só ícone, sem texto do lado) — pedido explícito via referência
-   visual. Antes era uma fileira de links com borda + texto ("GitHub",
-   "E-mail"); a versão anterior fica registrada no histórico do projeto. */
+/* Linha de contato rápido, logo abaixo dos botões: rótulo "Me encontre" +
+   linha fina, seguido de uma fileira de ícones quadrados. */
 .hero-social-block {
   display: flex;
   align-items: center;
@@ -482,9 +485,7 @@ header {
   transform: translateY(-2px);
 }
 
-/* Indicador de rolagem, ancorado no rodapé do hero inteiro (não numa coluna
-   específica) — junto com .hero-social, é o que preenche o vazio que sobrava
-   embaixo do conteúdo. Link real para #sobre, não só decoração. */
+/* Indicador de rolagem, ancorado no rodapé do hero. Link real para #sobre. */
 .hero-scroll-cue {
   position: absolute;
   bottom: 40px;
@@ -511,8 +512,6 @@ header {
   color: var(--text-main);
 }
 
-/* A animação (respeitando prefers-reduced-motion, igual ao resto do site)
-   é só do ícone — o texto "Role" fica parado. */
 @media (prefers-reduced-motion: no-preference) {
   .hero-scroll-cue-icon {
     animation: hero-scroll-bounce 1.8s ease-in-out infinite;
@@ -529,13 +528,12 @@ header {
   }
 }
 
-/* Botão principal: era fundo --text-main (branco/cinza claro no dark);
-   trocado pro verde sálvia (--hero-accent) pra bater com a referência
-   visual. Texto continua --bg-base (escuro), que já tinha bom contraste
-   contra tons claros e continua funcionando igual contra o verde. */
+/* Botão principal: branco com texto preto no tema escuro; grafite com texto
+   branco no tema claro. O "sweep" do hover usa --accent-hover (um cinza
+   próximo do fundo do botão) — nunca branco puro, que sumia no tema escuro. */
 .btn-raw {
-  background: var(--hero-accent);
-  color: var(--bg-base);
+  background: var(--accent);
+  color: var(--on-accent);
   padding: 15px 26px;
   font-family: var(--font-mono);
   font-size: 12px;
@@ -558,11 +556,7 @@ header {
   left: -100%;
   width: 100%;
   height: 100%;
-  /* Antes era --text-muted (cinza) — com o fundo agora verde, um cinza
-     neutro deslizando por cima ficava sem relação de cor nenhuma; troquei
-     pra uma versão clareada do próprio --hero-accent (mesmo tom, só mais
-     claro), então o hover continua lendo como "o mesmo botão, mais claro". */
-  background: color-mix(in srgb, var(--hero-accent) 100%, white 22%);
+  background: var(--accent-hover);
   transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1);
   z-index: 0;
 }
@@ -586,7 +580,7 @@ header {
 .btn-raw-outline {
   background: var(--bg-surface);
   color: var(--text-main);
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-strong);
   padding: 15px 26px;
   font-family: var(--font-mono);
   font-size: 12px;
@@ -612,14 +606,13 @@ header {
 
 .btn-raw-outline:hover {
   border-color: var(--text-main);
-  background: var(--bg-surface);
+  background: var(--bg-card);
   transform: translateY(-3px);
 }
 
 /* CONTAINER DA FOTO COM O ELEMENTO DE FUNDO (PINCELADA) - AJUSTADO SEM MOLDURA */
 .hero-portrait-container {
-  /* Base = comportamento no hero empilhado (telas ≤900px, uma coluna só):
-     centralizada, igual sempre foi. */
+  /* Base = comportamento no hero empilhado (telas ≤900px): centralizada. */
   position: relative;
   width: 100%;
   max-width: 470px;
@@ -631,34 +624,15 @@ header {
 }
 
 /* Acima de 900px (hero em duas colunas): a foto encosta na borda DIREITA da
-   sua coluna (margin-left: auto tira o espaço vazio que sobraria à direita
-   dela) — assim como o texto já fica encostado na borda ESQUERDA da coluna
-   dele, por ser o alinhamento padrão. Como o .layout-grid tem o mesmo
-   padding dos dois lados (5vw) e fica centralizado na tela, isso garante
-   que a distância da borda da tela até o título seja igual à distância da
-   borda da tela até a foto — título e foto ficam como um par espelhado e
-   centralizado, sem a foto nunca ultrapassar a borda do site (diferente do
-   "vazamento" via JS de rodadas anteriores, que media contra a janela real
-   e podia passar da borda do .layout-grid em telas muito largas). */
+   sua coluna, espelhando o texto encostado na borda ESQUERDA. */
 @media (min-width: 901px) {
   .hero-portrait-container {
-    /* Coluna agora bem mais larga (grid 1fr/1fr, ver .hero) — soltamos o
-       teto de 470px pra ela realmente ocupar a coluna (até um teto maior,
-       só de segurança pra não ficar gigante em telas absurdamente largas)
-       em vez de continuar pequena e sobrando espaço vazio ao redor. */
     max-width: 720px;
     margin: 0 0 0 auto;
   }
 }
 
-/* Anel decorativo atrás da foto — pedido explícito via referência visual
-   (nota: um pedido parecido — anéis/divisores/cantos soltos no hero — foi
-   feito e REVERTIDO numa rodada bem anterior deste projeto porque a Maria
-   não gostou do resultado; este aqui é diferente e foi pedido de novo, de
-   forma explícita e com uma imagem exata de referência, então não conta
-   como reintrodução sem pedido). z-index 0: fica atrás de .brush-background
-   (1) e .portrait-frame (2), então a foto cobre a maior parte do anel — só
-   as bordas que passam da foto ficam visíveis, como na referência. */
+/* Anel decorativo atrás da foto (pedido explícito via referência visual). */
 .hero-ring {
   position: absolute;
   z-index: 0;
@@ -672,29 +646,55 @@ header {
   pointer-events: none;
 }
 
+/* "O elemento" (imagens/element.png) foi substituído por um brilho circular
+   em gradiente radial atrás da foto. A <img class="brush-background"> fica
+   escondida (pode ser apagada do HTML). */
 .brush-background {
+  display: none;
+}
+
+.hero-portrait-container::before {
+  content: "";
   position: absolute;
-  width: 120%;
-  height: 120%;
-  object-fit: contain;
-  opacity: 0.65;
-  z-index: 1;
-  pointer-events: none;
-  /* "O elemento" (esta imagem, imagens/element.png) no mesmo tom de verde
-     sálvia do resto do site — pedido explícito da Maria. Mesmo filtro
-     validado matematicamente em rodada anterior deste projeto pra bater
-     num hex exato: resultado rgb(163,178,158) = #a3b29e = --hero-accent
-     (dark) / muito próximo de --hero-accent light também, já que o filter
-     não muda com o tema (a imagem em si é neutra/P&B antes do filtro). */
-  filter: grayscale(100%) sepia(80%) hue-rotate(60deg) saturate(50%)
-    brightness(0.83);
-  -webkit-mask-image: linear-gradient(
-    to bottom,
-    #000 0%,
-    #000 65%,
-    transparent 100%
+  z-index: 0;
+  top: 45%;
+  left: 50%;
+  width: 110%;
+  aspect-ratio: 1;
+  transform: translate(-50%, -50%);
+  border-radius: 50%;
+  background: radial-gradient(
+    circle at center,
+    var(--glow-core) 0%,
+    var(--glow-mid) 35%,
+    transparent 70%
   );
-  mask-image: linear-gradient(to bottom, #000 0%, #000 65%, transparent 100%);
+  pointer-events: none;
+}
+
+/* No celular o brilho não passa da largura da tela (evita rolagem lateral) */
+@media (max-width: 900px) {
+  .hero-portrait-container::before {
+    width: 100%;
+  }
+}
+
+@media (prefers-reduced-motion: no-preference) {
+  .hero-portrait-container::before {
+    animation: glow-breathe 6s ease-in-out infinite;
+  }
+}
+
+@keyframes glow-breathe {
+  0%,
+  100% {
+    opacity: 0.85;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.04);
+  }
 }
 
 .portrait-frame {
@@ -719,10 +719,7 @@ header {
   width: 100%;
   height: auto;
   object-fit: contain;
-  /* Filtro removido — pedido da Maria pra foto voltar às cores originais
-     (antes era um duotone P&B via grayscale/contrast/brightness). Mantido
-     só o mask-image (fade de opacidade no rodapé da foto), que é um efeito
-     de transparência e não de cor, e não foi pedido pra sair. */
+  /* Foto nas cores originais (sem filtro). Só o fade no rodapé. */
   border-radius: 0;
   transition: none;
   -webkit-mask-image: linear-gradient(
@@ -743,16 +740,8 @@ header {
   display: none;
 }
 
-/* Cluster decorativo "HUD técnico" ao redor da foto (ícone </>, linha até
-   um nó, uma grade pequena de pontos, outra linha descendo até um segundo
-   nó, e um trecho de código falso) — recriando a referência visual que a
-   Maria colou no chat. Tudo aria-hidden + pointer-events: none (é só
-   textura visual, não interativo) e por cima da foto/anel (z-index acima
-   de .portrait-frame), em tons bem discretos (--text-faint/--text-muted)
-   pra não competir com o conteúdo real. Sem imagem real neste sandbox de
-   teste pra comparar lado a lado — as posições abaixo são uma aproximação
-   fiel à referência; pode precisar de um ajuste fino depois que a Maria
-   ver com a foto de verdade. */
+/* Cluster decorativo "HUD técnico" ao redor da foto — só textura visual,
+   aria-hidden + pointer-events: none, em tons discretos. */
 .hero-tech-deco {
   position: absolute;
   inset: 0;
@@ -769,7 +758,7 @@ header {
   display: flex;
   align-items: center;
   justify-content: center;
-  border: 1px solid var(--line);
+  border: 1px solid var(--line-strong);
   border-radius: 6px;
   background: var(--bg-base);
   color: var(--text-muted);
@@ -781,7 +770,7 @@ header {
   right: 0;
   width: 16%;
   height: 1px;
-  background: var(--line);
+  background: var(--line-strong);
 }
 
 .tech-deco-line-v {
@@ -790,7 +779,7 @@ header {
   right: 0;
   width: 1px;
   height: 38%;
-  background: var(--line);
+  background: var(--line-strong);
 }
 
 .tech-deco-node {
@@ -798,7 +787,7 @@ header {
   width: 6px;
   height: 6px;
   border-radius: 50%;
-  background: var(--hero-accent);
+  background: var(--text-main);
   right: -2.5px;
 }
 
@@ -821,16 +810,7 @@ header {
   opacity: 0.7;
 }
 
-/* Ajuste: a Maria reportou o texto do código quebrado/sobreposto em cima da
-   foto de verdade ("no meio da imagem"). Antes ficava como texto solto, sem
-   fundo, direto sobre a foto — em cima de uma foto de verdade (não um
-   retângulo cinza-chapado) o texto ficava ilegível/misturado com a imagem
-   atrás. Correção: virou um cartão com fundo sólido, borda e sombra, então
-   fica legível em cima de QUALQUER imagem por trás, em vez de depender da
-   foto ser lisa. Mantido dentro dos limites do container (right em %, sem
-   "vazar" pra fora) pra não arriscar corte/overflow em nenhuma largura de
-   tela, e reposicionado pra perto do nó inferior do HUD (~39-40%) em vez do
-   centro vertical da foto. */
+/* Cartão com fundo sólido, borda e sombra, legível sobre qualquer foto. */
 .tech-deco-code {
   position: absolute;
   top: 40%;
@@ -850,9 +830,7 @@ header {
   margin: 0;
 }
 
-/* Escondido em telas empilhadas (≤900px): as posições são pensadas pro
-   layout de duas colunas, igual já é feito com outros decorativos do hero
-   (mesmo padrão de .hero-decor em rodadas anteriores). */
+/* Escondido em telas empilhadas (≤900px). */
 @media (max-width: 900px) {
   .hero-tech-deco,
   .hero-ring {
@@ -1142,6 +1120,10 @@ section {
   transition:
     border-color 0.3s,
     background 0.3s;
+}
+
+.form-field::placeholder {
+  color: var(--text-faint);
 }
 
 .form-field:focus {
