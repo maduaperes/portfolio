@@ -148,7 +148,4 @@
       fallback();
     }
   });
-  document.getElementById("cv").addEventListener("click", function () {
-    say("O CV é enviado por e-mail — fale comigo abaixo.");
-  });
 })();

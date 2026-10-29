@@ -1,4 +1,4 @@
-/* Layout: grid editorial de 12 colunas, max 1200px; faixas horizontais separadas por linhas finas; hero sempre escuro. */
+/* Layout: grid editorial de 12 colunas, max 1200px; faixas horizontais separadas por linhas finas; hero acompanha o tema (escuro/claro). */
 :root {
   --photo: url("imagens/maria.png");
   --hero-photo: url("imagens/maria-hero.png");
@@ -365,13 +365,13 @@ img {
   width: 16px;
   height: 16px;
 }
-.i-sun {
+.i-moon {
   display: none;
 }
-html.light .i-sun {
+html.light .i-moon {
   display: block;
 }
-html.light .i-moon {
+html.light .i-sun {
   display: none;
 }
 .menu-btn {
@@ -425,7 +425,7 @@ html.light .i-moon {
   }
 }
 
-/* ---------- HERO (sempre escuro) ---------- */
+/* ---------- HERO (escuro; versão clara no fim do arquivo) ---------- */
 .hero {
   --fg: #f2f2f2;
   --fg-2: #c4c4c4;
@@ -1808,8 +1808,10 @@ html.light .i-moon {
     display: none;
   }
   .portrait {
-    max-width: 340px;
-    margin-left: 14px;
+    width: min(230px, 62vw);
+    max-width: 100%;
+    justify-self: center; /* o <figure> tem margin:0 inline no HTML */
+    left: 7px; /* compensa a moldura deslocada 14px para a esquerda */
   }
   .ftr-in {
     flex-direction: column;
@@ -1827,4 +1829,100 @@ html.light .i-moon {
     opacity: 1;
     transform: none;
   }
+}
+
+/* ---------- HERO no modo claro ---------- */
+html.light body::before {
+  background: #f3f3f3;
+}
+html.light .hero-dark .hdr-in {
+  border-color: var(--line);
+}
+html.light .hero {
+  --fg: #0d0d0d;
+  --fg-2: #3a3a3a;
+  --muted: #6b6b6b;
+  --faint: #a3a3a3;
+  --line: rgba(0, 0, 0, 0.09);
+  --line-2: rgba(0, 0, 0, 0.16);
+  --line-3: rgba(0, 0, 0, 0.34);
+  --bg: #f3f3f3;
+  background: #ececec;
+  border-bottom-color: rgba(0, 0, 0, 0.09);
+  color-scheme: light;
+}
+html.light .hero-bg::before {
+  background:
+    radial-gradient(
+      ellipse 38% 60% at calc(58% + var(--mx, 0) * 2%)
+        calc(34% + var(--my, 0) * 2%),
+      rgba(255, 255, 255, 0.95),
+      transparent 70%
+    ),
+    radial-gradient(
+      ellipse 60% 80% at 100% 0%,
+      rgba(0, 0, 0, 0.035),
+      transparent 60%
+    ),
+    linear-gradient(180deg, #e4e4e4 0%, #eeeeee 100%);
+}
+html.light .beam {
+  background: linear-gradient(
+    180deg,
+    rgba(255, 255, 255, 0.75),
+    rgba(255, 255, 255, 0)
+  );
+}
+html.light .hero-grid-lines {
+  background-image: linear-gradient(
+    90deg,
+    rgba(0, 0, 0, 0.045) 1px,
+    transparent 1px
+  );
+}
+html.light .tag {
+  background: rgba(255, 255, 255, 0.55);
+}
+html.light .code {
+  color: #6b6b6b;
+  border-left-color: rgba(0, 0, 0, 0.16);
+}
+html.light .code::before,
+html.light .code::after {
+  background: rgba(0, 0, 0, 0.3);
+}
+html.light .code-h {
+  color: #8a8a8a;
+}
+html.light .code li::before {
+  color: #b3b3b3;
+}
+html.light .code .c {
+  color: #6b6b6b;
+}
+html.light .code .k {
+  color: #111111;
+}
+html.light .cursor {
+  background: #222222;
+}
+html.light .ticks {
+  background: repeating-linear-gradient(
+    180deg,
+    rgba(0, 0, 0, 0.18) 0 1px,
+    transparent 1px 12px
+  );
+}
+html.light .code-meta {
+  border-top-color: rgba(0, 0, 0, 0.08);
+  color: #9a9a9a;
+}
+html.light .scroll {
+  color: #8a8a8a;
+}
+html.light .scroll i {
+  background: linear-gradient(180deg, rgba(0, 0, 0, 0.3), transparent);
+}
+html.light .scroll i::after {
+  background: #111111;
 }
