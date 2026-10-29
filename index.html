@@ -1,479 +1,672 @@
 <!doctype html>
 <html lang="pt-BR">
   <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>Maria Eduarda — Desenvolvedora de Software</title>
+    <meta charset="utf-8" />
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1, viewport-fit=cover"
+    />
+    <title>Maria Eduarda Arruda Peres</title>
+    <meta
+      name="description"
+      content="Portfólio de Maria Eduarda Arruda Peres, desenvolvedora de software em formação: Python, back-end, dados e Inteligência Artificial."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Geist:wght@300;400;500;600&family=Geist+Mono:wght@400;500&display=swap"
+    />
     <link rel="stylesheet" href="style.css" />
   </head>
   <body>
-    <div class="layout-grid">
-      <!-- HEADER -->
-      <header>
-        <a href="#inicio" class="logo-tag"> <span></span>MADU.PERES </a>
-        <ul class="nav-links">
-          <li><a href="#sobre">/sobre</a></li>
-          <li><a href="#trajetoria">/trajetória</a></li>
-          <li><a href="#projetos">/projetos</a></li>
-          <li><a href="#contato">/contato</a></li>
-        </ul>
-        <div class="header-controls">
-          <button class="control-btn" id="langToggle" title="Mudar Idioma">
-            <svg
-              class="btn-icon"
-              viewBox="0 0 24 24"
-              width="14"
-              height="14"
-              stroke="currentColor"
-              stroke-width="2"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <circle cx="12" cy="12" r="10"></circle>
-              <line x1="2" y1="12" x2="22" y2="12"></line>
+    <header class="hdr hero-dark" id="hdr">
+      <div class="wrap hdr-in">
+        <a class="logo" href="#inicio" aria-label="Maria Eduarda — início">
+          <svg viewBox="0 0 34 28" aria-hidden="true">
+            <polyline points="2,26 9,3 16,21 23,3 31,26" />
+            <line x1="19.4" y1="15" x2="27" y2="15" />
+          </svg>
+        </a>
+        <nav class="nav" aria-label="Seções">
+          <a href="#inicio" data-s="inicio">Início</a>
+          <a href="#sobre" data-s="sobre">Sobre</a>
+          <a href="#perfil" data-s="perfil">Perfil Técnico</a>
+          <a href="#projetos" data-s="projetos">Projetos</a>
+          <a href="#trajetoria" data-s="trajetoria">Trajetória</a>
+          <a href="#contato" data-s="contato">Contato</a>
+        </nav>
+        <div class="hdr-actions">
+          <a class="btn btn-cv" href="#contato" id="cv"
+            ><span>Baixar CV</span
+            ><svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M12 4v11M7 10l5 5 5-5M5 20h14" /></svg
+          ></a>
+          <button
+            class="icon-btn"
+            id="theme"
+            type="button"
+            aria-label="Alternar tema claro/escuro"
+          >
+            <svg class="ico i-moon" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M20 14.5A8 8 0 1 1 9.5 4a6.5 6.5 0 0 0 10.5 10.5z" />
+            </svg>
+            <svg class="ico i-sun" viewBox="0 0 24 24" aria-hidden="true">
+              <circle cx="12" cy="12" r="4" />
               <path
-                d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"
-              ></path>
-            </svg>
-            <span class="btn-label">EN</span>
-          </button>
-
-          <button class="control-btn" id="themeToggle" title="Alternar Tema">
-            <svg
-              class="btn-icon"
-              id="themeIcon"
-              viewBox="0 0 24 24"
-              width="16"
-              height="16"
-              stroke="currentColor"
-              stroke-width="2"
-              fill="none"
-              stroke-linecap="round"
-              stroke-linejoin="round"
-            >
-              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"></path>
+                d="M12 2v2M12 20v2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M2 12h2M20 12h2M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"
+              />
             </svg>
           </button>
-
-          <button class="hamburger" id="hamburger" aria-label="Menu">
-            <span></span>
-            <span></span>
-            <span></span>
+          <button
+            class="icon-btn menu-btn"
+            id="menu"
+            type="button"
+            aria-label="Abrir menu"
+            aria-expanded="false"
+            aria-controls="mnav"
+          >
+            <svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+              <path d="M4 8h16M4 16h16" />
+            </svg>
           </button>
         </div>
-      </header>
-
-      <!-- MENU MOBILE OVERLAY -->
-      <div class="mobile-menu" id="mobileMenu">
-        <a href="#sobre" class="mobile-link">/sobre</a>
-        <a href="#trajetoria" class="mobile-link">/trajetória</a>
-        <a href="#projetos" class="mobile-link">/projetos</a>
-        <a href="#contato" class="mobile-link">/contato</a>
+        <nav class="mnav" id="mnav" aria-label="Seções (menu)">
+          <a href="#inicio" data-s="inicio">Início</a>
+          <a href="#sobre" data-s="sobre">Sobre</a>
+          <a href="#perfil" data-s="perfil">Perfil Técnico</a>
+          <a href="#projetos" data-s="projetos">Projetos</a>
+          <a href="#trajetoria" data-s="trajetoria">Trajetória</a>
+          <a href="#contato" data-s="contato">Contato</a>
+        </nav>
       </div>
+    </header>
 
-      <!-- HERO -->
-      <section id="inicio" class="hero">
-        <div class="hero-content">
-          <p class="hero-eyebrow">
-            Olá, eu sou a
-            <span class="hero-eyebrow-accent">Madu</span>
-            <span class="hero-eyebrow-cursor" aria-hidden="true">_</span>
-          </p>
+    <nav class="rail" aria-label="Progresso da página">
+      <a href="#inicio" data-s="inicio" aria-label="Início">01</a>
+      <a href="#sobre" data-s="sobre" aria-label="Sobre mim">02</a>
+      <a href="#perfil" data-s="perfil" aria-label="Perfil técnico">03</a>
+      <a href="#trajetoria" data-s="trajetoria" aria-label="Trajetória">04</a>
+      <a href="#projetos" data-s="projetos" aria-label="Projetos">05</a>
+      <a href="#contato" data-s="contato" aria-label="Contato">06</a>
+    </nav>
 
-          <h1 class="hero-main-title">
-            Desenvolvedora<br /><span>de Software</span>
-          </h1>
-          <p class="hero-bio">
-            Estudante de Ciência da Computação com base sólida em Python,
-            FastAPI e modelagem de dados. Focada em criar soluções eficientes,
-            estruturadas e com alta usabilidade.
-          </p>
-          <div class="hero-actions">
-            <a href="#projetos" class="btn-raw">
-              <span>
-                <svg
-                  class="btn-icon-inline"
-                  viewBox="0 0 24 24"
-                  width="16"
-                  height="16"
-                  stroke="currentColor"
-                  stroke-width="2"
-                  fill="none"
-                  stroke-linecap="round"
-                  stroke-linejoin="round"
-                >
-                  <line x1="5" y1="12" x2="19" y2="12"></line>
-                  <polyline points="12 5 19 12 12 19"></polyline>
-                </svg>
-                Ver Projetos
-              </span>
-            </a>
-            <a href="#contato" class="btn-raw-outline">
-              Fale Comigo
-              <svg
-                class="btn-icon-inline"
-                viewBox="0 0 24 24"
-                width="16"
-                height="16"
-                stroke="currentColor"
-                stroke-width="2"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
+    <main>
+      <!-- 1. HERO -->
+      <section class="hero" id="inicio" data-sec>
+        <div class="hero-bg" aria-hidden="true">
+          <div class="hero-grid-lines"></div>
+          <div class="beam"></div>
+          <div class="beam b2"></div>
+          <div
+            class="photo"
+            role="img"
+            aria-label="Fotografia de Maria Eduarda"
+          ></div>
+        </div>
+        <div class="wrap hero-in">
+          <div class="hero-txt">
+            <p class="hello">OLÁ, EU SOU</p>
+            <h1 class="name">
+              <span>Maria Eduarda</span><span class="l2">Arruda Peres</span>
+            </h1>
+            <p class="role">Desenvolvedora de Software em Formação</p>
+            <p class="hero-p">
+              Curiosa por natureza, apaixonada por tecnologia e sempre em busca
+              de aprender e construir soluções que geram impacto real.
+            </p>
+            <ul class="tags" aria-label="Áreas de foco">
+              <li class="tag">Python</li>
+              <li class="tag">Back-end</li>
+              <li class="tag">Dados</li>
+              <li class="tag">Inteligência Artificial</li>
+            </ul>
+            <div class="ctas">
+              <a class="btn" href="#projetos"
+                >Ver meus projetos
+                <svg class="ico r" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 12h15M14 7l5 5-5 5" /></svg
+              ></a>
+              <a class="link" href="#sobre"
+                >Sobre mim
+                <svg class="ico d" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M12 4v15M7 14l5 5 5-5" /></svg
+              ></a>
+            </div>
+          </div>
+          <div class="code" aria-hidden="true">
+            <div class="ticks"></div>
+            <div class="code-h"><span>main.py</span><span>/&gt;</span></div>
+            <ol>
+              <li><span class="c">// transformar</span></li>
+              <li><span class="c">// curiosidade</span></li>
+              <li><span class="c">// em projetos</span></li>
+              <li>
+                <span class="k">// reais.</span><span class="cursor"></span>
+              </li>
+            </ol>
+            <div class="code-meta">
+              <span>python 3.12</span><span>utf-8</span>
+            </div>
+          </div>
+        </div>
+        <a class="scroll" href="#sobre" aria-label="Rolar para a próxima seção"
+          ><span>SCROLL</span><i></i
+        ></a>
+      </section>
+
+      <!-- 2. SOBRE -->
+      <section class="sec" id="sobre" data-sec>
+        <div class="wrap">
+          <div class="about">
+            <div data-rv>
+              <p class="eyebrow">Sobre mim</p>
+              <h2 class="h2">
+                Estudante, curiosa<br />e em constante evolução.
+              </h2>
+              <p class="lead">
+                Sou estudante de Ciência da Computação e técnica em ADS, com
+                foco em Python, dados e Inteligência Artificial. Tenho
+                experiência no ambiente corporativo, onde desenvolvi habilidades
+                analíticas, visão de negócio e automação de processos. Gosto de
+                entender como as coisas funcionam, resolver problemas e
+                transformar ideias em soluções práticas.
+              </p>
+            </div>
+            <div class="about-media" data-rv>
+              <ul class="markers" aria-label="Princípios">
+                <li><b>APRENDER</b><span>Sempre</span></li>
+                <li><b>EVOLUIR</b><span>Constante</span></li>
+                <li><b>CONSTRUIR</b><span>Soluções</span></li>
+                <li><b>IMPACTAR</b><span>O futuro</span></li>
+              </ul>
+              <figure class="portrait" style="margin: 0">
+                <span class="corner tr"></span><span class="corner bl"></span>
+                <div
+                  class="portrait-img"
+                  role="img"
+                  aria-label="Retrato de Maria Eduarda em preto e branco"
+                ></div>
+                <figcaption class="portrait-cap">
+                  <span>M.E.A.P.</span><span>Sorocaba — SP</span>
+                </figcaption>
+              </figure>
+            </div>
+          </div>
+          <div class="facts" data-rv>
+            <div class="fact">
+              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
                 <path
-                  d="M21 11.5a8.38 8.38 0 0 1-.9 3.8 8.5 8.5 0 0 1-7.6 4.7 8.38 8.38 0 0 1-3.8-.9L3 21l1.9-5.7a8.38 8.38 0 0 1-.9-3.8 8.5 8.5 0 0 1 4.7-7.6 8.38 8.38 0 0 1 3.8-.9h.5a8.48 8.48 0 0 1 8 8v.5z"
-                ></path>
+                  d="M12 21s-7-6.2-7-11.5A7 7 0 0 1 19 9.5C19 14.8 12 21 12 21z"
+                />
+                <circle cx="12" cy="9.5" r="2.5" />
               </svg>
+              <div>
+                <b>LOCALIZAÇÃO</b>
+                <p>Sorocaba, SP</p>
+                <small>Brasil</small>
+              </div>
+            </div>
+            <div class="fact">
+              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M2 9l10-5 10 5-10 5z" />
+                <path d="M6 11v5c0 1.5 2.7 3 6 3s6-1.5 6-3v-5M22 9v6" />
+              </svg>
+              <div>
+                <b>FORMAÇÃO</b>
+                <p>Ciência da Computação</p>
+                <small>+ Técnica em ADS</small>
+              </div>
+            </div>
+            <div class="fact">
+              <svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="7" width="18" height="13" rx="1.5" />
+                <path d="M9 7V5a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v2M3 12h18" />
+              </svg>
+              <div>
+                <b>DISPONIBILIDADE</b>
+                <p>Presencial / Híbrido / Remoto</p>
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 3. PERFIL TÉCNICO -->
+      <section class="sec alt" id="perfil" data-sec>
+        <div class="wrap split">
+          <div data-rv>
+            <p class="eyebrow">Perfil técnico</p>
+            <h2 class="h2">Tecnologia, dados<br />e soluções.</h2>
+            <p class="lead">
+              Tenho foco em back-end com Python, modelagem de dados e
+              arquitetura de software. Tenho interesse em Inteligência
+              Artificial e busco transformar curiosidade em projetos práticos.
+              Minha vivência em ambiente corporativo fortaleceu minha capacidade
+              analítica, visão de negócio e identificação de problemas.
+            </p>
+            <div class="mt">
+              <a
+                class="btn"
+                href="https://github.com/maduaperes"
+                target="_blank"
+                rel="noopener"
+                >Ver código no GitHub
+                <svg class="ico r" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 12h15M14 7l5 5-5 5" /></svg
+              ></a>
+            </div>
+          </div>
+          <div class="panel" data-rv>
+            <div class="col">
+              <span class="col-n">01</span>
+              <div class="col-ico">
+                <svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M8 7l-5 5 5 5M16 7l5 5-5 5M14 4l-4 16" />
+                </svg>
+              </div>
+              <h3>Back-end &amp; Dados</h3>
+              <ul>
+                <li>Python</li>
+                <li>FastAPI</li>
+                <li>SQLAlchemy</li>
+                <li>PostgreSQL</li>
+                <li>REST APIs</li>
+              </ul>
+            </div>
+            <div class="col">
+              <span class="col-n">02</span>
+              <div class="col-ico">
+                <svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="3" y="4" width="18" height="12" rx="1.5" />
+                  <path d="M8 20h8M12 16v4" />
+                </svg>
+              </div>
+              <h3>Front-end &amp; Ferramentas</h3>
+              <ul>
+                <li>JavaScript</li>
+                <li>HTML5 / CSS3</li>
+                <li>Git &amp; GitHub</li>
+                <li>Power BI</li>
+                <li>Figma</li>
+              </ul>
+            </div>
+            <div class="col">
+              <span class="col-n">03</span>
+              <div class="col-ico">
+                <svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+                  <rect x="6" y="6" width="12" height="12" rx="1.5" />
+                  <rect x="9.5" y="9.5" width="5" height="5" />
+                  <path
+                    d="M9 2v4M15 2v4M9 18v4M15 18v4M2 9h4M2 15h4M18 9h4M18 15h4"
+                  />
+                </svg>
+              </div>
+              <h3>Outros</h3>
+              <ul>
+                <li>Lógica de programação</li>
+                <li>Estrutura de dados</li>
+                <li>Análise de dados</li>
+                <li>IA Generativa</li>
+                <li>Inglês técnico</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 4. TRAJETÓRIA -->
+      <section class="sec traj" id="trajetoria" data-sec>
+        <div class="wrap split">
+          <div data-rv>
+            <p class="eyebrow">Trajetória profissional</p>
+            <h2 class="h2">
+              Experiência que fortalece<br />meu olhar sobre a tecnologia.
+            </h2>
+            <p class="lead">
+              Atuei em um ambiente corporativo, onde desenvolvi habilidades em
+              análise de dados, automação de rotinas, criação de indicadores e
+              apoio a processos internos. Essa vivência ampliou minha visão de
+              negócio e minha capacidade de transformar informações em decisões.
+            </p>
+          </div>
+          <div class="tl" data-rv>
+            <div class="tl-rail">
+              <span class="dot" aria-hidden="true"></span>
+            </div>
+            <div>
+              <h3>CNH Industrial Brasil</h3>
+              <p class="r">Aprendiz Administrativo Rural — Controladoria</p>
+              <span class="when"
+                ><time datetime="2025-03">03/2025</time
+                ><span aria-hidden="true">—</span
+                ><time datetime="2026-10">10/2026</time></span
+              >
+              <p class="loc">Sorocaba, SP · Ambiente corporativo</p>
+            </div>
+            <div class="acts">
+              <h4>Principais atividades</h4>
+              <ul>
+                <li>Análise de informações</li>
+                <li>Relatórios gerenciais</li>
+                <li>Indicadores de desempenho</li>
+                <li>Apoio a processos corporativos</li>
+                <li>Automação de rotinas</li>
+              </ul>
+            </div>
+            <div class="tools">
+              <h4>Ferramentas</h4>
+              <ul>
+                <li>SAP</li>
+                <li>Excel</li>
+                <li>Power Query</li>
+                <li>Power BI</li>
+                <li>IA generativa</li>
+              </ul>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 5. PROJETOS -->
+      <section class="sec alt" id="projetos" data-sec>
+        <div class="wrap proj">
+          <div class="proj-intro" data-rv>
+            <div>
+              <p class="eyebrow">Projetos</p>
+              <h2 class="h2">Ideias que viram<br />soluções.</h2>
+              <p class="lead">
+                Aqui estão alguns dos projetos que desenvolvi para colocar em
+                prática o que venho aprendendo e explorar novas possibilidades
+                em dados, automação e IA.
+              </p>
+            </div>
+            <div class="mt">
+              <a
+                class="btn"
+                href="https://github.com/maduaperes"
+                target="_blank"
+                rel="noopener"
+                >Ver todos os projetos
+                <svg class="ico r" viewBox="0 0 24 24" aria-hidden="true">
+                  <path d="M4 12h15M14 7l5 5-5 5" /></svg
+              ></a>
+            </div>
+          </div>
+          <div class="cards">
+            <a
+              class="card"
+              href="https://github.com/maduaperes"
+              target="_blank"
+              rel="noopener"
+              data-rv
+            >
+              <div class="thumb" aria-hidden="true">
+                <div class="thumb-in">
+                  <div class="t-light"></div>
+                  <div
+                    class="win"
+                    style="left: 7%; top: 13%; width: 62%; height: 78%"
+                  >
+                    <div class="win-bar"><i></i><i></i><i></i></div>
+                    <pre><em>01</em> <b>from</b> fastapi <b>import</b> FastAPI
+<em>02</em> <b>from</b> .db <b>import</b> repo
+<em>03</em>
+<em>04</em> app = FastAPI(title=<b>"ProcessDebt"</b>)
+<em>05</em>
+<em>06</em> @app.get(<b>"/processos/{id}/debt"</b>)
+<em>07</em> <b>def</b> calcular_debt(id: int):
+<em>08</em>     etapas = repo.etapas(id)
+<em>09</em>     gargalos = detectar(etapas)
+<em>10</em>     <b>return</b> {
+<em>11</em>       <b>"score"</b>: score(gargalos),
+<em>12</em>       <b>"etapas"</b>: len(etapas),
+<em>13</em>     }</pre>
+                  </div>
+                  <div
+                    class="win"
+                    style="left: 56%; top: 34%; width: 38%; height: 56%"
+                  >
+                    <div class="win-bar"><i></i><i></i><i></i></div>
+                    <pre><b>$</b> uvicorn app:app
+<em>INFO</em> running :8000
+<b>GET</b> /processos/12/debt
+<em>200</em> score: <b>0.73</b>
+<b>GET</b> /processos/31/debt
+<em>200</em> score: <b>0.41</b></pre>
+                  </div>
+                </div>
+              </div>
+              <div class="card-b">
+                <h3>ProcessDebt</h3>
+                <p>Sistema de Análise de Ineficiência Operacional</p>
+                <div class="card-f">
+                  <ul class="chips">
+                    <li>Python</li>
+                    <li>FastAPI</li>
+                    <li>PostgreSQL</li>
+                  </ul>
+                  <span class="arrow"
+                    ><svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M4 12h15M14 7l5 5-5 5" /></svg
+                  ></span>
+                </div>
+              </div>
+            </a>
+
+            <a
+              class="card"
+              href="https://github.com/maduaperes"
+              target="_blank"
+              rel="noopener"
+              data-rv
+            >
+              <div class="thumb" aria-hidden="true">
+                <div class="thumb-in">
+                  <div class="t-light"></div>
+                  <div class="dash">
+                    <div class="kpi">TEMP. MÉDIA<b>27,4°</b></div>
+                    <div class="kpi">UMIDADE<b>62%</b></div>
+                    <div class="kpi">CHUVA 24H<b>8 mm</b></div>
+                    <div class="chart">
+                      <svg viewBox="0 0 200 60" preserveAspectRatio="none">
+                        <g stroke="rgba(255,255,255,.06)" stroke-width=".5">
+                          <line x1="0" y1="15" x2="200" y2="15" />
+                          <line x1="0" y1="30" x2="200" y2="30" />
+                          <line x1="0" y1="45" x2="200" y2="45" />
+                        </g>
+                        <path
+                          d="M0 42 L15 38 L30 40 L45 31 L60 33 L75 24 L90 27 L105 18 L120 22 L135 14 L150 19 L165 11 L180 15 L200 8 L200 60 L0 60Z"
+                          fill="rgba(255,255,255,.07)"
+                        />
+                        <path
+                          d="M0 42 L15 38 L30 40 L45 31 L60 33 L75 24 L90 27 L105 18 L120 22 L135 14 L150 19 L165 11 L180 15 L200 8"
+                          fill="none"
+                          stroke="#e6e6e6"
+                          stroke-width="1"
+                          vector-effect="non-scaling-stroke"
+                        />
+                        <path
+                          d="M0 50 L20 47 L40 49 L60 44 L80 46 L100 40 L120 43 L140 38 L160 41 L180 36 L200 38"
+                          fill="none"
+                          stroke="#6a6a6a"
+                          stroke-width="1"
+                          stroke-dasharray="2 2"
+                          vector-effect="non-scaling-stroke"
+                        />
+                        <circle cx="200" cy="8" r="2" fill="#fff" />
+                      </svg>
+                    </div>
+                    <div class="bars">
+                      <i style="height: 30%"></i><i style="height: 55%"></i
+                      ><i style="height: 40%"></i><i style="height: 70%"></i
+                      ><i style="height: 52%"></i><i style="height: 85%"></i
+                      ><i style="height: 60%"></i><i style="height: 45%"></i
+                      ><i style="height: 75%"></i><i style="height: 35%"></i
+                      ><i style="height: 62%"></i><i style="height: 90%"></i
+                      ><i style="height: 48%"></i><i style="height: 66%"></i>
+                    </div>
+                  </div>
+                </div>
+              </div>
+              <div class="card-b">
+                <h3>Sentinela Climática</h3>
+                <p>Dashboard de dados climáticos e ambientais</p>
+                <div class="card-f">
+                  <ul class="chips">
+                    <li>Python</li>
+                    <li>Data Viz</li>
+                    <li>API</li>
+                  </ul>
+                  <span class="arrow"
+                    ><svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M4 12h15M14 7l5 5-5 5" /></svg
+                  ></span>
+                </div>
+              </div>
+            </a>
+
+            <a
+              class="card"
+              href="https://github.com/maduaperes"
+              target="_blank"
+              rel="noopener"
+              data-rv
+            >
+              <div class="thumb" aria-hidden="true">
+                <div class="thumb-in">
+                  <div
+                    class="t-light"
+                    style="
+                      background: radial-gradient(
+                        ellipse 50% 70% at 50% 10%,
+                        rgba(255, 255, 255, 0.16),
+                        transparent 70%
+                      );
+                    "
+                  ></div>
+                  <div class="floor"></div>
+                  <div class="book2"></div>
+                  <div class="book">
+                    <span class="bk-l">E-BOOK · 2026</span>
+                    <span class="bk-ia">IA</span>
+                    <span class="bk-t"
+                      >A Nova Habilidade Mais Valiosa do Século XXI</span
+                    >
+                    <span class="bk-a">MARIA EDUARDA A. PERES</span>
+                  </div>
+                </div>
+              </div>
+              <div class="card-b">
+                <h3>IA: A Nova Habilidade Mais Valiosa do Século XXI</h3>
+                <p>E-book sobre IA e suas aplicações no mercado de trabalho</p>
+                <div class="card-f">
+                  <ul class="chips">
+                    <li>HTML</li>
+                    <li>CSS</li>
+                    <li>JavaScript</li>
+                  </ul>
+                  <span class="arrow"
+                    ><svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+                      <path d="M4 12h15M14 7l5 5-5 5" /></svg
+                  ></span>
+                </div>
+              </div>
             </a>
           </div>
+        </div>
+      </section>
 
-          <div class="hero-social-block">
-            <span class="hero-social-label">Me encontre</span>
-            <span class="hero-social-line" aria-hidden="true"></span>
+      <!-- 6. CONTATO -->
+      <section class="sec contact-sec" id="contato" data-sec>
+        <div class="wrap contact">
+          <div data-rv>
+            <p class="eyebrow">Contato</p>
+            <h2 class="h2 big">Vamos conversar?</h2>
+            <p class="lead" style="max-width: 36ch">
+              Estou aberta a novas oportunidades, parcerias e desafios. Será um
+              prazer trocar ideias!
+            </p>
           </div>
-          <div class="hero-social">
+          <ul class="clist" data-rv>
+            <li>
+              <a href="mailto:mariaeduardaaperes@hotmail.com"
+                ><span class="lbl">E-mail</span
+                ><span id="mail">mariaeduardaaperes@hotmail.com</span></a
+              >
+              <button class="copy" type="button" id="copy">Copiar</button>
+            </li>
+            <li>
+              <a
+                href="https://www.linkedin.com/in/mariaeduarda-peres"
+                target="_blank"
+                rel="noopener"
+                ><span class="lbl">LinkedIn</span
+                ><span>linkedin.com/in/mariaeduarda-peres</span></a
+              >
+            </li>
+            <li>
+              <a
+                href="https://github.com/maduaperes"
+                target="_blank"
+                rel="noopener"
+                ><span class="lbl">GitHub</span
+                ><span>github.com/maduaperes</span></a
+              >
+            </li>
+          </ul>
+          <div class="cta" data-rv>
+            <a class="btn" href="mailto:mariaeduardaaperes@hotmail.com"
+              >Enviar mensagem
+              <svg class="ico r" viewBox="0 0 24 24" aria-hidden="true">
+                <path d="M4 12h15M14 7l5 5-5 5" /></svg
+            ></a>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 7. FOOTER -->
+    <footer class="ftr">
+      <div class="wrap ftr-in">
+        <div class="ftr-l">
+          <span>Maria Eduarda Arruda Peres</span><span>© 2026</span>
+        </div>
+        <div class="ftr-r">
+          <span class="words">Código · Dados · Pessoas · Futuro</span>
+          <div class="soc">
             <a
               href="https://github.com/maduaperes"
               target="_blank"
               rel="noopener"
-              class="hero-social-icon"
               aria-label="GitHub"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                stroke="currentColor"
-                stroke-width="2"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
+              ><svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
                 <path
-                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"
-                ></path>
-              </svg>
-            </a>
-            <!-- TODO: trocar o href="#" pelo link real do LinkedIn da Maria -->
-            <a href="#" class="hero-social-icon" aria-label="LinkedIn">
-              <svg
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                stroke="currentColor"
-                stroke-width="2"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-2-2 2 2 0 0 0-2 2v7h-4v-7a6 6 0 0 1 6-6z"
-                ></path>
-                <rect x="2" y="9" width="4" height="12"></rect>
-                <circle cx="4" cy="4" r="2"></circle>
-              </svg>
-            </a>
-            <!-- TODO: trocar o href="#" pelo link real do Instagram da Maria -->
-            <a href="#" class="hero-social-icon" aria-label="Instagram">
-              <svg
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                stroke="currentColor"
-                stroke-width="2"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect>
-                <path
-                  d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"
-                ></path>
-                <line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line>
-              </svg>
-            </a>
+                  d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.9a3.4 3.4 0 0 0-.9-2.6c3.1-.4 6.4-1.5 6.4-7a5.4 5.4 0 0 0-1.5-3.8 5.1 5.1 0 0 0-.1-3.7s-1.2-.4-3.9 1.5a13.4 13.4 0 0 0-7 0C6.3.6 5.1 1 5.1 1A5.1 5.1 0 0 0 5 4.8a5.4 5.4 0 0 0-1.5 3.7c0 5.4 3.3 6.6 6.4 7A3.4 3.4 0 0 0 9 18.1V22"
+                /></svg
+            ></a>
             <a
-              href="mailto:mariaeduardaaperes@hotmail.com"
-              class="hero-social-icon"
-              aria-label="E-mail"
-            >
-              <svg
-                viewBox="0 0 24 24"
-                width="18"
-                height="18"
-                stroke="currentColor"
-                stroke-width="2"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <path
-                  d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"
-                ></path>
-                <polyline points="22 6 12 13 2 6"></polyline>
-              </svg>
-            </a>
-          </div>
-        </div>
-
-        <a
-          href="#sobre"
-          class="hero-scroll-cue"
-          aria-label="Rolar para a próxima seção"
-        >
-          <span>Role</span>
-          <svg
-            class="hero-scroll-cue-icon"
-            viewBox="0 0 24 24"
-            width="16"
-            height="16"
-            stroke="currentColor"
-            stroke-width="2"
-            fill="none"
-            stroke-linecap="round"
-            stroke-linejoin="round"
-          >
-            <polyline points="6 9 12 15 18 9"></polyline>
-          </svg>
-        </a>
-
-        <div class="hero-portrait-container">
-
-          <!-- Imagem do pincel de fundo -->
-          <img src="imagens/element.png" alt="" class="brush-background" />
-
-          <div class="portrait-frame">
-            <img src="imagens/me.png" alt="Maria Eduarda" />
-            <div class="portrait-hud-overlay">
-              <span class="hud-corner tl"></span>
-              <span class="hud-corner tr"></span>
-              <span class="hud-corner bl"></span>
-              <span class="hud-corner br"></span>
-              <div class="hud-text">SYS.ID // 01.MARIA</div>
-            </div>
-          </div>
-
-          <div class="floating-tech-badge">Sorocaba, SP — BR</div>
-
-          <div class="hero-tech-deco" aria-hidden="true">
-            <span class="tech-deco-icon">
-              <svg
-                viewBox="0 0 24 24"
-                width="14"
-                height="14"
-                stroke="currentColor"
-                stroke-width="2"
-                fill="none"
-                stroke-linecap="round"
-                stroke-linejoin="round"
-              >
-                <polyline points="16 18 22 12 16 6"></polyline>
-                <polyline points="8 6 2 12 8 18"></polyline>
-              </svg>
-            </span>
-            <span class="tech-deco-line-h"></span>
-            <span class="tech-deco-node tech-deco-node--top"></span>
-            <span class="tech-deco-dotgrid"></span>
-            <span class="tech-deco-line-v"></span>
-            <span class="tech-deco-node tech-deco-node--bottom"></span>
-          </div>
-        </div>
-      </section>
-
-      <!-- SOBRE -->
-      <section id="sobre">
-        <div class="section-header">
-          <h2 class="section-title">Perfil Técnico</h2>
-          <span class="section-counter">01</span>
-        </div>
-        <div class="about-grid">
-          <div class="about-text">
-            <p>
-              Meu foco principal está no desenvolvimento back-end: construo APIs
-              estruturadas utilizando FastAPI, modelo bancos de dados
-              relacionais com PostgreSQL e aplico padrões limpos de arquitetura
-              para garantir manutenibilidade.
-            </p>
-            <p>
-              Atualmente atuo em ambiente corporativo estruturando dados e
-              apoiando indicadores de desempenho, o que aprimorou drasticamente
-              minha visão sistêmica de negócios, capacidade analítica e atenção
-              aos detalhes na escrita de código.
-            </p>
-            <div class="about-image-wrapper" style="margin-top: 30px">
-              <img src="imagens/workspace.png" alt="Workspace / Código" />
-            </div>
-          </div>
-          <div>
-            <div class="stack-box">
-              <h4>Back-end & Dados</h4>
-              <div class="stack-tags">
-                <span>Python</span>
-                <span>FastAPI</span>
-                <span>SQLAlchemy</span>
-                <span>PostgreSQL</span>
-                <span>REST APIs</span>
-              </div>
-            </div>
-            <div class="stack-box">
-              <h4>Front-end & Ferramentas</h4>
-              <div class="stack-tags">
-                <span>JavaScript</span>
-                <span>HTML5 / CSS3</span>
-                <span>Git & GitHub</span>
-                <span>Power BI</span>
-                <span>Figma</span>
-              </div>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- TRAJETÓRIA -->
-      <section id="trajetoria">
-        <div class="section-header">
-          <h2 class="section-title">Trajetória Profissional</h2>
-          <span class="section-counter">02</span>
-        </div>
-        <div class="timeline-list">
-          <div class="timeline-row">
-            <div class="timeline-meta">2024 — Presente</div>
-            <div class="timeline-details">
-              <h3>Analista de Dados / Suporte Corporativo</h3>
-              <h4>Ambiente Corporativo</h4>
-              <p>
-                Atuação na estruturação de bases de dados, consolidação de
-                indicadores de desempenho e apoio direto aos fluxos operacionais
-                internos, otimizando processos e garantindo maior confiabilidade
-                nas informações.
-              </p>
-            </div>
-          </div>
-          <div class="timeline-row">
-            <div class="timeline-meta">Cursando</div>
-            <div class="timeline-details">
-              <h3>Bacharelado em Ciência da Computação</h3>
-              <h4>Universidade</h4>
-              <p>
-                Formação focada nas bases fundamentais da computação,
-                algoritmos, estruturas de dados, engenharia de software e
-                arquitetura de sistemas.
-              </p>
-            </div>
-          </div>
-        </div>
-      </section>
-
-      <!-- PROJETOS -->
-      <section id="projetos">
-        <div class="section-header">
-          <h2 class="section-title">Projetos em Destaque</h2>
-          <span class="section-counter">03</span>
-        </div>
-        <div class="projects-grid">
-          <div class="project-card">
-            <div class="project-content">
-              <h3>ProcessDebt</h3>
-              <p>
-                Plataforma voltada para diagnóstico, mensuração de ineficiência
-                processual e controle de débito técnico voltado à gestão de
-                negócios corporativos.
-              </p>
-              <div class="project-chips">
-                <span>Python</span>
-                <span>FastAPI</span>
-                <span>PostgreSQL</span>
-              </div>
-            </div>
-            <a
-              href="https://github.com/maduaperes"
+              href="https://www.linkedin.com/in/mariaeduarda-peres"
               target="_blank"
-              class="project-link"
-              >Repositório GitHub →</a
-            >
-          </div>
-          <div class="project-card">
-            <div class="project-content">
-              <h3>SkillBridge</h3>
-              <p>
-                Sistema focado no mapeamento inteligente, retenção e
-                transferência otimizada de conhecimento e competências técnicas
-                entre equipes organizacionais.
-              </p>
-              <div class="project-chips">
-                <span>Python</span>
-                <span>SQLAlchemy</span>
-                <span>JavaScript</span>
-              </div>
-            </div>
-            <a
-              href="https://github.com/maduaperes"
-              target="_blank"
-              class="project-link"
-              >Repositório GitHub →</a
-            >
+              rel="noopener"
+              aria-label="LinkedIn"
+              ><svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+                <path
+                  d="M16 8a6 6 0 0 1 6 6v7h-4v-7a2 2 0 0 0-4 0v7h-4v-7a6 6 0 0 1 6-6zM2 9h4v12H2z"
+                />
+                <circle cx="4" cy="4" r="2" /></svg
+            ></a>
+            <a href="mailto:mariaeduardaaperes@hotmail.com" aria-label="E-mail"
+              ><svg class="ico" viewBox="0 0 24 24" aria-hidden="true">
+                <rect x="3" y="5" width="18" height="14" rx="1.5" />
+                <path d="M3 7l9 6 9-6" /></svg
+            ></a>
           </div>
         </div>
-      </section>
+      </div>
+    </footer>
 
-      <!-- CONTATO -->
-      <section id="contato">
-        <div class="section-header">
-          <h2 class="section-title">Vamos Conversar?</h2>
-          <span class="section-counter">04</span>
-        </div>
-        <div class="contact-grid">
-          <div class="contact-info">
-            <p>
-              Estou em busca de novas oportunidades de estágio ou posições
-              júnior em desenvolvimento de software. Se você tem uma vaga
-              interessante ou quer trocar ideia sobre tecnologia, entre em
-              contato.
-            </p>
-            <div class="contact-list">
-              <p><span>E-MAIL:</span> mariaeduardaaperes@hotmail.com</p>
-              <p><span>LOCAL:</span> Sorocaba - SP, Brasil</p>
-              <p><span>GITHUB:</span> github.com/maduaperes</p>
-            </div>
-          </div>
-          <div>
-            <form action="https://formspree.io/f/xbgrlznp" method="POST">
-              <input
-                type="text"
-                name="name"
-                placeholder="Seu Nome"
-                class="form-field"
-                required
-              />
-              <input
-                type="email"
-                name="email"
-                placeholder="Seu E-mail"
-                class="form-field"
-                required
-              />
-              <textarea
-                name="message"
-                rows="5"
-                placeholder="Sua Mensagem"
-                class="form-field"
-                required
-              ></textarea>
-              <button type="submit" class="btn-raw" style="width: 100%">
-                <span>Enviar Mensagem</span>
-              </button>
-            </form>
-          </div>
-        </div>
-      </section>
-
-      <!-- FOOTER -->
-      <footer>
-        <p>© 2026 Maria Eduarda. Desenvolvido com código limpo.</p>
-      </footer>
-    </div>
+    <div class="toast" id="toast" role="status" aria-live="polite"></div>
 
     <script src="script.js"></script>
   </body>
