@@ -31,27 +31,41 @@
       menu.setAttribute("aria-expanded", "false");
     }
   });
-  // seção ativa
-  var links = document.querySelectorAll("[data-s]");
+  // seção ativa: a última seção cujo topo já passou do meio da tela.
+  // No fim da página, marca sempre a última (Contato), que é curta demais para chegar ao meio.
+  var links = document.querySelectorAll("[data-s]"),
+    secs = document.querySelectorAll("[data-sec]"),
+    activeRaf = 0;
   function setActive(id) {
     links.forEach(function (a) {
       a.classList.toggle("on", a.getAttribute("data-s") === id);
     });
   }
-  if ("IntersectionObserver" in window) {
-    var so = new IntersectionObserver(
-      function (es) {
-        es.forEach(function (e) {
-          if (e.isIntersecting) setActive(e.target.id);
-        });
-      },
-      { rootMargin: "-45% 0px -50% 0px" },
-    );
-    document.querySelectorAll("[data-sec]").forEach(function (s) {
-      so.observe(s);
-    });
+  function updateActive() {
+    activeRaf = 0;
+    var mid = window.innerHeight * 0.5,
+      id = secs[0].id,
+      atBottom =
+        window.innerHeight + window.scrollY >=
+        document.documentElement.scrollHeight - 4;
+    if (atBottom) {
+      id = secs[secs.length - 1].id;
+    } else {
+      secs.forEach(function (s) {
+        if (s.getBoundingClientRect().top <= mid) id = s.id;
+      });
+    }
+    setActive(id);
   }
-  setActive("inicio");
+  window.addEventListener(
+    "scroll",
+    function () {
+      if (!activeRaf) activeRaf = requestAnimationFrame(updateActive);
+    },
+    { passive: true },
+  );
+  window.addEventListener("resize", updateActive);
+  updateActive();
   // revelar ao rolar (só abaixo da dobra; o que está visível já nasce pronto)
   var reduce = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
   if (!reduce && "IntersectionObserver" in window) {
