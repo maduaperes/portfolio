@@ -1,6 +1,6 @@
 /* Layout: grid editorial de 12 colunas, max 1200px; faixas horizontais separadas por linhas finas; hero acompanha o tema (escuro/claro). */
 :root {
-  --photo: url("imagens/maria-sobre.jpeg");
+  --photo: url("imagens/maria-sobre.jpg");
   --hero-photo: url("imagens/maria-hero.png");
   --bg: #0a0a0a;
   --bg-2: #0e0e0e;
@@ -296,7 +296,6 @@ img {
   display: flex;
   align-items: center;
   color: var(--fg);
-  margin-right: auto;
 }
 .logo svg {
   width: 34px;
@@ -310,9 +309,7 @@ img {
 .nav {
   display: flex;
   gap: 30px;
-  position: absolute;
-  left: 50%;
-  transform: translateX(-50%);
+  margin: 0 auto; /* centraliza no espaço entre a logo e os botões, sem sobrepor */
 }
 .nav a {
   font-size: 13px;
@@ -1689,6 +1686,9 @@ html.light .i-sun {
   .menu-btn {
     display: grid;
   }
+  .logo {
+    margin-right: auto;
+  }
   .mnav {
     position: absolute;
     top: 100%;
@@ -1841,6 +1841,45 @@ html.light .i-sun {
     opacity: 1;
     transform: none;
   }
+}
+
+/* ---------- ícones sociais no header e no menu mobile ---------- */
+.hdr-soc {
+  display: none;
+}
+.hdr-sep {
+  display: none;
+  width: 1px;
+  height: 18px;
+  background: var(--line-2);
+  margin: 0 6px;
+}
+@media (min-width: 1180px) {
+  .hdr-soc,
+  .hdr-sep {
+    display: flex;
+  }
+}
+.mnav .mnav-soc {
+  display: flex;
+  gap: 6px;
+  padding-top: 14px;
+}
+.mnav .mnav-soc a {
+  width: 40px;
+  height: 40px;
+  padding: 0;
+  border: 1px solid var(--line-2);
+  border-radius: 50%;
+  color: var(--fg-2);
+}
+.mnav .mnav-soc a:hover {
+  color: var(--fg);
+  border-color: var(--line-3);
+}
+.mnav .mnav-soc svg {
+  width: 16px;
+  height: 16px;
 }
 
 /* ---------- escolha do app de e-mail (desktop) ---------- */

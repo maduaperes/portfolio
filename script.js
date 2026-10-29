@@ -185,4 +185,16 @@
       send.focus();
     }
   });
+  // ícones de e-mail (header, menu e rodapé): no desktop levam ao contato e abrem a escolha do app
+  document.querySelectorAll(".js-mail").forEach(function (a) {
+    a.addEventListener("click", function (e) {
+      if (!desktop.matches) return;
+      e.preventDefault();
+      document.getElementById("contato").scrollIntoView({ behavior: "smooth" });
+      setTimeout(function () {
+        mailMenu.hidden = false;
+        send.setAttribute("aria-expanded", "true");
+      }, 700);
+    });
+  });
 })();
