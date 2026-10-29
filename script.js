@@ -142,4 +142,33 @@
       fallback();
     }
   });
+  // enviar mensagem: no desktop abre a escolha do app de e-mail; no celular segue o mailto
+  var send = document.getElementById("send"),
+    mailMenu = document.getElementById("mail-menu"),
+    desktop = window.matchMedia("(hover: hover) and (pointer: fine)");
+  function closeMail() {
+    mailMenu.hidden = true;
+    send.setAttribute("aria-expanded", "false");
+  }
+  send.addEventListener("click", function (e) {
+    if (!desktop.matches) return;
+    e.preventDefault();
+    var open = mailMenu.hidden;
+    mailMenu.hidden = !open;
+    send.setAttribute("aria-expanded", String(open));
+    if (open) mailMenu.querySelector("a").focus();
+  });
+  mailMenu.addEventListener("click", function (e) {
+    if (e.target.closest("#mail-copy")) document.getElementById("copy").click();
+    if (e.target.closest("a, button")) closeMail();
+  });
+  document.addEventListener("click", function (e) {
+    if (!mailMenu.hidden && !e.target.closest(".mail-pick")) closeMail();
+  });
+  document.addEventListener("keydown", function (e) {
+    if (e.key === "Escape" && !mailMenu.hidden) {
+      closeMail();
+      send.focus();
+    }
+  });
 })();
